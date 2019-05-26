@@ -53,6 +53,16 @@
 		============================================ -->
     <link rel="stylesheet" href={{ asset('css/calendar/fullcalendar.min.css') }}>
     <link rel="stylesheet" href={{ asset('css/calendar/fullcalendar.print.min.css') }}>
+    <!-- x-editor CSS
+		============================================ -->
+    <link rel="stylesheet" href={{ asset('css/editor/select2.css') }}>
+    <link rel="stylesheet" href={{ asset('css/editor/datetimepicker.css') }}>
+    <link rel="stylesheet" href={{ asset('css/editor/bootstrap-editable.css') }}>
+    <link rel="stylesheet" href={{ asset('css/editor/x-editor-style.css') }}>
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href={{ asset('css/data-table/bootstrap-table.css') }}>
+    <link rel="stylesheet" href={{ asset('css/data-table/bootstrap-editable.css') }}>
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href={{ asset('style.css') }}>
@@ -78,8 +88,8 @@
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
-                        <li class="active">
-                            <a title="Landing Page" href={{ asset('/') }}>
+                        <li class="{{Request::is("/")?'active':''}}" >
+                            <a title="Home" href={{ asset('/') }}>
 								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">Education</span>
 								</a>
@@ -104,12 +114,13 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
+                                <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li>
                                 <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
                                 <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li>
                                 <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
+                                <li class="{{Request::is("data-jemaat")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
                             </ul>
                         </li>
                         <li>
@@ -1042,16 +1053,6 @@
 
         @yield('content')
 
-        <div class="footer-copyright-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Colorlib</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1115,7 +1116,33 @@
     <script src={{ asset('js/main.js') }}></script>
     <!-- tawk chat JS
 		============================================ -->
-    <script src={{ asset('js/tawk-chat.js') }}></script>
+    {{-- <script src={{ asset('js/tawk-chat.js') }}></script> --}}
+    <!-- data table JS
+        ============================================ -->
+    <script src={{ asset('js/data-table/bootstrap-table.js') }}></script>
+    <script src={{ asset('js/data-table/tableExport.js') }}></script>
+    <script src={{ asset('js/data-table/data-table-active.js') }}></script>
+    <script src={{ asset('js/data-table/bootstrap-table-editable.js') }}></script>
+    <script src={{ asset('js/data-table/bootstrap-editable.js') }}></script>
+    <script src={{ asset('js/data-table/bootstrap-table-resizable.js') }}></script>
+    <script src={{ asset('js/data-table/colResizable-1.5.source.js') }}></script>
+    <script src={{ asset('js/data-table/bootstrap-table-export.js') }}></script>
+    <!--  editable JS
+        ============================================ -->
+    <script src={{ asset('js/editable/jquery.mockjax.js') }}></script>
+    <script src={{ asset('js/editable/mock-active.js') }}></script>
+    <script src={{ asset('js/editable/select2.js') }}></script>
+    <script src={{ asset('js/editable/moment.min.js') }}></script>
+    <script src={{ asset('js/editable/bootstrap-datetimepicker.js') }}></script>
+    <script src={{ asset('js/editable/bootstrap-editable.js') }}></script>
+    <script src={{ asset('js/editable/xediable-active.js') }}></script>
+    <!-- Chart JS
+		============================================ -->
+    <script src={{ asset('js/chart/jquery.peity.min.js') }}></script>
+    <script src={{ asset('js/peity/peity-active.js') }}></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src={{ asset('js/tab.js') }}></script>
 </body>
 
 </html>

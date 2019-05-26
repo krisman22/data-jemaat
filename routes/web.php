@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('pages.admin.index');
 });
+
+Route::get('/all-jemaat', function(){
+    return view('pages.admin.jemaat.jemaat');
+});
+
+Route::get('/data-jemaat', function () {
+    return view('pages.admin.jemaat.data-jemaat');
+});
