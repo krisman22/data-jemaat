@@ -72,6 +72,9 @@
     <!-- modernizr JS
 		============================================ -->
     <script src={{ asset('js/vendor/modernizr-2.8.3.min.js') }}></script>
+    <!-- Awsomeicon
+        ============================================ -->
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 
 <body>
@@ -90,8 +93,8 @@
                     <ul class="metismenu" id="menu1">
                         <li class="{{Request::is("/")?'active':''}}" >
                             <a title="Home" href={{ asset('/') }}>
-								   <span class="educate-icon educate-home icon-wrap"></span>
-								   <span class="mini-click-non">Education</span>
+								   <span class="fas fa-church" style='font-size:17px'></span>
+								   <span class="mini-click-non">Dashboard</span>
 								</a>
                             {{-- <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
@@ -101,7 +104,7 @@
                                 <li><a title="Widgets" href="widgets.html"><span class="mini-sub-pro">Widgets</span></a></li>
                             </ul> --}}
                         </li>
-                        <li>
+                        {{-- <li>
                             <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Event</span></a>
                         </li>
                         <li>
@@ -112,18 +115,18 @@
                                 <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li>
                                 <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li>
-                                <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
-                                <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li>
-                                <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
                                 <li class="{{Request::is("data-jemaat")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
+                                <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li>
+                                <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Add Students" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Add Student</span></a></li>
+                                <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li>
+                                <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
@@ -221,7 +224,7 @@
                                 <li><a title="404 Page" href="404.html"><span class="mini-sub-pro">404 Page</span></a></li>
                                 <li><a title="500 Page" href="500.html"><span class="mini-sub-pro">500 Page</span></a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </nav>
             </div>
@@ -1051,7 +1054,7 @@
                 </div>
             </div>
             <div class="breadcome-area">
-                <div class="container-fluid">
+                {{-- <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list single-page-breadcome">
@@ -1068,7 +1071,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Dashboard</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Data Table</span>
+                                            <li><span class="bread-blod">...</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -1076,7 +1079,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>       
         </div>
         <!-- Content 

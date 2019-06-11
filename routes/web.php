@@ -22,3 +22,11 @@ Route::get('/all-jemaat', function(){
 Route::get('/data-jemaat', function () {
     return view('pages.admin.jemaat.data-jemaat');
 });
+
+Route::get('/lihat-data-jemaat', function () {
+    return view('pages.admin.jemaat.edit-jemaat');
+});
+
+Route::get('/tambah-jemaat', function () {
+    return view('pages.admin.jemaat.tambah-jemaat');
+});

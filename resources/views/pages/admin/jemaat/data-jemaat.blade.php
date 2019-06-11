@@ -9,46 +9,41 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Projects <span class="table-project-n">Data</span> Table</h1>
+                            <h1>Data Jemaat</h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                            <div id="toolbar">
+                            {{-- <div id="toolbar">
                                 <select class="form-control dt-tb">
                                     <option value="">Export Basic</option>
                                     <option value="all">Export All</option>
                                     <option value="selected">Export Selected</option>
                                 </select>
-                            </div>
-                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                            </div> --}}
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="false" data-resizable="true" data-cookie="true"
                                 data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">ID</th>
-                                        <th data-field="name" data-editable="true">Task</th>
-                                        <th data-field="email" data-editable="true">Email</th>
-                                        <th data-field="phone" data-editable="true">Phone</th>
-                                        <th data-field="complete">Completed</th>
-                                        <th data-field="task" data-editable="true">Task</th>
-                                        <th data-field="date" data-editable="true">Date</th>
-                                        <th data-field="price" data-editable="true">Price</th>
-                                        <th data-field="action">Action</th>
+                                        <th data-field="nama">Nama</th>
+                                        <th data-field="nomorstambuk">Nomor Stambuk</th>
+                                        <th data-field="lingkungan">Lingkungan </th>
+                                        <th data-field="ttl">TTL</th>
+                                        {{-- <th data-field="complete">Completed</th> --}}
+                                        <th data-field="status">Status Jemaat</th>
+                                        {{-- <th data-field="date" data-editable="true">Date</th>
+                                        <th data-field="price" data-editable="true">Price</th> --}}
+                                        <th data-field="action"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Web Development</td>
-                                        <td>admin@uttara.com</td>
-                                        <td>+8801962067309</td>
-                                        <td class="datatable-ct"><span class="pie">1/6</span>
-                                        </td>
-                                        <td>10%</td>
-                                        <td>Jul 14, 2017</td>
-                                        <td>$5455</td>
-                                        <td class="datatable-ct"><i class="fa fa-check"></i>
-                                        </td>
+                                        <td>Adven Setiawan Gulo</td>
+                                        <td>19971221</td>
+                                        <td>101 - Mudik</td>
+                                        <td>Gunungsitoli, 21 Des 1997</td>
+                                        <td>Aktif</td>
+                                        <td><button type="button" class="btn btn-success btn-sm">Lihat Detail</button></td>
                                     </tr>
                                 </tbody>
                             </table>
