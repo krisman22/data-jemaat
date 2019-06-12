@@ -37,14 +37,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($datajemaats as $datajemaat)
                                     <tr>
-                                        <td>Adven Setiawan Gulo</td>
-                                        <td>19971221</td>
-                                        <td>101 - Mudik</td>
-                                        <td>Gunungsitoli, 21 Des 1997</td>
-                                        <td>Aktif</td>
-                                        <td><button type="button" class="btn btn-success btn-sm">Lihat Detail</button></td>
+                                        <td>{{ $datajemaat->jemaat_nama}}</td>
+                                        <td>{{ $datajemaat->jemaat_nostambuk}}</td>
+                                        <td>{{ $datajemaat->id_lingkungan}}</td>
+                                        <td>{{ $datajemaat->jemaat_tempat_lahir}}, {{ $datajemaat->jemaat_tanggal_lahir->format('d M Y') }}</td>
+                                        <td>@if($datajemaat->jemaat_status_aktif == "t")
+                                            Aktif
+                                            @else
+                                                {{$datajemaat->jemaat_keterangan_status}} ({{$datajemaat->jemaat_tanggal_meninggal->format('d M Y') }})
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href={{ route('profiledetail', $datajemaat) }}><button type="button" class="btn btn-info btn-sm">Lihat Detail</button></a>
+                                            <a href={{ route('jemaatedit', $datajemaat) }}><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+                                        </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

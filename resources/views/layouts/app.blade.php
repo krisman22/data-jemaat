@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard V.1 | Kiaalap - Kiaalap Admin Template</title>
+    <title>Data Jemaat BNKP</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -120,10 +120,10 @@
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-jemaat")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
-                                <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li>
-                                <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Add Students" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Add Student</span></a></li>
-                                <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li>
-                                <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
+                                {{-- <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li> --}}
+                                {{-- <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Add Students" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Add Student</span></a></li> --}}
+                                {{-- <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li> --}}
+                                {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
                             </ul>
                         </li>
                         {{-- <li>
@@ -257,7 +257,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                        <div class="header-top-menu tabl-d-n">
+                                        {{-- <div class="header-top-menu tabl-d-n">
                                             <ul class="nav navbar-nav mai-top-nav">
                                                 <li class="nav-item"><a href="#" class="nav-link">Home</a>
                                                 </li>
@@ -277,7 +277,7 @@
                                                 <li class="nav-item"><a href="#" class="nav-link">Support</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                         <div class="header-right-info">
@@ -288,7 +288,7 @@
                                                         <div class="message-single-top">
                                                             <h1>Message</h1>
                                                         </div>
-                                                        <ul class="message-menu">
+                                                        {{-- <ul class="message-menu">
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="message-img">
@@ -337,7 +337,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-                                                        </ul>
+                                                        </ul> --}}
                                                         <div class="message-view">
                                                             <a href="#">View All Messages</a>
                                                         </div>
@@ -348,7 +348,7 @@
                                                         <div class="notification-single-top">
                                                             <h1>Notifications</h1>
                                                         </div>
-                                                        <ul class="notification-menu">
+                                                        {{-- <ul class="notification-menu">
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="notification-icon">
@@ -397,7 +397,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-                                                        </ul>
+                                                        </ul> --}}
                                                         <div class="notification-view">
                                                             <a href="#">View All Notification</a>
                                                         </div>
@@ -405,8 +405,8 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="img/product/pro4.jpg" alt="" />
-															<span class="admin-name">Prof.Anderson</span>
+															<img src="img/product/pro.jpg" alt="" />
+															<span class="admin-name">Admin</span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
@@ -422,7 +422,8 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-menu"></i></a>
+                                                <div class="col-md-1"></div>
+                                                {{-- <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-menu"></i></a>
 
                                                     <div role="menu" class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated zoomIn">
                                                         <ul class="nav nav-tabs custon-set-tab">
@@ -856,9 +857,9 @@
 
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> 
                                                     </div>
-                                                </li>
+                                                </li>--}}
                                             </ul>
                                         </div>
                                     </div>
