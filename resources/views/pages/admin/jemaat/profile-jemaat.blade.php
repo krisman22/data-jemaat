@@ -88,11 +88,11 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            {{-- <div class="col-md-3" style="padding-left:0px;">
-                                                                <a href="#" data-toggle="modal" data-target="#DangerModalalert">
+                                                            <div class="col-md-3" style="padding-left:0px;">
+                                                                <a href="#" data-toggle="modal" data-target="#DangerModalalert1">
                                                                     <button type="button" class="btn btn-danger btn-block">Hapus </button></a>
 
-                                                                <div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+                                                                <div id="DangerModalalert1" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <form action="{{ route('hapusdatajemaat', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
@@ -112,7 +112,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div> --}}
+                                                            </div>
                                                         </div>
 
                                                         <!--Wrapper Modals -->

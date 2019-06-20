@@ -19,8 +19,9 @@ class DataJemaatController extends Controller
     public function index()
     {
         // $datajemaats = data_jemaat::all()->where(['jemaat_status_aktif', 't'], ['jemaat_status_aktif', 'f']);
+        $datajemaats = data_jemaat::all()->where('jemaat_status_aktif','!=','del');
 
-        $datajemaats = data_jemaat::all();
+        // $datajemaats = data_jemaat::all();
 
         // $datajemaats = DB::select('select * from data_jemaats where jemaat_status_aktif = "t" or jemaat_status_aktif = "f"');
 
