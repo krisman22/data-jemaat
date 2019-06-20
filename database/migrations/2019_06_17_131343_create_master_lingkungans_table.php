@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMasterJemaatLingkungansTable extends Migration
+class CreateMasterLingkungansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMasterJemaatLingkungansTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_jemaat_lingkungans', function (Blueprint $table) {
+        Schema::create('master_lingkungans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('nomor_lingkungan')->unsigned();
+            $table->integer('nomor_lingkungan')->unsigned()->unique();
             $table->string('nama_lingkungan');
+            $table->integer('id_jemaat_snk');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMasterJemaatLingkungansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_jemaat_lingkungans');
+        Schema::dropIfExists('master_lingkungans');
     }
 }

@@ -9,10 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/favicon.ico')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
@@ -63,6 +69,18 @@
         ============================================ -->
     <link rel="stylesheet" href={{ asset('css/data-table/bootstrap-table.css') }}>
     <link rel="stylesheet" href={{ asset('css/data-table/bootstrap-editable.css') }}>
+    <!-- Buttons
+        ============================================ -->
+    <link rel="stylesheet" href={{ asset('css/buttons.css') }}>
+    <!-- Modals
+        ============================================ -->
+        <link rel="stylesheet" href={{ asset('css/modals.css') }}>
+    <!-- Form
+        ============================================ -->
+        <link rel="stylesheet" href={{ asset('css/form/all-type-forms.css') }}>
+    <!-- datepicker
+        ============================================ -->
+        <link rel="stylesheet" href={{ asset('css/datapicker/datepicker3.css') }}>
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href={{ asset('style.css') }}>
@@ -75,6 +93,9 @@
     <!-- Awsomeicon
         ============================================ -->
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <!-- Time Picker Head
+        ============================================ -->
+    
 </head>
 
 <body>
@@ -119,9 +140,9 @@
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li class="{{Request::is("data-jemaat")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
+                                <li class="{{Request::is("data-jemaat")?'active':''}} || {{Request::is("data-jemaat/profile/*")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
                                 {{-- <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li> --}}
-                                {{-- <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Add Students" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Add Student</span></a></li> --}}
+                                <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Tambah Jemaat" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Tambah Jemaat</span></a></li>
                                 {{-- <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li> --}}
                                 {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
                             </ul>
@@ -237,7 +258,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="{{asset('/')}}"><img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -405,7 +426,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="img/product/pro.jpg" alt="" />
+															<img src="{{asset('img/product/pro.jpg')}}" alt="" />
 															<span class="admin-name">Admin</span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
@@ -1091,6 +1112,7 @@
     <!-- jquery
 		============================================ -->
     <script src={{ asset('js/vendor/jquery-1.12.4.min.js') }}></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src={{ asset('js/bootstrap.min.js') }}></script>
@@ -1140,6 +1162,39 @@
     <script src={{ asset('js/calendar/moment.min.js') }}></script>
     <script src={{ asset('js/calendar/fullcalendar.min.js') }}></script>
     <script src={{ asset('js/calendar/fullcalendar-active.js') }}></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src={{ asset('js/icheck/icheck.min.js') }}></script>
+    <script src={{ asset('js/icheck/icheck-active.js') }}></script>
+     <!-- datapicker JS
+		============================================ -->
+    <script src={{ asset('js/datapicker/bootstrap-datepicker.js') }}></script>
+    <script src={{ asset('js/datapicker/datepicker-active.js') }}></script>
+     <!-- input-mask JS
+		============================================ -->
+        {{-- <script src={{ asset('js/input-mask/jasny-bootstrap.min.js') }}></script> --}}
+        <!-- chosen JS
+            ============================================ -->
+        {{-- <script src={{ asset('js/chosen/chosen.jquery.js') }}></script>
+        <script src={{ asset('js/chosen/chosen-active.js') }}></script> --}}
+        <!-- select2 JS
+            ============================================ -->
+        {{-- <script src={{ asset('js/select2/select2.full.min.js') }}></script>
+        <script src={{ asset('js/select2/select2-active.js') }}></script> --}}
+        <!-- ionRangeSlider JS
+            ============================================ -->
+        {{-- <script src={{ asset('js/ionRangeSlider/ion.rangeSlider.min.js') }}></script>
+        <script src={{ asset('js/ionRangeSlider/ion.rangeSlider.active.js') }}></script> --}}
+        <!-- rangle-slider JS
+            ============================================ -->
+        {{-- <script src={{ asset('js/rangle-slider/jquery-ui-1.10.4.custom.min.js') }}></script>
+        <script src={{ asset('js/rangle-slider/jquery-ui-touch-punch.min.js') }}></script>
+        <script src={{ asset('js/rangle-slider/rangle-active.js') }}></script> --}}
+        <!-- knob JS
+            ============================================ -->
+        {{-- <script src={{ asset('js/knob/jquery.knob.js') }}></script>
+        <script src={{ asset('js/knob/knob-active.js') }}></script> --}}
+        
     <!-- plugins JS
 		============================================ -->
     <script src={{ asset('js/plugins.js') }}></script>
@@ -1175,6 +1230,15 @@
     <!-- tab JS
         ============================================ -->
     <script src={{ asset('js/tab.js') }}></script>
+    <!-- Date Time Picker JS
+        ============================================ -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    
+    <!-- extend scrip on blade
+        ============================================ -->
+    @yield('scripts')
+
 </body>
 
 </html>

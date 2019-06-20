@@ -21,14 +21,23 @@
                                     <option value="selected">Export Selected</option>
                                 </select>
                             </div> --}}
+                            @if ($message = Session::get('success'))
+                                <div class="col-md-12">
+                                    <div class="alert alert-info alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                </div>
+                            @endif
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="false" data-resizable="true" data-cookie="true"
                                 data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
                                         <th data-field="nama">Nama</th>
+                                        <th data-field="namaalias">Nama Alias</th>
                                         <th data-field="nomorstambuk">Nomor Stambuk</th>
                                         <th data-field="lingkungan">Lingkungan </th>
-                                        <th data-field="ttl">TTL</th>
+                                        {{-- <th data-field="ttl">TTL</th> --}}
                                         {{-- <th data-field="complete">Completed</th> --}}
                                         <th data-field="status">Status Jemaat</th>
                                         {{-- <th data-field="date" data-editable="true">Date</th>
@@ -40,18 +49,21 @@
                                     @foreach ($datajemaats as $datajemaat)
                                     <tr>
                                         <td>{{ $datajemaat->jemaat_nama}}</td>
-                                        <td>{{ $datajemaat->jemaat_nostambuk}}</td>
-                                        <td>{{ $datajemaat->id_lingkungan}}</td>
-                                        <td>{{ $datajemaat->jemaat_tempat_lahir}}, {{ $datajemaat->jemaat_tanggal_lahir->format('d M Y') }}</td>
+                                        <td>{{ $datajemaat->jemaat_nama_alias}}</td>                                        
+                                        <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
+                                        <td>{{ $datajemaat->lingkungan->nomor_lingkungan}} - {{ $datajemaat->lingkungan->nama_lingkungan}}</td>
+                                        {{-- <td>{{ $datajemaat->jemaat_tempat_lahir}}, {{ $datajemaat->jemaat_tanggal_lahir->format('d M Y') }}</td> --}}
                                         <td>@if($datajemaat->jemaat_status_aktif == "t")
-                                            Aktif
+                                            <span style="font-size:10pt" class="label label-primary">Aktif</span>
+                                            @elseif($datajemaat->jemaat_keterangan_status == "Pindah")
+                                            <span style="font-size:10pt" class="label label-default">{{$datajemaat->jemaat_keterangan_status}} ({{$datajemaat->jemaat_tanggal_status->formatLocalized('%d %B %Y') }})</span>
                                             @else
-                                                {{$datajemaat->jemaat_keterangan_status}} ({{$datajemaat->jemaat_tanggal_meninggal->format('d M Y') }})
+                                            <span style="font-size:10pt" class="label label-warning">{{$datajemaat->jemaat_keterangan_status}} ({{$datajemaat->jemaat_tanggal_status->formatLocalized('%d %B %Y') }})</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href={{ route('profiledetail', $datajemaat) }}><button type="button" class="btn btn-info btn-sm">Lihat Detail</button></a>
-                                            <a href={{ route('jemaatedit', $datajemaat) }}><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+                                        <td style="text-align: center">
+                                            <a href={{ route('profiledetail', $datajemaat) }} target="_blank"><button type="button" class="btn btn-primary btn-sm">Lihat Detail</button></a>
+                                            <a href={{ route('jemaateditprofile', $datajemaat) }} target="_blank"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
                                         </td>
                                     </tr>
                                     @endforeach
