@@ -20,10 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('pages.admin.jemaat.jemaat');
     });
     
-    Route::get('/data-jemaat', 'dataJemaatController@index')->name('datajemaat');
-    Route::get('/data-jemaat/profile/{data_jemaat}', 'dataJemaatController@show')->name('profiledetail');
-    Route::get('/data-jemaat/profile/{data_jemaat}/edit', 'dataJemaatController@edit')->name('jemaateditprofile');
-    Route::patch('/data-jemaat/{id}/update', 'dataJemaatController@update')->name('jemaatupdate');
+    Route::get('/data-jemaat', 'DataJemaatController@index')->name('datajemaat');
+    Route::get('/data-jemaat/profile/{data_jemaat}', 'DataJemaatController@show')->name('profiledetail');
+    Route::get('/data-jemaat/profile/{data_jemaat}/edit', 'DataJemaatController@edit')->name('jemaateditprofile');
+    Route::patch('/data-jemaat/{id}/update', 'DataJemaatController@update')->name('jemaatupdate');
     Route::patch('/data-jemaat/profile/{id}/update1', 'DataJemaatController@updateStatusPensiun')->name('updatestatuspensiun');
     Route::patch('/data-jemaat/profile/{id}/update2', 'DataJemaatController@updateStatusMeninggal')->name('updatestatusmeninggal');
     Route::patch('/data-jemaat/profile/{id}/update3', 'DataJemaatController@destroy')->name('hapusdatajemaat');
@@ -34,8 +34,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     
     
-    Route::get('/tambah-jemaat', 'dataJemaatController@create')->name('tambahjemaat');
-    Route::post('/tambah-jemaat', 'dataJemaatController@store')->name('tambahdatajemaat');
+    Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
+    Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
 
 });
 
