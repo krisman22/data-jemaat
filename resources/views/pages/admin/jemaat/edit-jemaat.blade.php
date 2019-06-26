@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => 'Edit'])
 
 @section('content')
     <!-- Single pro tab review Start-->

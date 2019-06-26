@@ -1,4 +1,18 @@
-@extends('layouts.app')
+@section('scriptshead')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('#myTabedu1 a[href="' + activeTab + '"]').tab('show');
+            // window.localStorage.removeItem("activeTab");
+        }
+    });
+    </script>
+@endsection
+@extends('layouts.app', ['title' => 'Profile'])
 
 @section('content')
     <!-- Single pro tab review Start-->
@@ -8,9 +22,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-payment-inner-st">
                     <ul id="myTabedu1" class="tab-review-design">
-                        <li class="active"><a href="#description">Data Pribadi</a></li>
-                        <li><a href="#reviews"> Edit Account Information</a></li>
-                        <li><a href="#INFORMATION">Edit Social Information</a></li>
+                        <li class="active"><a data-toggle="tab" href="#description">Data Pribadi</a></li>
+                        <li><a data-toggle="tab" href="#keluarga"> Data Keluarga</a></li>
+                        <li><a data-toggle="tab" href="#komisi">Data Komisi</a></li>
                     </ul>
                     <div id="myTabContent" class="tab-content custom-product-edit">
                         <div class="product-tab-list tab-pane fade active in" id="description">
@@ -65,6 +79,7 @@
                                                     <!--End of Detail Top -->
 
                                                     <!--Button Navigation -->
+                                                    @if($data_jemaat->jemaat_status_aktif == "t")
                                                     <div class="col-md-12">
                                                         @if ($message = Session::get('update'))
                                                             <div class="col-md-12">
@@ -105,7 +120,6 @@
                                                                                 <p>Hapus Data dari : </p><h4>{{$data_jemaat->jemaat_nama}}</h4>
                                                                             </div>
                                                                             <div class="modal-footer danger-md">
-                                                                                <a data-dismiss="modal" href="#">Cancel</a>
                                                                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                                                             </div>
                                                                             </form>
@@ -217,6 +231,7 @@
                                                         </div>
                                                         <!--End off wrapper Modals -->
                                                     </div>
+                                                    @endif
                                                     <!-- End of Button Navigation -->
 
                                                     <!--Detai Jemaat -->
@@ -452,34 +467,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-tab-list tab-pane fade" id="reviews">
+                        <div class="product-tab-list tab-pane fade" id="keluarga">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="review-content-section">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="devit-card-custom">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Email" value="Admin@gmail.com">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="number" class="form-control" placeholder="Phone" value="01962067309">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="password" class="form-control" placeholder="Password" value="#123#123">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="password" class="form-control" placeholder="Confirm Password" value="#123#123">
-                                                    </div>
-                                                    <a href="#!" class="btn btn-primary waves-effect waves-light">Submit</a>
-                                                </div>
-                                            </div>
+                                    <div class="product-status-wrap">
+                                        <h4>Daftar Nama Keluarga</h4>
+                                        <div class="add-product">
+                                            <a href="#">Tambah Daftar Keluarga</a>
+                                        </div>
+                                        <div class="asset-inner">
+                                            <table>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Status Keluarga</th>
+                                                </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>@if($dataAyah != null){{$dataAyah->jemaat_nama}} @else - @endif</td>
+                                                        <td>Ayah Kandung</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>@if($dataIbu != null){{$dataIbu->jemaat_nama}} @else - @endif</td>
+                                                        <td>Ibu Kandung</td>
+                                                    </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                        <div class="product-tab-list tab-pane fade" id="komisi">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">

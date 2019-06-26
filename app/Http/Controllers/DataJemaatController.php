@@ -16,7 +16,7 @@ class DataJemaatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public static function index()
     {
         // $datajemaats = data_jemaat::all()->where(['jemaat_status_aktif', 't'], ['jemaat_status_aktif', 'f']);
         $datajemaats = data_jemaat::all()->where('jemaat_status_aktif','!=','del');
@@ -124,7 +124,20 @@ class DataJemaatController extends Controller
      */
     public function show(data_jemaat $data_jemaat)
     {
-        return view('pages.admin.jemaat.profile-jemaat', compact('data_jemaat'));
+        $parent = $data_jemaat->id_parent;
+        $datapanggil = $data_jemaat->jemaat_status_aktif;
+        $dataAyah = data_jemaat::find($data_jemaat->id_parent);
+        $dataIbu = data_jemaat::where('id_parent','=', $parent)
+            ->where('jemaat_status_dikeluarga','=', "1")->first();
+        // dd($dataIbu->jemaat_nama);
+
+        if($datapanggil == "del"){
+            return redirect()->route('datajemaat');
+        }
+        else{
+            return view('pages.admin.jemaat.profile-jemaat', compact('data_jemaat', 'dataAyah', 'dataIbu'));
+        }
+
     }
 
     /**
@@ -139,7 +152,7 @@ class DataJemaatController extends Controller
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
         
-        return view('pages.admin.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans'));   
+        return view('pages.admin.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans'));      
     }
 
     /**
@@ -192,7 +205,7 @@ class DataJemaatController extends Controller
         $data_jemaat->update([
             'jemaat_status_aktif' => "del",
         ]);
-        return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
+        return redirect()->route('datajemaat')->with(['delete' => 'Data Jemaat berhasil di hapus']);
     }
 
     public function updateStatusPensiun(Request $request, $id)

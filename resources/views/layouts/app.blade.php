@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Data Jemaat BNKP</title>
+    <title>@isset($title)
+            {{ $title }} | 
+        @endisset Data Jemaat BNKP</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -93,8 +95,8 @@
     <!-- Awsomeicon
         ============================================ -->
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <!-- Time Picker Head
-        ============================================ -->
+    
+    @yield('scriptshead')
     
 </head>
 
@@ -425,21 +427,29 @@
                                                     </div>
                                                 </li>
                                                 <li class="nav-item">
+
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="{{asset('img/product/pro.jpg')}}" alt="" />
-															<span class="admin-name">Admin</span>
+															<img src="{{asset('img/logo/cross-logo.jpg')}}" alt="" />
+															<span class="admin-name">{{ Auth::user()->name }}</span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
+                                                        {{-- <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
                                                         </li>
                                                         <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
                                                         </li>
                                                         <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>User Billing</a>
-                                                        </li>
+                                                        </li> --}}
                                                         <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
                                                         </li>
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        <li><a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                            <span class="edu-icon edu-locked author-log-ic"></span>Log Out                                                         
+                                                        </a>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </li>

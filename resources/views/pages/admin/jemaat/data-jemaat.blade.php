@@ -20,12 +20,14 @@
                                     <option value="all">Export All</option>
                                     <option value="selected">Export Selected</option>
                                 </select>
-                            </div> --}}
-                            @if ($message = Session::get('success'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-info alert-block">
+                            </div> --}}                            
+                            @if ($message = Session::get('delete'))
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="alert alert-danger alert-block">
                                         <button type="button" class="close" data-dismiss="alert">×</button>
                                         <strong>{{ $message }}</strong>
+                                    </div>
                                     </div>
                                 </div>
                             @endif
@@ -63,7 +65,9 @@
                                         </td>
                                         <td style="text-align: center">
                                             <a href={{ route('profiledetail', $datajemaat) }} target="_blank"><button type="button" class="btn btn-primary btn-sm">Lihat Detail</button></a>
-                                            <a href={{ route('jemaateditprofile', $datajemaat) }} target="_blank"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+                                            @if($datajemaat->jemaat_status_aktif == "t")
+                                                <a href={{ route('jemaateditprofile', $datajemaat) }} target="_blank"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
