@@ -133,12 +133,12 @@
                                                                     <div class="form-group-inner" style="margin: 10px 0">
                                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                                             <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
-                                                                                <input type="radio" value="l" {{ old('jemaat_jenis_kelamin') == 'l' ? 'selected' : '' }} name="jemaat_jenis_kelamin"> <i></i> Laki-Laki
+                                                                                <input type="radio" value="l" {{ old('jemaat_jenis_kelamin') == 'l' ? 'checked' : '' }} name="jemaat_jenis_kelamin"> <i></i> Laki-Laki
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                                             <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
-                                                                                <input type="radio" value="p" {{ old('jemaat_jenis_kelamin') == 'p' ? 'selected' : '' }} name="jemaat_jenis_kelamin"> <i></i> Perempuan
+                                                                                <input type="radio" value="p" {{ old('jemaat_jenis_kelamin') == 'p' ? 'checked' : '' }} name="jemaat_jenis_kelamin"> <i></i> Perempuan
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -294,7 +294,12 @@
                                                             </div>
                                                             <div class="col-md-8" style="padding-left:0">
                                                                 <div class="form-group">
-                                                                    <input style="border=0;" type="text" class="form-control" name="id_pekerjaan" value="{{ old('id_pekerjaan') }}">
+                                                                    {{-- <input style="border=0;" type="text" class="form-control" name="id_pekerjaan" value="{{ old('id_pekerjaan') }}"> --}}
+                                                                    <select class="form-control" name="id_pekerjaan">
+                                                                        @foreach($data_pekerjaans as $data_pekerjaan)
+                                                                            <option value="{{$data_pekerjaan->id}}" {{ old('id_pekerjaan') == $data_pekerjaan->id ? 'selected' : '' }}>{{$data_pekerjaan->jenis_pekerjaan}}</option>
+                                                                        @endforeach                                                                        
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -439,7 +439,7 @@
                                                                 </div>
                                                                 <div class="col-md-8" style="padding-left:0">
                                                                     <div class="form-group">
-                                                                        <input style="border=0; background-color:white" readonly="readonly" type="text" class="form-control" value="{{$data_jemaat->jemaat_status_dikeluarga}}">
+                                                                        <input style="border=0; background-color:white" readonly="readonly" type="text" class="form-control" value="@if($data_jemaat->jemaat_status_dikeluarga == 0) Ayah @elseif ($data_jemaat->jemaat_status_dikeluarga == 1) Ibu @else Anak @endif">
                                                                     </div>
                                                                 </div>
                                                             </div>

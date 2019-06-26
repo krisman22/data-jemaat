@@ -9,8 +9,8 @@
                 <div class="product-payment-inner-st">
                     <ul id="myTabedu1" class="tab-review-design">
                         <li class="active"><a href="#description">Data Pribadi</a></li>
-                        <li><a href="#reviews"> Edit Account Information</a></li>
-                        <li><a href="#INFORMATION">Edit Social Information</a></li>
+                        {{-- <li><a href="#reviews"> Edit Account Information</a></li>
+                        <li><a href="#INFORMATION">Edit Social Information</a></li> --}}
                     </ul>
                     <div id="myTabContent" class="tab-content custom-product-edit">
                         <div class="product-tab-list tab-pane fade active in" id="description">
@@ -285,7 +285,12 @@
                                                             </div>
                                                             <div class="col-md-8" style="padding-left:0">
                                                                 <div class="form-group">
-                                                                    <input style="border=0;" type="text" class="form-control" name="id_pekerjaan" value="{{$data_jemaat->id_pekerjaan}}">
+                                                                    {{-- <input style="border=0;" type="text" class="form-control" name="id_pekerjaan" value="{{$data_jemaat->id_pekerjaan}}"> --}}
+                                                                    <select class="form-control" name="id_pekerjaan">                                                                        
+                                                                        @foreach($data_pekerjaans as $data_pekerjaan)
+                                                                            <option @if($data_pekerjaan->id == $data_jemaat->id_pekerjaan) selected="" @endif value="{{$data_pekerjaan->id}}">{{$data_pekerjaan->jenis_pekerjaan}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -297,7 +302,12 @@
                                                             </div>
                                                             <div class="col-md-8" style="padding-left:0">
                                                                 <div class="form-group">
-                                                                    <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{$data_jemaat->jemaat_status_dikeluarga}}">
+                                                                    {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{$data_jemaat->jemaat_status_dikeluarga}}"> --}}
+                                                                    <select class="form-control" name="jemaat_status_dikeluarga">
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "0") selected="" @endif value="0">Ayah</option>
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "1") selected="" @endif value="1">Ibu</option>
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "2") selected="" @endif value="2">Anak</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>

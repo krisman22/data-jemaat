@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\data_jemaat;
 use App\master_pendidikan;
 use App\master_lingkungan;
+use App\master_pekerjaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,8 +39,9 @@ class DataJemaatController extends Controller
         
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
+        $data_pekerjaans = master_pekerjaan::all();
         
-        return view('pages.admin.jemaat.tambah-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans'));
+        return view('pages.admin.jemaat.tambah-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans','data_pekerjaans'));
     }
 
     /**
@@ -52,6 +54,7 @@ class DataJemaatController extends Controller
     {
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
+        $data_pekerjaans = master_pekerjaan::all();
 
         $validatedData = $request->validate([
             'jemaat_nomor_stambuk' => 'nullable|required|unique:data_jemaats|max:18',
@@ -151,8 +154,12 @@ class DataJemaatController extends Controller
         $this->$data_jemaat = $data_jemaat->id;
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
+        $data_pekerjaans = DB::table('master_pekerjaans')
+            ->orderBy('jenis_pekerjaan', 'asc')->get();
         
-        return view('pages.admin.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans'));      
+        // dd($data_pekerjaans);
+
+        return view('pages.admin.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans', 'data_pekerjaans'));      
     }
 
     /**
