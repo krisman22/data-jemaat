@@ -57,40 +57,66 @@ class DataJemaatController extends Controller
         $data_pekerjaans = master_pekerjaan::all();
 
         $validatedData = $request->validate([
-            'jemaat_nomor_stambuk' => 'nullable|required|unique:data_jemaats|max:18',
+            'jemaat_nomor_stambuk' => 'nullable|unique:data_jemaats|max:18',
             'jemaat_nama' => 'required',
             'jemaat_gelar_depan' => 'nullable',
             'jemaat_gelar_belakang' => 'nullable',
             // 'jemaat_nama_alias' => ,
-            // 'jemaat_tempat_lahir' => 'required',
-            // 'jemaat_tanggal_lahir' => request('jemaat_tanggal_lahir'),
+            'jemaat_tempat_lahir' => 'required',
+            'jemaat_tanggal_lahir' => 'required',
             // 'jemaat_jenis_kelamin' => request('jemaat_jenis_kelamin'),
             // 'jemaat_status_perkawinan' => request('jemaat_status_perkawinan'),
             // 'jemaat_tanggal_perkawinan' => request('jemaat_tanggal_perkawinan'),
-            // 'jemaat_tanggal_baptis' => request('jemaat_tanggal_baptis'),
+            'jemaat_tanggal_baptis' => 'required',
             // 'jemaat_tanggal_sidi' => request('jemaat_tanggal_sidi'),            
-            // 'jemaat_tanggal_bergabung' => request('jemaat_tanggal_bergabung'),
+            'jemaat_tanggal_bergabung' => 'nullable',
             // 'id_pendidikan_akhir' => request('id_pendidikan_akhir'),
-            // 'id_lingkungan' => request('id_lingkungan'),
+            'id_lingkungan' => 'required',
             // 'jemaat_alamat_rumah' => request('jemaat_alamat_rumah'),
             // 'jemaat_nomor_hp' => request('jemaat_nomor_hp'),
             // 'jemaat_email' => 'email',
             // 'id_pekerjaan' => request('id_pekerjaan'),
-            // 'jemaat_status_dikeluarga' => request('jemaat_status_dikeluarga'),
+            'jemaat_status_dikeluarga' => 'required',
             // 'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
         ],    
         [
-            'jemaat_nomor_stambuk.required' => 'Harap isi Nomor Stambuk',
             'jemaat_nomor_stambuk.unique' => 'Nomor Stambuk tidak boleh sama',
             'jemaat_nomor_stambuk.max' => 'Nomor Stambuk hanya 18 karakter',
             'jemaat_nama.required' => 'Harap isi Nama Jemaat',
-            // 'jemaat_gelar_depan.regex' => 'Gelar depan tidak boleh pakai angka',
-            // 'jemaat_gelar_belakang.regex' => 'Gelar belakang tidak boleh pakai angka',
+            'jemaat_tempat_lahir.required' => 'Tempat lahir harus di isi',
+            'jemaat_tanggal_lahir.required' => 'Tanggal lahir harus di isi',
+            'jemaat_tanggal_baptis.required' => 'Tanggal baptis jemaat harus di isi',
+            'id_lingkungan.required' => 'Nomor Lingkungan wajib di isi',
+            'jemaat_status_dikeluarga.required' => 'Pilih salah satu status dikeluarga',
         ]);
+        $tl = request('jemaat_tanggal_lahir');
+        $tls = substr($tl, 0, 4) . substr($tl, 5, 2) . substr($tl, 8, 2);
+        $baptis = request('jemaat_tanggal_baptis');
+        $baps = substr($baptis, 0, 4) . substr($baptis, 5, 2);
+        $jks;
+        $jk = request('jemaat_jenis_kelamin');
+        if($jk == 'l'){
+            $jks = 1;
+        }
+        elseif($jk == 'p'){
+            $jks = 2;
+        }        
+        $def="00";
+        $plus = 1;
+        $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;
+
+        $check = data_jemaat::where('jemaat_nomor_stambuk', $nomorstambuk)->first();
+        do {
+            $check = data_jemaat::where('jemaat_nomor_stambuk', $nomorstambuk)->first();
+            if($check!=null){
+                $plus +=1;
+            }
+            $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;
+        } while ($check!=null);
         
         
         data_jemaat::create([
-            'jemaat_nomor_stambuk' =>request('jemaat_nomor_stambuk'),
+            'jemaat_nomor_stambuk' => $nomorstambuk,
             'jemaat_nama' => request('jemaat_nama'),
             'jemaat_gelar_depan' => request('jemaat_gelar_depan'),
             'jemaat_gelar_belakang' => request('jemaat_gelar_belakang'),
@@ -102,7 +128,7 @@ class DataJemaatController extends Controller
             'jemaat_tanggal_perkawinan' => request('jemaat_tanggal_perkawinan'),
             'jemaat_tanggal_baptis' => request('jemaat_tanggal_baptis'),
             'jemaat_tanggal_sidi' => request('jemaat_tanggal_sidi'),            
-            'jemaat_tanggal_bergabung' => request('jemaat_tanggal_bergabung'),
+            'jemaat_tanggal_bergabung' => request('jemaat_tanggal_bergabung', '2018-12-31'),
             'id_pendidikan_akhir' => request('id_pendidikan_akhir'),
             'id_lingkungan' => request('id_lingkungan'),
             'jemaat_alamat_rumah' => request('jemaat_alamat_rumah'),
@@ -116,7 +142,8 @@ class DataJemaatController extends Controller
         ]);
         
         $datajemaats = data_jemaat::all();
-        return view('pages.admin.jemaat.data-jemaat', compact('datajemaats'))->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
+        // return view('pages.admin.jemaat.data-jemaat', compact('datajemaats'))->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
+        return redirect()->route('datajemaat')->with( ['datajemaats' => $datajemaats])->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
     }
 
     /**
@@ -243,5 +270,20 @@ class DataJemaatController extends Controller
         // return "berhasil";
 
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
+    }
+
+    public function confirmation(Request $request)
+    {
+        // $this->validate($request, [
+        //     'jemaat_nama' => 'required',
+        //     'jemaat_tanggal_lahir' => 'required'
+        // ]);
+    
+        $datas['dataJemaats'] = $request->all();
+        
+        // dd($datas);
+
+    
+        return view('pages.admin.jemaat.confirmation', compact('datas'));
     }
 }

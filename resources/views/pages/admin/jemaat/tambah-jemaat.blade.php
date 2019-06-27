@@ -9,8 +9,8 @@
                 <div class="product-payment-inner-st">
                     <ul id="myTabedu1" class="tab-review-design">
                         <li class="active"><a href="#description">Data Pribadi</a></li>
-                        <li><a href="#reviews"> Edit Account Information</a></li>
-                        <li><a href="#INFORMATION">Edit Social Information</a></li>
+                        {{-- <li><a href="#reviews"> Edit Account Information</a></li>
+                        <li><a href="#INFORMATION">Edit Social Information</a></li> --}}
                     </ul>
                     <div id="myTabContent" class="tab-content custom-product-edit">
                         <div class="product-tab-list tab-pane fade active in" id="description">
@@ -19,7 +19,8 @@
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad">
                                             <form action="{{route('tambahdatajemaat')}}" method="post" enctype="multipart/form-data" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                                            {{ csrf_field() }} 
+                                                {{-- <form action="{{route('confirmation')}}" method="post" enctype="multipart/form-data" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload"> --}}                                            
+                                                {{ csrf_field() }} 
                                                 <div class="row">
                                                     {{-- @if ($message = Session::get('success'))
                                                         <div class="col-md-12">
@@ -74,7 +75,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        {{-- <div class="row">
                                                             <div class="col-md-4" style="padding-right:0">
                                                                 <div class="form-group" style="">
                                                                     <input style="text-align:right" type="text" class="form-control" value="Nomor Stambuk" readonly="readonly">
@@ -85,7 +86,7 @@
                                                                     <input style="border=0;" type="text" class="form-control" name="jemaat_nomor_stambuk" value="{{ old('jemaat_nomor_stambuk') }}">
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="row">
                                                             <div class="col-md-4" style="padding-right:0">
                                                                 <div class="form-group" style="">
@@ -117,7 +118,7 @@
                                                             <div class="col-md-3" style="padding-left:0">
                                                                 <div class="form-group">
                                                                 {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_tanggal_lahir" value="{{$data_jemaat->jemaat_tanggal_lahir}}"> --}}
-                                                                    <input class="datepicker form-control"  type="text" name="jemaat_tanggal_lahir" value="{{ old('jemaat_tanggal_lahir') }}" required>
+                                                                    <input class="datepicker form-control"  type="text" name="jemaat_tanggal_lahir" value="{{ old('jemaat_tanggal_lahir') }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -306,24 +307,24 @@
                                                         <div class="row">
                                                             <div class="col-md-4" style="padding-right:0">
                                                                 <div class="form-group" style="">
-                                                                    <input style="text-align:right" type="text" class="form-control" value="Status dikeluarga" readonly="readonly">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8" style="padding-left:0">
-                                                                <div class="form-group">
-                                                                    <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{ old('jemaat_status_dikeluarga') }}">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4" style="padding-right:0">
-                                                                <div class="form-group" style="">
                                                                     <input style="text-align:right" type="text" class="form-control" value="Golongan Darah" readonly="readonly">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8" style="padding-left:0">
                                                                 <div class="form-group">
                                                                     <input style="border=0;" type="text" class="form-control" name="jemaat_golongan_darah" value="{{ old('jemaat_golongan_darah') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="padding-right:0">
+                                                                <div class="form-group" style="">
+                                                                    <input style="text-align:right" type="text" class="form-control" value="Status dikeluarga" readonly="readonly">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8" style="padding-left:0">
+                                                                <div class="form-group">
+                                                                    <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{ old('jemaat_status_dikeluarga') }}">
                                                                 </div>
                                                             </div>
                                                         </div>

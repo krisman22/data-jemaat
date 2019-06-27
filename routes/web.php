@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
+    Route::post('/tambah-jemaat/confirmation', 'DataJemaatController@confirmation')->name('confirmation');
 
 });
 

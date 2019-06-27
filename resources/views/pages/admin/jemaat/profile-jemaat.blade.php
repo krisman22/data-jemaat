@@ -7,7 +7,7 @@
         var activeTab = localStorage.getItem('activeTab');
         if(activeTab){
             $('#myTabedu1 a[href="' + activeTab + '"]').tab('show');
-            // window.localStorage.removeItem("activeTab");
+            window.localStorage.removeItem("activeTab");
         }
     });
     </script>

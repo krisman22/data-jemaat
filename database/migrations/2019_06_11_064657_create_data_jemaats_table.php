@@ -29,7 +29,7 @@ class CreateDataJemaatsTable extends Migration
             $table->date('jemaat_tanggal_perkawinan')->nullable();
             $table->integer('id_pendidikan_akhir')->unsigned();
             $table->integer('id_lingkungan')->unsigned();
-            $table->date('jemaat_tanggal_bergabung')->default('2000-01-01'); 
+            $table->date('jemaat_tanggal_bergabung')->default('2018-12-31'); 
             $table->string('jemaat_alamat_rumah')->nullable();
             $table->string('jemaat_nomor_hp')->nullable();
             $table->string('jemaat_email')->nullable();
