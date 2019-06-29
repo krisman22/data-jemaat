@@ -13,14 +13,14 @@
                             @if ($errors->any())                                                       
                                 @foreach ($errors->all() as $error)
                                     <div class="col-md-12">
-                                        <div class="alert alert-danger alert-block" style="">
+                                        <div class="alert alert-danger alert-block" style="margin-bottom:0px;">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <strong>{{ $error }}</strong>
                                         </div>
                                     </div>
                                 @endforeach                                                            
                             @endif
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:4vh">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:4vh;margin-top:2vh">
                                 <ul id="myTabedu1" class="tab-review-design">
                                     <li class="active"><a href="#description">Data Pribadi</a></li>
                                 </ul>
@@ -221,7 +221,7 @@
                                                             <label class="login2 pull-right pull-right-pro">Golongan Darah</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input style="border=0;" type="text" class="form-control" name="jemaat_golongan_darah" value="{{ old('jemaat_golongan_darah') }}">
+                                                            <input type="text" class="form-control" name="jemaat_golongan_darah" value="{{ old('jemaat_golongan_darah') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,36 +230,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:2vh">
                                 <ul id="myTabedu1" class="tab-review-design">
                                     <li class="active"><a href="#keluarga">Data Keluarga</a></li>
                                 </ul>
-                                <div id="myTabContent" class="tab-content custom-product-edit" style="padding-top:15px">
+                                <div id="myTabContent" class="tab-content custom-product-edit" style="padding-top:15px ">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:4vh">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:4vh; ">
                                             <div class="all-form-element-inner">
                                                 <div class="form-group-inner">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Normal</label>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            {{-- <input type="text" class="form-control" /> --}}
-                                                            <select id="nameid" class="form-control" name="id_parent">
-                                                                <option disabled selected></option>
-                                                                @foreach($dataKK as $data)
-                                                                    <option value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}}</option>
-                                                                @endforeach                                                                        
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                             <label class="login2 pull-right pull-right-pro">Kepala Keluarga </label>                                                            
                                                         </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                             <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
                                                                 <label>
                                                                     <input type="checkbox" value="1" name="jemaat_kk_status"> <i></i> Ya </label>
@@ -280,6 +264,41 @@
                                                                 <option value="2" {{ old('jemaat_status_dikeluarga') == 2 ? 'selected' : '' }}>Ibu</option>
                                                                 <option value="3" {{ old('jemaat_status_dikeluarga') == 3 ? 'selected' : '' }}>Anak</option>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Pilih Kepala Keluarga</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select id="nameid" class="form-control" name="id_parent" style="padding:0px;">
+                                                                <option disabled selected></option>
+                                                                @foreach($dataKK as $data)
+                                                                    <option value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}}</option>
+                                                                @endforeach                                                                        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Nama Ayah</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <input type="text" class="form-control" name="namaAyah" value="{{ old('namaAyah') }}">                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Nama Ibu</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <input type="text" class="form-control" name="namaIbu" value="{{ old('namaIbu') }}">                                                                                                                    
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,7 +346,7 @@
 <script type="text/javascript">
 
     $("#nameid").select2({
-          placeholder: "Select a Name"
+          placeholder: "Pilih KK"
       });
 </script>
 

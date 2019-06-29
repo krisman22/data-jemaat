@@ -492,6 +492,19 @@
                                                         <td>@if($dataIbu != null){{$dataIbu->jemaat_nama}} @else - @endif</td>
                                                         <td>Ibu Kandung</td>
                                                     </tr>
+                                                    @php
+                                                        $i=3;
+                                                    @endphp
+                                                    @foreach ($saudaras as $saudara)
+                                                        <tr>
+                                                            <td>{{$i}}</td>
+                                                            <td>@if($saudara != null){{$saudara->jemaat_nama}} @else - @endif</td>
+                                                            <td>Saudara Kandung</td>
+                                                            @php
+                                                                $i+=1;
+                                                            @endphp
+                                                        </tr>
+                                                    @endforeach
                                             </table>
                                         </div>
                                     </div>

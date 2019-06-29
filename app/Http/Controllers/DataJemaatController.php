@@ -75,6 +75,7 @@ class DataJemaatController extends Controller
             // 'jemaat_alamat_rumah' => request('jemaat_alamat_rumah'),
             // 'jemaat_nomor_hp' => request('jemaat_nomor_hp'),
             // 'jemaat_email' => 'email',
+            'id_parent' => 'nullable',
             'id_pekerjaan' =>'required',
             'jemaat_status_dikeluarga' => 'required',
             // 'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
@@ -139,7 +140,7 @@ class DataJemaatController extends Controller
             'id_pekerjaan' => request('id_pekerjaan'),
             'jemaat_status_dikeluarga' => request('jemaat_status_dikeluarga'),
             'jemaat_status_aktif' => "t",
-            'id_parent' => 0,
+            'id_parent' => request('id_parent', null),
             'jemaat_kk_status' => request('jemaat_kk_status', '0'),
             'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
         ]);
@@ -159,16 +160,28 @@ class DataJemaatController extends Controller
     {
         $parent = $data_jemaat->id_parent;
         $datapanggil = $data_jemaat->jemaat_status_aktif;
-        $dataAyah = data_jemaat::find($data_jemaat->id_parent);
-        $dataIbu = data_jemaat::where('id_parent','=', $parent)
-            ->where('jemaat_status_dikeluarga','=', "2")->first();
-        // dd($dataIbu->jemaat_nama);
+        if($data_jemaat->jemaat_status_dikeluarga == 3)
+        {
+            $dataAyah = data_jemaat::find($data_jemaat->id_parent);
+            $dataIbu = data_jemaat::where('id_parent','=', $parent)
+                ->where('jemaat_status_dikeluarga','=', "2")->first();
+            $saudaras = data_jemaat::where('id_parent', '=', $parent)
+                ->where('jemaat_status_dikeluarga', '=', '3')
+                ->where('id', '!=', $data_jemaat->id)
+                ->orderBy('jemaat_tanggal_lahir', 'ASC')
+                ->get();
+        }
+        else{
+            $dataAyah = null;
+            $dataIbu = null;
+            $saudaras = null;
+        }
 
         if($datapanggil == "del"){
             return redirect()->route('datajemaat');
         }
         else{
-            return view('pages.admin.jemaat.profile-jemaat', compact('data_jemaat', 'dataAyah', 'dataIbu'));
+            return view('pages.admin.jemaat.profile-jemaat', compact('data_jemaat', 'dataAyah', 'dataIbu', 'saudaras'));
         }
 
     }
