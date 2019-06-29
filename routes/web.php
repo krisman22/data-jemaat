@@ -12,13 +12,7 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
-        return view('pages.admin.index');
-    });
-
-    Route::get('/all-jemaat', function(){
-        return view('pages.admin.jemaat.jemaat');
-    });
+    Route::resource('/','HomeController');
     
     Route::get('/data-jemaat', 'DataJemaatController@index')->name('datajemaat');
     Route::get('/data-jemaat/profile/{data_jemaat}', 'DataJemaatController@show')->name('profiledetail');
@@ -28,15 +22,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/data-jemaat/profile/{id}/update2', 'DataJemaatController@updateStatusMeninggal')->name('updatestatusmeninggal');
     Route::patch('/data-jemaat/profile/{id}/update3', 'DataJemaatController@destroy')->name('hapusdatajemaat');
     
-    Route::get('/lihat-data-jemaat', function () {
-        return view('pages.admin.jemaat.edit-jemaat');
-    });
-    
-    
-    
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
-    Route::post('/tambah-jemaat/confirmation', 'DataJemaatController@confirmation')->name('confirmation');
+    
+    
 
 });
 

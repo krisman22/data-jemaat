@@ -304,9 +304,9 @@
                                                                 <div class="form-group">
                                                                     {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{$data_jemaat->jemaat_status_dikeluarga}}"> --}}
                                                                     <select class="form-control" name="jemaat_status_dikeluarga">
-                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "0") selected="" @endif value="0">Ayah</option>
-                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "1") selected="" @endif value="1">Ibu</option>
-                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "2") selected="" @endif value="2">Anak</option>
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "1") selected="" @endif value="0">Ayah</option>
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "2") selected="" @endif value="1">Ibu</option>
+                                                                        <option @if($data_jemaat->jemaat_status_dikeluarga == "3") selected="" @endif value="2">Anak</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
