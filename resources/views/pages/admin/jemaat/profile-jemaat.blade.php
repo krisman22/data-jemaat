@@ -434,12 +434,17 @@
                                                             <div class="col-md-6">
                                                                 <div class="col-md-4" style="padding-right:0">
                                                                     <div class="form-group" style="">
-                                                                        <input style="text-align:right" type="text" class="form-control" value="Status Dikeluarga" readonly="readonly">
+                                                                        <input style="text-align:right" type="text" class="form-control" value="Status dengan KK" readonly="readonly">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-8" style="padding-left:0">
                                                                     <div class="form-group">
-                                                                        <input style="border=0; background-color:white" readonly="readonly" type="text" class="form-control" value="@if($data_jemaat->jemaat_status_dikeluarga == 1) Ayah @elseif ($data_jemaat->jemaat_status_dikeluarga == 2) Ibu @else Anak @endif @if($data_jemaat->jemaat_kk_status == true)- Kepala Keluarga @else @endif">
+                                                                        <input style="border=0; background-color:white" readonly="readonly" type="text" class="form-control" value="@if($data_jemaat->jemaat_status_dikeluarga == 1) Kepala Keluarga
+                                                                            @elseif ($data_jemaat->jemaat_status_dikeluarga == 2) Istri
+                                                                            @elseif ($data_jemaat->jemaat_status_dikeluarga == 3) Anak
+                                                                            @elseif ($data_jemaat->jemaat_status_dikeluarga == 4) Famili
+                                                                            @elseif ($data_jemaat->jemaat_status_dikeluarga == 5) Adik Kandung
+                                                                            @endif">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -484,27 +489,67 @@
                                                 </tr>
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>@if($dataAyah != null){{$dataAyah->jemaat_nama}} @else - @endif</td>
+                                                        <td>
+                                                            @if($dataAyahnon != null) {{$dataAyahnon}}
+                                                            @else -
+                                                            @endif
+                                                        </td>
                                                         <td>Ayah Kandung</td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
-                                                        <td>@if($dataIbu != null){{$dataIbu->jemaat_nama}} @else - @endif</td>
+                                                        <td>
+                                                            @if($dataIbunon != null){{$dataIbunon}}
+                                                            @else - 
+                                                            @endif</td>
                                                         <td>Ibu Kandung</td>
                                                     </tr>
                                                     @php
                                                         $i=3;
                                                     @endphp
-                                                    @foreach ($saudaras as $saudara)
-                                                        <tr>
-                                                            <td>{{$i}}</td>
-                                                            <td>@if($saudara != null){{$saudara->jemaat_nama}} @else - @endif</td>
-                                                            <td>Saudara Kandung</td>
-                                                            @php
-                                                                $i+=1;
-                                                            @endphp
-                                                        </tr>
-                                                    @endforeach
+                                                    @if($suami != null || $istri != null)
+                                                    <tr>
+                                                        <td>{{$i}}</td>
+                                                        <td>@if($suami != null) {{$suami->jemaat_nama}} @else {{$istri->jemaat_nama}} @endif</td>
+                                                        <td>@if($suami != null) Suami @else Istri @endif</td>
+                                                    </tr>
+                                                    @endif
+                                                    @if($anaks!=null)
+                                                        @foreach ($anaks as $anak)
+                                                            <tr>
+                                                                <td>{{$i}}</td>
+                                                                <td>@if($anak != null){{$anak->jemaat_nama}} @else - @endif</td>
+                                                                <td>Anak</td>
+                                                                @php
+                                                                    $i+=1;
+                                                                @endphp
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                    @if($saudaras!=null)
+                                                        @foreach ($saudaras as $saudara)
+                                                            <tr>
+                                                                <td>{{$i}}</td>
+                                                                <td>@if($saudara != null){{$saudara->jemaat_nama}} @else - @endif</td>
+                                                                <td>Saudara Kandung</td>
+                                                                @php
+                                                                    $i+=1;
+                                                                @endphp
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                    @if($adiks != null)
+                                                        @foreach ($adiks as $adik)
+                                                            <tr>
+                                                                <td>{{$i}}</td>
+                                                                <td>@if($adik != null){{$adik->jemaat_nama}} @else - @endif</td>
+                                                                <td>Adik Kandung</td>
+                                                                @php
+                                                                    $i+=1;
+                                                                @endphp
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
                                             </table>
                                         </div>
                                     </div>

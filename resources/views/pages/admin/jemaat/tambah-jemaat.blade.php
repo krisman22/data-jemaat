@@ -62,19 +62,6 @@
                                                 <div class="form-group-inner">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Tempat Tanggal Lahir</label>
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                                            <input type="text" class="form-control" name="jemaat_tempat_lahir" placeholder="Tempat Lahir" value="{{ old('jemaat_tempat_lahir') }}">
-                                                    </div>
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                                            <input class="datepicker form-control"  type="text" name="jemaat_tanggal_lahir" placeholder="yyyy-mm-dd" value="{{ old('jemaat_tanggal_lahir') }}">
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                             <label class="login2 pull-right pull-right-pro">Jenis Kelamin</label>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -86,6 +73,39 @@
                                                             <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
                                                                 <input type="radio" value="p" {{ old('jemaat_jenis_kelamin') == 'p' ? 'checked' : '' }} name="jemaat_jenis_kelamin"> <i></i> Perempuan
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Tempat Tanggal Lahir</label>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                            <input type="text" class="form-control" name="jemaat_tempat_lahir" placeholder="Tempat Lahir" value="{{ old('jemaat_tempat_lahir') }}">
+                                                    </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                                            <input class="datepicker form-control"  type="text" name="jemaat_tanggal_lahir" placeholder="dd/mm/yyyy" value="{{ old('jemaat_tanggal_lahir') }}">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Tanggal Baptis</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_baptis" value="{{ old('jemaat_tanggal_baptis') }}" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Tanggal Sidi</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_sidi" value="{{ old('jemaat_tanggal_sidi') }}" placeholder="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,26 +138,6 @@
                                                 <div class="form-group-inner">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Tanggal Baptis</label>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_baptis" value="{{ old('jemaat_tanggal_baptis') }}" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Tanggal Sidi</label>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_sidi" value="{{ old('jemaat_tanggal_sidi') }}" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                             <label class="login2 pull-right pull-right-pro">Tanggal Bergabung</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -151,22 +151,7 @@
                                                             <label class="login2 pull-right pull-right-pro">Nomor Lingkungan</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input style="border=0;" type="text" class="form-control" name="id_lingkungan" value="{{ old('id_lingkungan') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group-inner">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Pendidikan Akhir</label>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <select class="form-control" name="id_pendidikan_akhir">
-                                                                <option disabled selected>--Pilih Pendidikan Akhir--</option>
-                                                                @foreach($data_pendidikans as $data_pendidikan)
-                                                                    <option value="{{$data_pendidikan->id}}" {{ old('id_pendidikan_akhir') == $data_pendidikan->id ? 'selected' : '' }}>{{$data_pendidikan->nama_pendidikan}}</option>
-                                                                @endforeach                                                                        
-                                                            </select>
+                                                            <input style="border=0;" type="text" class="form-control" name="id_lingkungan" placeholder="Isi Nomor Lingkungan*" value="{{ old('id_lingkungan') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,6 +165,21 @@
                                                                 <option disabled selected>--Pilih Pekerjaan--</option>
                                                                 @foreach($data_pekerjaans as $data_pekerjaan)
                                                                     <option value="{{$data_pekerjaan->id}}" {{ old('id_pekerjaan') == $data_pekerjaan->id ? 'selected' : '' }}>{{$data_pekerjaan->jenis_pekerjaan}}</option>
+                                                                @endforeach                                                                        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Pendidikan Akhir</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select class="form-control" name="id_pendidikan_akhir">
+                                                                <option disabled selected>--Pilih Pendidikan Akhir--</option>
+                                                                @foreach($data_pendidikans as $data_pendidikan)
+                                                                    <option value="{{$data_pendidikan->id}}" {{ old('id_pendidikan_akhir') == $data_pendidikan->id ? 'selected' : '' }}>{{$data_pendidikan->nama_pendidikan}}</option>
                                                                 @endforeach                                                                        
                                                             </select>
                                                         </div>
@@ -246,7 +246,7 @@
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                             <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
                                                                 <label>
-                                                                    <input type="checkbox" value="1" name="jemaat_kk_status"> <i></i> Ya </label>
+                                                                    <input type="checkbox" value="1" {{ old('jemaat_kk_status') == 1 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Ya </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,15 +254,17 @@
                                                 <div class="form-group-inner">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <label class="login2 pull-right pull-right-pro">Status dikeluarga</label>
+                                                            <label class="login2 pull-right pull-right-pro">Status dengan KK</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                             {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{ old('jemaat_status_dikeluarga') }}"> --}}
                                                             <select class="form-control" name="jemaat_status_dikeluarga">
                                                                 <option selected disabled>--Status dikeluarga--</option>
-                                                                <option value="1" {{ old('jemaat_status_dikeluarga') == 1 ? 'selected' : '' }}>Ayah</option>
-                                                                <option value="2" {{ old('jemaat_status_dikeluarga') == 2 ? 'selected' : '' }}>Ibu</option>
+                                                                <option value="1" {{ old('jemaat_status_dikeluarga') == 1 ? 'selected' : '' }}>Kepala Keluarga</option>
+                                                                <option value="2" {{ old('jemaat_status_dikeluarga') == 2 ? 'selected' : '' }}>Istri</option>
                                                                 <option value="3" {{ old('jemaat_status_dikeluarga') == 3 ? 'selected' : '' }}>Anak</option>
+                                                                <option value="5" {{ old('jemaat_status_dikeluarga') == 5 ? 'selected' : '' }}>Adik Kandung</option>
+                                                                <option value="4" {{ old('jemaat_status_dikeluarga') == 4 ? 'selected' : '' }}>Famili</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -332,7 +334,7 @@
 
     $('.datepicker').datepicker({
 
-        format: 'yyyy-mm-dd'
+        format: 'dd/mm/yyyy'
 
     }); 
 </script> 

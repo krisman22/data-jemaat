@@ -18,7 +18,6 @@ class data_jemaat extends Model
         'jemaat_tanggal_lahir', 'jemaat_tanggal_status', 'jemaat_tanggal_baptis', 'jemaat_tanggal_sidi', 'jemaat_tanggal_bergabung','jemaat_tanggal_perkawinan'
     ];
     
-    
     public function getAge(){
         return $this->jemaat_tanggal_lahir->diff(Carbon::now())
         ->format('%y Tahun, %m Bulan, %d Hari');

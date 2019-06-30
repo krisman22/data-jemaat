@@ -7,6 +7,7 @@ use App\data_jemaat;
 use App\master_pendidikan;
 use App\master_lingkungan;
 use App\master_pekerjaan;
+use App\DataKeluarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +37,6 @@ class DataJemaatController extends Controller
      */
     public function create()
     {
-
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
         $data_pekerjaans = master_pekerjaan::all();
@@ -53,6 +53,7 @@ class DataJemaatController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
         $data_pekerjaans = master_pekerjaan::all();
@@ -61,10 +62,9 @@ class DataJemaatController extends Controller
             'jemaat_nama' => 'required',
             'jemaat_gelar_depan' => 'nullable',
             'jemaat_gelar_belakang' => 'nullable',
-            // 'jemaat_nama_alias' => ,
             'jemaat_tempat_lahir' => 'required',
             'jemaat_tanggal_lahir' => 'required',
-            // 'jemaat_jenis_kelamin' => request('jemaat_jenis_kelamin'),
+            'jemaat_jenis_kelamin' => 'required',
             'jemaat_status_perkawinan' => 'required',
             // 'jemaat_tanggal_perkawinan' => request('jemaat_tanggal_perkawinan'),
             'jemaat_tanggal_baptis' => 'required',
@@ -79,11 +79,13 @@ class DataJemaatController extends Controller
             'id_pekerjaan' =>'required',
             'jemaat_status_dikeluarga' => 'required',
             // 'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
+            'id_parent' => 'required_without:jemaat_kk_status',
         ],    
         [
             'jemaat_nomor_stambuk.max' => 'Nomor Stambuk hanya 18 karakter',
             'jemaat_nama.required' => 'Harap isi Nama Jemaat',
             'jemaat_tempat_lahir.required' => 'Tempat lahir harus di isi',
+            'jemaat_jenis_kelamin.required' => 'Pilih jenis kelamin',
             'jemaat_tanggal_lahir.required' => 'Tanggal lahir harus di isi',
             'jemaat_tanggal_baptis.required' => 'Tanggal baptis jemaat harus di isi',
             'jemaat_status_perkawinan.required' => 'Pilih Status Perkawinan',
@@ -91,12 +93,34 @@ class DataJemaatController extends Controller
             'id_pendidikan_akhir.required' => 'Pilih Pendidikan Akhir',
             'id_pekerjaan.required' => 'Pilih pekerjaan',
             'jemaat_status_dikeluarga.required' => 'Pilih salah satu status dikeluarga',
+            'id_parent.required_without' => 'Pilih kepala keluarga',
         ]);
-        $tl = request('jemaat_tanggal_lahir');
-        $tls = substr($tl, 0, 4) . substr($tl, 5, 2) . substr($tl, 8, 2);
-        $baptis = request('jemaat_tanggal_baptis');
-        $baps = substr($baptis, 0, 4) . substr($baptis, 5, 2);
-        $jks;
+        
+        $date1 = request('jemaat_tanggal_lahir');
+        $date2 = request('jemaat_tanggal_perkawinan');
+        $date3 = request('jemaat_tanggal_baptis');
+        $date4 = request('jemaat_tanggal_sidi');
+        if(request('jemaat_tanggal_bergabung') != null){
+            $date5 = request('jemaat_tanggal_bergabung');
+        }
+        else{
+            $date5 = '2018-12-31';
+        }
+
+        $tglLahir = str_replace('/', '-', $date1);
+        $tglperkawinan = str_replace('/', '-', $date2);
+        $tglbaptis = str_replace('/', '-', $date3);
+        $tglsidi = str_replace('/', '-', $date4);
+        $tglbergabung = str_replace('/', '-', $date5);
+
+        $tglLahir = date('Y-m-d', strtotime($tglLahir));
+        $tglperkawinan = date('Y-m-d', strtotime($tglperkawinan));
+        $tglbaptis = date('Y-m-d', strtotime($tglbaptis));
+        $tglsidi = date('Y-m-d', strtotime($tglsidi));
+        $tglbergabung = date('Y-m-d', strtotime($tglbergabung));
+        
+        $tls = substr($tglLahir, 0, 4) . substr($tglLahir, 5, 2) . substr($tglLahir, 8, 2);
+        $baps = substr($tglbaptis, 0, 4) . substr($tglbaptis, 5, 2);
         $jk = request('jemaat_jenis_kelamin');
         if($jk == 'l'){
             $jks = 1;
@@ -116,8 +140,9 @@ class DataJemaatController extends Controller
             }
             $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;
         } while ($check!=null);
-        
-        
+
+        $idPar=(data_jemaat::all()->last()->id)+1;
+
         data_jemaat::create([
             'jemaat_nomor_stambuk' => $nomorstambuk,
             'jemaat_nama' => request('jemaat_nama'),
@@ -125,13 +150,13 @@ class DataJemaatController extends Controller
             'jemaat_gelar_belakang' => request('jemaat_gelar_belakang'),
             'jemaat_nama_alias' => request('jemaat_nama_alias'),
             'jemaat_tempat_lahir' => request('jemaat_tempat_lahir'),
-            'jemaat_tanggal_lahir' => request('jemaat_tanggal_lahir'),
+            'jemaat_tanggal_lahir' => $tglLahir,
             'jemaat_jenis_kelamin' => request('jemaat_jenis_kelamin'),
             'jemaat_status_perkawinan' => request('jemaat_status_perkawinan'),
-            'jemaat_tanggal_perkawinan' => request('jemaat_tanggal_perkawinan'),
-            'jemaat_tanggal_baptis' => request('jemaat_tanggal_baptis'),
-            'jemaat_tanggal_sidi' => request('jemaat_tanggal_sidi'),            
-            'jemaat_tanggal_bergabung' => request('jemaat_tanggal_bergabung', '2018-12-31'),
+            'jemaat_tanggal_perkawinan' => $tglperkawinan,
+            'jemaat_tanggal_baptis' => $tglbaptis,
+            'jemaat_tanggal_sidi' => $tglsidi,            
+            'jemaat_tanggal_bergabung' => $tglbergabung,
             'id_pendidikan_akhir' => request('id_pendidikan_akhir'),
             'id_lingkungan' => request('id_lingkungan'),
             'jemaat_alamat_rumah' => request('jemaat_alamat_rumah'),
@@ -140,9 +165,22 @@ class DataJemaatController extends Controller
             'id_pekerjaan' => request('id_pekerjaan'),
             'jemaat_status_dikeluarga' => request('jemaat_status_dikeluarga'),
             'jemaat_status_aktif' => "t",
-            'id_parent' => request('id_parent', null),
+            'id_parent' => request('id_parent', $idPar),
             'jemaat_kk_status' => request('jemaat_kk_status', '0'),
             'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
+        ]);
+
+        // if(request('jemaat_kk_status') == true){
+        //     data_jemaat::update([
+        //         'id_parent' => 
+        //     ]);
+        // }
+
+        DataKeluarga::create([
+            'no_stambuk' => $nomorstambuk,
+            'nama_ayah' => request('namaAyah'),
+            'nama_ibu' => request('namaIbu'),
+            'status_hubungan' => 1,
         ]);
         
         $datajemaats = data_jemaat::all();
@@ -159,12 +197,12 @@ class DataJemaatController extends Controller
     public function show(data_jemaat $data_jemaat)
     {
         $parent = $data_jemaat->id_parent;
+        $idjemaat = $data_jemaat->id;
+        $dataKeluargas = DataKeluarga::where('no_stambuk', '=', $data_jemaat->jemaat_nomor_stambuk)
+            ->where('status_hubungan', '=', 1)->first();        
         $datapanggil = $data_jemaat->jemaat_status_aktif;
-        if($data_jemaat->jemaat_status_dikeluarga == 3)
+        if($data_jemaat->jemaat_status_dikeluarga == 3 && $parent != null)
         {
-            $dataAyah = data_jemaat::find($data_jemaat->id_parent);
-            $dataIbu = data_jemaat::where('id_parent','=', $parent)
-                ->where('jemaat_status_dikeluarga','=', "2")->first();
             $saudaras = data_jemaat::where('id_parent', '=', $parent)
                 ->where('jemaat_status_dikeluarga', '=', '3')
                 ->where('id', '!=', $data_jemaat->id)
@@ -172,16 +210,55 @@ class DataJemaatController extends Controller
                 ->get();
         }
         else{
-            $dataAyah = null;
-            $dataIbu = null;
             $saudaras = null;
+        }
+
+        if($dataKeluargas != null){
+            $dataAyahnon = $dataKeluargas->nama_ayah;
+            $dataIbunon = $dataKeluargas->nama_ibu;
+            // dd($dataAyahnon);
+        }
+        else{
+            $dataAyahnon = null;
+            $dataIbunon = null;
+        }
+        
+        if($data_jemaat->jemaat_status_dikeluarga == 1 || $data_jemaat->jemaat_status_dikeluarga == 2){
+            $anaks = data_jemaat::where('id_parent', '=', $idjemaat)
+                ->where('jemaat_status_dikeluarga', '=', '3')
+                ->orderBy('jemaat_tanggal_lahir', 'ASC')
+                ->get();
+
+            $suami = data_jemaat::where('id_parent', '=', $parent)
+                ->where('jemaat_status_dikeluarga', '=', '1')
+                ->where('id', '!=', $data_jemaat->id)
+                ->where('jemaat_jenis_kelamin', '=', "l")
+                ->first();
+
+            $istri = data_jemaat::where('id_parent', '=', $parent)
+                ->where('jemaat_status_dikeluarga', '=', '2')
+                ->where('id', '!=', $data_jemaat->id)
+                ->where('jemaat_jenis_kelamin', '=', "p")
+                ->first();
+            
+            $adiks = data_jemaat::where('id_parent', '=', $idjemaat)
+                ->where('jemaat_status_dikeluarga', '=', '5')
+                ->orderBy('jemaat_tanggal_lahir', 'ASC')
+                ->get();
+        }
+        else {
+            $anaks =null;
+            $suami = null;
+            $istri = null;
+            $adiks = null;
         }
 
         if($datapanggil == "del"){
             return redirect()->route('datajemaat');
         }
         else{
-            return view('pages.admin.jemaat.profile-jemaat', compact('data_jemaat', 'dataAyah', 'dataIbu', 'saudaras'));
+            return view('pages.admin.jemaat.profile-jemaat', 
+            compact('data_jemaat','suami','istri', 'saudaras','adiks','dataAyahnon', 'dataIbunon', 'anaks'));
         }
 
     }
