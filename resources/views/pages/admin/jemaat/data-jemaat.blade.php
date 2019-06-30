@@ -40,20 +40,34 @@
                                     </div>
                                 </div>
                             @endif
-                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="false" data-resizable="true" data-cookie="true"
-                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-                                <thead>
-                                    <tr>
+                            {{-- <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="false" data-resizable="true" data-cookie="true"
+                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar"> --}}
+                                
+                            <table id="table" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    {{-- <tr>
                                         <th data-field="nama">Nama</th>
                                         <th data-field="namaalias">Nama Alias</th>
                                         <th data-field="nomorstambuk">Nomor Stambuk</th>
                                         <th data-field="lingkungan">Lingkungan </th>
                                         {{-- <th data-field="ttl">TTL</th> --}}
                                         {{-- <th data-field="complete">Completed</th> --}}
-                                        <th data-field="status">Status Jemaat</th>
+                                        {{-- <th data-field="status">Status Jemaat</th> --}}
                                         {{-- <th data-field="date" data-editable="true">Date</th>
                                         <th data-field="price" data-editable="true">Price</th> --}}
-                                        <th data-field="action"></th>
+                                        {{-- <th data-field="action"></th>
+                                    </tr>  --}}
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Nama Alias</th>
+                                        <th>Nomor Stambuk</th>
+                                        <th>Lingkungan </th>
+                                        {{-- <th data-field="ttl">TTL</th> --}}
+                                        {{-- <th data-field="complete">Completed</th> --}}
+                                        <th>Status Jemaat</th>
+                                        {{-- <th data-field="date" data-editable="true">Date</th>
+                                        <th data-field="price" data-editable="true">Price</th> --}}
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,4 +103,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+</script>
 @endsection

@@ -20,12 +20,7 @@ class DataJemaatController extends Controller
      */
     public static function index()
     {
-        // $datajemaats = data_jemaat::all()->where(['jemaat_status_aktif', 't'], ['jemaat_status_aktif', 'f']);
-        $datajemaats = data_jemaat::all()->where('jemaat_status_aktif','!=','del');
-
-        // $datajemaats = data_jemaat::all();
-
-        // $datajemaats = DB::select('select * from data_jemaats where jemaat_status_aktif = "t" or jemaat_status_aktif = "f"');
+        $datajemaats = data_jemaat::where('jemaat_status_aktif','!=','del')->orderBy('id', 'DESC')->get();
 
         return view('pages.admin.jemaat.data-jemaat', compact('datajemaats'));
     }
