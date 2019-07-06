@@ -62,7 +62,7 @@ class DataJemaatController extends Controller
             'jemaat_jenis_kelamin' => 'required',
             'jemaat_status_perkawinan' => 'required',
             // 'jemaat_tanggal_perkawinan' => request('jemaat_tanggal_perkawinan'),
-            'jemaat_tanggal_baptis' => 'required',
+            // 'jemaat_tanggal_baptis' => 'required',
             // 'jemaat_tanggal_sidi' => request('jemaat_tanggal_sidi'),            
             'jemaat_tanggal_bergabung' => 'nullable',
             'id_pendidikan_akhir' => 'required',
@@ -82,7 +82,7 @@ class DataJemaatController extends Controller
             'jemaat_tempat_lahir.required' => 'Tempat lahir harus di isi',
             'jemaat_jenis_kelamin.required' => 'Pilih jenis kelamin',
             'jemaat_tanggal_lahir.required' => 'Tanggal lahir harus di isi',
-            'jemaat_tanggal_baptis.required' => 'Tanggal baptis jemaat harus di isi',
+            // 'jemaat_tanggal_baptis.required' => 'Tanggal baptis jemaat harus di isi',
             'jemaat_status_perkawinan.required' => 'Pilih Status Perkawinan',
             'id_lingkungan.required' => 'Nomor Lingkungan wajib di isi',
             'id_pendidikan_akhir.required' => 'Pilih Pendidikan Akhir',
@@ -93,7 +93,12 @@ class DataJemaatController extends Controller
         
         $date1 = request('jemaat_tanggal_lahir');
         $date2 = request('jemaat_tanggal_perkawinan');
-        $date3 = request('jemaat_tanggal_baptis');
+        if(request('jemaat_tanggal_baptis') != null){
+            $date3 = request('jemaat_tanggal_baptis');
+        }
+        else{
+            $date3 = '00-00-0000';
+        }        
         $date4 = request('jemaat_tanggal_sidi');
         if(request('jemaat_tanggal_bergabung') != null){
             $date5 = request('jemaat_tanggal_bergabung');
@@ -109,13 +114,29 @@ class DataJemaatController extends Controller
         $tglbergabung = str_replace('/', '-', $date5);
 
         $tglLahir = date('Y-m-d', strtotime($tglLahir));
-        $tglperkawinan = date('Y-m-d', strtotime($tglperkawinan));
-        $tglbaptis = date('Y-m-d', strtotime($tglbaptis));
-        $tglsidi = date('Y-m-d', strtotime($tglsidi));
+        if(request('jemaat_tanggal_perkawinan') != null){
+            $tglperkawinan = date('Y-m-d', strtotime($tglperkawinan));
+        } else{
+            $tglperkawinan = request('jemaat_tanggal_perkawinan');
+        }
+        if(request('jemaat_tanggal_baptis') != null){
+            $tglbaptis = date('Y-m-d', strtotime($tglbaptis));
+        }else{
+            $tglbaptis = request('jemaat_tanggal_baptis');
+        }
+        if(request('jemaat_tanggal_sidi') != null){
+            $tglsidi = date('Y-m-d', strtotime($tglsidi));
+        } else {
+            $tglsidi = request('jemaat_tanggal_sidi');
+        }
         $tglbergabung = date('Y-m-d', strtotime($tglbergabung));
         
         $tls = substr($tglLahir, 0, 4) . substr($tglLahir, 5, 2) . substr($tglLahir, 8, 2);
-        $baps = substr($tglbaptis, 0, 4) . substr($tglbaptis, 5, 2);
+        if(request('jemaat_tanggal_baptis') != null){
+            $baps = substr($tglbaptis, 0, 4) . substr($tglbaptis, 5, 2);
+        }else{
+            $baps = substr($date3, 6, 4) . substr($date3, 3, 2);
+        }
         $jk = request('jemaat_jenis_kelamin');
         if($jk == 'l'){
             $jks = 1;
@@ -129,13 +150,21 @@ class DataJemaatController extends Controller
 
         $check = data_jemaat::where('jemaat_nomor_stambuk', $nomorstambuk)->first();
         do {
+            if(strlen($nomorstambuk) == '19'){
+                $def = "0";
+                $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;            
+            }
+            elseif(strlen($nomorstambuk) == '20'){
+                $def = "";
+                $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;
+            }
             $check = data_jemaat::where('jemaat_nomor_stambuk', $nomorstambuk)->first();
             if($check!=null){
                 $plus +=1;
             }
             $nomorstambuk = $tls.''.$baps.''.$jks.''.$def.''.$plus;
         } while ($check!=null);
-
+        
         $idPar=(data_jemaat::all()->last()->id)+1;
 
         data_jemaat::create([
