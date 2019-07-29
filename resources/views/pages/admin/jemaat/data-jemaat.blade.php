@@ -78,7 +78,7 @@
                                         <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
                                         <td>{{ $datajemaat->lingkungan->nomor_lingkungan}} - {{ $datajemaat->lingkungan->nama_lingkungan}}</td>
                                         {{-- <td>{{ $datajemaat->jemaat_tempat_lahir}}, {{ $datajemaat->jemaat_tanggal_lahir->format('d M Y') }}</td> --}}
-                                        <td>@if($datajemaat->jemaat_status_aktif == "t")
+                                        <td style="text-align: center">@if($datajemaat->jemaat_status_aktif == "t")
                                             <span style="font-size:10pt" class="label label-primary">Aktif</span>
                                             @elseif($datajemaat->jemaat_keterangan_status == "Pindah")
                                             <span style="font-size:10pt" class="label label-default">{{$datajemaat->jemaat_keterangan_status}} ({{$datajemaat->jemaat_tanggal_status->formatLocalized('%d %B %Y') }})</span>
@@ -108,7 +108,16 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('#table').DataTable();
+        $('#table').DataTable( {
+            "columnDefs": [
+                { "width": "22%", "targets": 0 },
+                { "width": "18%", "targets": 1 },
+                { "width": "17%", "targets": 2 },
+                { "width": "15%", "targets": 3 },
+                { "width": "13%", "className": "text-right", "targets": 4 },
+                { "width": "15%", "targets": 5 },
+            ]
+        });
     });
 </script>
 @endsection
