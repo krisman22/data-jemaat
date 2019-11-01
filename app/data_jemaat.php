@@ -37,5 +37,9 @@ class data_jemaat extends Model
     {
         return $this->belongsTo('\App\master_pekerjaan', 'id_pekerjaan');
     }
+    public function statusdikeluarga()
+    {
+        return $this->belongsTo('\App\master_status_dikeluarga', 'jemaat_status_dikeluarga');
+    }
     
 }

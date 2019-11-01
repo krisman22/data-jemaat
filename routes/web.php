@@ -25,7 +25,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
     
-    
+    Route::get('/kartu-jemaat', 'KartuJemaatController@index')->name('kartujemaat');
+    Route::get('/kartu-jemaat/{data_jemaat}', 'KartuJemaatController@show')->name('lihatdatakk');
+
+    Route::get('/cetak-kartu/{data_jemaat}', 'KartuJemaatController@cetak_pdf')->name('cetakpdf');
+
+    Route::get('/cetakpdf', 'KartuJemaatController@cetakkartu')->name('cetakkartu');
+
 
 });
 
