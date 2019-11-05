@@ -65,7 +65,11 @@ class KartuJemaatController extends Controller
             ->get();
 
         $name = $data_jemaat->jemaat_nomor_stambuk . '_' . date('m-d-Y') . '.pdf';
-        $pdf = PDF::loadView('pages.admin.kartujemaat.pdf-view', compact('data_jemaat','dataKartuKeluargas','data_keluargas'))->setPaper('a4', 'landscape'); 
+        
+        $pdf = PDF::loadView('pages.admin.kartujemaat.pdf-view',
+            compact('data_jemaat','dataKartuKeluargas','data_keluargas'))
+                ->setPaper('a4')->setOrientation('landscape');
+        
         return $pdf->download('coba.pdf');
     }
 
