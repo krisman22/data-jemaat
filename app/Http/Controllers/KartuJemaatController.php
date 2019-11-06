@@ -64,13 +64,14 @@ class KartuJemaatController extends Controller
             ->where(['data_jemaats.id_parent' => $idparent])
             ->get();
 
-        $name = $data_jemaat->jemaat_nomor_stambuk . '_' . date('m-d-Y') . '.pdf';
-        
+        $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
+        $customPaper = array(0,0,609.44,935.43);
+
         $pdf = PDF::loadView('pages.admin.kartujemaat.pdf-view',
             compact('data_jemaat','dataKartuKeluargas','data_keluargas'))
-                ->setPaper('a4')->setOrientation('landscape');
+                ->setPaper($customPaper, 'landscape');
         
-        return $pdf->download('coba.pdf');
+        return $pdf->download($name);
     }
 
     public function cetakkartu()
