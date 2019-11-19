@@ -134,7 +134,7 @@
                                 {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
                             </ul>
                         </li>
-                        <li class="{{Request::is("/kartu-jemaat")?'active':''}}" >
+                        <li class="{{Request::is("kartu-jemaat")?'active':''}}" >
                             <a title="Kartu Jemaat" href={{ asset('/kartu-jemaat') }}>
 								   <span class="fas fa-id-card" style='font-size:17px'></span>
 								   <span class="mini-click-non">Kartu Jemaat</span>

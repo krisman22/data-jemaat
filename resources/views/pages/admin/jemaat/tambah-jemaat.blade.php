@@ -244,9 +244,9 @@
                                                             <label class="login2 pull-right pull-right-pro">Kepala Keluarga </label>                                                            
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <div class="i-checks pull-left" style="width:100px; height:40px; padding: 8px 0px;">
+                                                            <div class="pull-left" style="width:100px; height:40px; padding: 8px 0px;">
                                                                 <label>
-                                                                    <input type="checkbox" value="1" {{ old('jemaat_kk_status') == 1 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Ya </label>
+                                                                    <input type="checkbox" id="isKK" value="1" {{ old('jemaat_kk_status') == 1 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Ya </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -257,7 +257,6 @@
                                                             <label class="login2 pull-right pull-right-pro">Status dengan KK</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{ old('jemaat_status_dikeluarga') }}"> --}}
                                                             <select class="form-control" name="jemaat_status_dikeluarga">
                                                                 <option selected disabled>--Status dikeluarga--</option>
                                                                 <option value="1" {{ old('jemaat_status_dikeluarga') == 1 ? 'selected' : '' }}>Kepala Keluarga</option>
@@ -269,7 +268,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group-inner">
+                                                <div class="form-group-inner" id="pilihKK">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                             <label class="login2 pull-right pull-right-pro">Pilih Kepala Keluarga</label>
@@ -351,5 +350,19 @@
           placeholder: "Pilih KK"
       });
 </script>
+
+<script>
+   $(document).ready(function() {
+    // $('#isKK').hide();
+     $('#isKK').click(function() {
+       if ($(this).prop("checked") == true) {
+         $('#pilihKK').hide();
+       } else {
+        $('#pilihKK').show();         
+       }
+     })
+   });
+</script>
+
 
 @endsection
