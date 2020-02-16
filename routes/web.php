@@ -32,6 +32,24 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/cetakpdf', 'KartuJemaatController@cetakkartu')->name('cetakkartu');
 
+    Route::get('/rekap-lingkungan', 'RekapDataController@lingkungan');
+    Route::get('/rekap-jenis-kelamin', 'RekapDataController@jeniskelamin');
+    Route::get('/rekap-jenis-usia', 'RekapDataController@jenisusia');
+    Route::get('/rekap-status-perkawinan', 'RekapDataController@statusperkawinan');
+    Route::get('/rekap-pendidikan', 'RekapDataController@pendidikan');
+    Route::get('/rekap-pekerjaan', 'RekapDataController@pekerjaan');
+    Route::get('/rekap-pekerjaan/show', 'RekapDataController@getPekerjaan')->name('getPekerjaan');
+    Route::get('/rekap-jemaat-bergabung', 'RekapDataController@jemaatbergabung');
+
+    Route::get('/grafik-lingkungan', 'GrafikController@lingkungan');
+    Route::get('/grafik-jenis-kelamin', 'GrafikController@jeniskelamin');
+    Route::get('/grafik-jenis-usia', 'GrafikController@jenisusia');
+    Route::get('/grafik-status-perkawinan', 'GrafikController@statusperkawinan');
+    Route::get('/grafik-pendidikan', 'GrafikController@pendidikan');
+    Route::get('/grafik-pekerjaan', 'GrafikController@pekerjaan');
+    Route::get('/grafik-jemaat-bergabung', 'GrafikController@jemaatbergabung');
+
+
 
 });
 

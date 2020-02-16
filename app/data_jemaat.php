@@ -23,6 +23,10 @@ class data_jemaat extends Model
         ->format('%y Tahun, %m Bulan, %d Hari');
     }
 
+    public function getYearBergabung(){
+        return $this->jemaat_tanggal_bergabung->year;
+    }
+
     public function pendidikan()
     {
         return $this->belongsTo('App\master_pendidikan', 'id_pendidikan_akhir');

@@ -1,37 +1,83 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href={{ asset('css/font-awesome.min.css') }}>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <style>
+    <style type="text/css">
+        /* Style Baru */
+        @page {
+            margin: 0.5cm 1cm 0.5cm 1cm;
+            border : 0.5px solid red;
+        }
+        .tablepdf{
+            font-family: Serif;
+            border-collapse: collapse;
+            width: 100%;
+            padding : 0;
+            margin : 0;
+            clear: left;
+        }
+        .tablepdf td,
+        .tablepdf th,
+        .tablepdf tbody {
+            border: 1px solid #000;
+            font-size: 11px;
+            padding: 0 0 0 2px;
+        }
+
+        .row {
+            width: 100%;
+        }
+        .col-md-1{
+            width: 8.333333333333333%;
+            float:left;
+        }
+        .col-md-2{
+            width: 16.66666666666667%;
+            float:left;
+        }
+        .col-md-3{
+            width: 25%;
+            float:left;
+        }
+        .col-md-4{
+            width: 33.33333333333333%;
+            float:left;
+        }
+        .col-md-5{
+            width: 41.66666666666666%;
+            float:left;
+        }
+        .col-md-6{
+            width: 50%;
+            float:left;
+        }
+
+        #fixed {
+            position: fixed;
+            bottom: 85px;
+            /* border : 1px solid greenyellow; */
+        }
+        
+        /* Yang lama */
         h1{
             display: inline-block;
             font-size: 21px;
             font-weight:800;
             letter-spacing : -1px;
-            transform: scale(1.13, 2.8);
+            transform: scale(1.13, 2.4);
         }
         .logo{
-            width: 125px;
-            height: 125px;
-            margin: 10px 0 10px 45px;
+            width: 100px;
+            height: 100px;
+            margin: 0 0 0 40px;
         }
 
         .table {
-            font-size: 12px;
+            font-size: 11px;
         }
         .table tbody tr td {
-            padding : 2px;
+            /* padding : 2px; */
             vertical-align: middle;            
         }
         #head{
@@ -44,11 +90,9 @@
         #bluehead td{
             text-align: center;
             font-style: italic;
-            font-size: 11px;
+            font-size: 10px;
         }
-        tr .noBorder td {
-            border: 0;
-        }
+
        .table td[rowspan] {
             vertical-align: middle;
        }
@@ -63,66 +107,65 @@
 
 <body style="text-transform: uppercase;">
 <!-- Static Table Start -->
-<div class="col-md-12">
+{{-- <div class="col-md-12"> --}}
     <div class="row">
         <div class="col-md-3">
-            <img  src="{{ asset('img/logo-bnkp.jpg')}}" class="logo" alt="">
+            <img  src="img/logo-bnkp.jpg" class="logo" alt="">
         </div>
         <div class="col-md-6" style="text-align:center">
-            <h1>KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1> <br>
+            <h1 style="margin-left:0.4cm; margin-top:0px; padding-top:0px">KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1> <br>
             <h2 style="font-size: 18pt; font-weight:bold; text-align:center">NOMOR : </h2>
         </div>
     </div>
+
+    <div class=row style="clear: both;">
+        <div class="col-md-3" style="height:20px; width: 230px; padding-left:35px;">
+            <h5 style="font-size:11px; margin-top:5px">NAMA KEPALA KELUARGA </h5> <br>
+        </div>
+        <div class="col-md-5" style="height:20px; padding-left:1px;">
+            <h5 style="font-size:11px; margin-top:5px">: {{$data_jemaat->jemaat_nama}} </h5> <br>
+        </div>
+        <div class="col-md-1" style="height:20px; width:137px; padding-left:30px;">
+            <h5 style="font-size:11px; margin-top:5px">LINGKUNGAN NOMOR</h5> <br>
+        </div>
+        <div class="col-md-3" style="height:20px;">
+            <h5 style="font-size:11px; margin-top:5px">: {{$data_jemaat->id_lingkungan}} {{$data_jemaat->lingkungan->nama_lingkungan}}</h5> <br>
+        </div>
+    </div>
+    <div class="row" style="clear: both;">
+        <div class="col-md-3" style="height:20px; width: 230px; padding-left:35px;">
+            <h5 style="font-size:11px; margin-top:0px">ALAMAT LENGKAP/DESA/LURAH</h5> <br>
+        </div>
+        <div class="col-md-5" style="height:20px; padding-left:1px;">
+            <h5 style="font-size:11px; margin-top:0px">: {{$data_jemaat->jemaat_alamat_rumah}}</h5> <br>
+        </div>
+        <div class="col-md-1" style="height:20px; width:137px; padding-left:30px;">
+            <h5 style="font-size:11px; margin-top:0px;">SNK Lingkungan</h5> <br>
+        </div>
+        <div class="col-md-3" style="height:20px;">
+            <h5 style="font-size:11px; margin-top:0px;">: SNK.{{$data_jemaat->lingkungan->nama_snk}}</h5> <br>
+        </div>
+    </div>
   
-    <table class="table table-bordered">
+    <table class="tablepdf">
         <tbody>
-            {{-- <tr>
-                <td> </td>
-                <td rowspan="2"> </td>
-                <td colspan="5"><h1 style="font-size: 20pt; margin : 0; text-align:center">KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1></td>
-                <td colspan="3"> </td>
-            </tr>
-            <tr>
-                <td> </td>                                       
-                <td colspan="5"><h1 style="font-size: 16pt; text-align:center">NOMOR : </h1></td>
-                <td colspan="3" > </td>
-            </tr> --}}
-            <div class=row>
-                <div class="col-md-3" style="height:20px; width: 275px; margin-left:42px;">
-                    <h5>NAMA KEPALA KELUARGA </h5> <br>
-                </div>
-                <div class="col-md-5" style="height:20px; padding-left:1px;">
-                    <h5>: {{$data_jemaat->jemaat_nama}} </h5> <br>
-                </div>
-                <div class="col-md-4" style="height:20px; width: 300px; margin-left:57px;">
-                    <h5>LINGKUNGAN NOMOR : {{$data_jemaat->id_lingkungan}} {{$data_jemaat->lingkungan->nama_lingkungan}}</h5> <br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3" style="height:45px; width: 275px; margin-left:42px;">
-                    <h5>ALAMAT LENGKAP/DESA/LURAH</h5> <br>
-                </div>
-                <div class="col-md-3" style="height:45px; width: 275px;  padding-left:1px;">
-                    <h5>: {{$data_jemaat->jemaat_alamat_rumah}}</h5> <br>
-                </div>
-            </div>
-            
             <tr id="head">
                 <td  rowspan="2" width="3%">NO URUT </td>
-                <td  width="20%">A. NAMA LENGKAP</td>
-                <td  rowspan="2" width="10%">STATUS HUBUNGAN DENGAN KEPALA KELUARGA</td>
-                <td  rowspan="2" width="8%">JENIS KELAMIN L/P </td>
-                <td  colspan="2" width="23%"> LAHIR</td>
-                <td colspan="2" width="23%">TGL/BLN/THN </td>
+                <td  rowspan="2" width="22%">NAMA LENGKAP <div style="line-height:40%;">
+                    <br>
+                </div> NAMA PANGGILAN ALIAS</td>
+                <td  rowspan="2" width="11%">STATUS HUBUNGAN DENGAN KEPALA KELUARGA</td>
+                <td  rowspan="2" width="11%">JENIS KELAMIN <br> L/P </td>
+                <td  colspan="2"> LAHIR</td>
+                <td colspan="2">TGL/BLN/THN </td>
                 <td  rowspan="2" width="9%"> STATUS PERKAWINAN</td>
-                <td  rowspan="2" width="19%"> TANGGAL PERKAWINAN</td>
+                <td  rowspan="2" width="11%"> TANGGAL PERKAWINAN</td>
             </tr>
             <tr id="head">
-                <td >B. NAMA PANGGILAN ALIAS </td>
-                <td  width="10%">TEMPAT </td>
-                <td  width="10%">TGL/BLN/THN</td>
-                <td  width="10%">BAPTIS</td>
-                <td  width="10%">SIDI</td>
+                <td  width="11%">TEMPAT </td>
+                <td  width="11%">TGL/BLN/THN</td>
+                <td  width="11%">BAPTIS</td>
+                <td  width="11%">SIDI</td>
             </tr>
             <tr id="bluehead">
                 <td></td>
@@ -206,8 +249,8 @@
                 @endfor
             @else
             @endif
-            <tr >
-                <td style="height:15px;"></td> 
+            <tr>
+                <td colspan="10" height="10px"></td>
             </tr>
             <tr id="head">
                 <td rowspan="2">NO URUT </td>
@@ -275,8 +318,35 @@
             @endif
         </tbody>
     </table>
-                        
-</div>
+    @php
+        $mytime = Carbon\Carbon::now();
+    @endphp
+    <div class="row" style="margin-left:35px;">
+        <p style="font-size:11px; text-transform:none"> Dikeluarkan tanggal : {{ $mytime->formatLocalized('%d %B %Y')}} <br>
+        Keterangan : <br>
+        -  Lembar 1 : Untuk Kepala Keluarga yang bersangkutan (Warna Kuning) <br>
+        -  Lembar 2 : Untuk BPMJ/sekretaris Jemaat (Warna Putih) <br>
+        -  Lembar 3 : Untuk Database (Warna Biru) <br>
+        -  Lembar 4 : Untuk SNK Lingkungan (Warna Merah)
+        </p>
+    </div>
+
+    <div class="row" id="fixed">
+    <div class="row" style="font-size:11px;">
+        <div class="col-md-6" style="text-align:center; margin-bottom:55px">Kepala Keluarga</div>
+        <div class="col-md-6" style="text-align:center; margin-bottom:55px">Badan Pekerja majelis jemaat kota gunungsitoli </div>
+        
+    </div>
+    <div class="row" style="font-size:11px; clear:left">
+        <div class="col-md-6" style="text-align:center;">
+            @if($data_jemaat->jemaat_gelar_depan !="" && $data_jemaat->jemaat_gelar_belakang !=""){{$data_jemaat->jemaat_gelar_depan}}.{{$data_jemaat->jemaat_nama}},{{$data_jemaat->jemaat_gelar_belakang}} @elseif($data_jemaat->jemaat_gelar_depan !=""){{$data_jemaat->jemaat_gelar_depan}}.{{$data_jemaat->jemaat_nama}},@elseif($data_jemaat->jemaat_gelar_belakang !=""){{$data_jemaat->jemaat_nama}},{{$data_jemaat->jemaat_gelar_belakang}}@else{{$data_jemaat->jemaat_nama}}
+            @endif
+        </div>
+        <div class="col-md-3" style="text-align:center;">SNK Drs. ELYSATI NAZARA, MM. <br> KETUA</div>
+        <div class="col-md-3" style="text-align:center;">SNK TALIFAUDU TELAUMBANUA <br> SEKRETARIS</div>
+    </div>
+    </div>              
+{{-- </div> --}}
 </body>
 
 </html>

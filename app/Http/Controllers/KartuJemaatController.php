@@ -24,7 +24,7 @@ class KartuJemaatController extends Controller
                         ->where('jemaat_status_aktif','!=','del')
                         ->get();
 
-        return view('pages.admin.kartujemaat.kartujemaat', compact('datajemaats'));
+        return view('pages.kartujemaat.kartujemaat', compact('datajemaats'));
     }
 
     public function show(data_jemaat $data_jemaat)
@@ -43,7 +43,7 @@ class KartuJemaatController extends Controller
             ->where(['data_jemaats.id_parent' => $idparent])
             ->get();
         
-        return view('pages.admin.kartujemaat.detail-kartu', 
+        return view('pages.kartujemaat.detail-kartu', 
             compact('data_jemaat','dataKartuKeluargas','data_keluargas'));
         
     }
@@ -67,7 +67,7 @@ class KartuJemaatController extends Controller
         $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
 
-        $pdf = PDF::loadView('pages.admin.kartujemaat.pdf-view',
+        $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
             compact('data_jemaat','dataKartuKeluargas','data_keluargas'))
                 ->setPaper($customPaper, 'landscape');
         
@@ -85,7 +85,7 @@ class KartuJemaatController extends Controller
         //                 ->where('jemaat_status_aktif','!=','del')
         //                 ->get();
 
-        $pdf = PDF::loadView('pages.admin.kartujemaat.contoh_pdf', $data);
+        $pdf = PDF::loadView('pages.kartujemaat.contoh_pdf', $data);
         $name = $id . '_' . date('m-d-Y') . '.pdf';
         return $pdf->download($name);
     }

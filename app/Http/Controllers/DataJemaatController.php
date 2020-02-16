@@ -22,7 +22,7 @@ class DataJemaatController extends Controller
     {
         $datajemaats = data_jemaat::where('jemaat_status_aktif','!=','del')->orderBy('id', 'DESC')->get();
 
-        return view('pages.admin.jemaat.data-jemaat', compact('datajemaats'));
+        return view('pages.jemaat.data-jemaat', compact('datajemaats'));
     }
 
     /**
@@ -37,7 +37,7 @@ class DataJemaatController extends Controller
         $data_pekerjaans = master_pekerjaan::all();
         $dataKK = data_jemaat::where('jemaat_kk_status', true)->get();
         
-        return view('pages.admin.jemaat.tambah-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans','data_pekerjaans', 'dataKK'));
+        return view('pages.jemaat.tambah-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans','data_pekerjaans', 'dataKK'));
     }
 
     /**
@@ -208,7 +208,7 @@ class DataJemaatController extends Controller
         ]);
         
         $datajemaats = data_jemaat::all();
-        // return view('pages.admin.jemaat.data-jemaat', compact('datajemaats'))->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
+        // return view('pages.jemaat.data-jemaat', compact('datajemaats'))->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
         return redirect()->route('datajemaat')->with( ['datajemaats' => $datajemaats])->with(['success' => 'Data Jemaat berhasil di Tambahkan']);
     }
 
@@ -281,7 +281,7 @@ class DataJemaatController extends Controller
             return redirect()->route('datajemaat');
         }
         else{
-            return view('pages.admin.jemaat.profile-jemaat', 
+            return view('pages.jemaat.profile-jemaat', 
             compact('data_jemaat','suami','istri', 'saudaras','adiks','dataAyahnon', 'dataIbunon', 'anaks'));
         }
 
@@ -305,7 +305,7 @@ class DataJemaatController extends Controller
             ->first();
         // dd($data_keluarga);
 
-        return view('pages.admin.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans', 'data_pekerjaans', 'data_keluarga'));      
+        return view('pages.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans', 'data_pekerjaans', 'data_keluarga'));      
     }
 
     /**
