@@ -10,12 +10,12 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="caption pro-sl-hd">
-                                    <span class="caption-subject"><b>University Earnings</b></span>
+                                    <span class="caption-subject"><b></b></span>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="actions graph-rp graph-rp-dl">
-                                    <p>All Earnings are in million $</p>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -44,12 +44,7 @@
                 text: 'Chart Data Jemaat Bergabung'
             },
             xAxis: {
-                categories: [
-                    '<2018',
-                    '2018',
-                    '2019',
-                    '2020'
-                ],
+                categories: {!!json_encode($years)!!},
                 crosshair: true
             },
             yAxis: {
@@ -59,9 +54,9 @@
                 }
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                // headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                // pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                //     '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -74,11 +69,11 @@
             },
             series: [{
                 name: 'Laki-Laki',
-                data: [49.9, 71.5, 106.4, 129.2]
+                data: {{json_encode($laki)}}
 
             }, {
                 name: 'Perempuan',
-                data: [83.6, 78.8, 98.5, 93.4]
+                data: {!!json_encode($perempuan)!!}
 
             }]
         });
