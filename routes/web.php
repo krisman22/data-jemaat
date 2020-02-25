@@ -21,18 +21,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/data-jemaat/profile/{id}/update1', 'DataJemaatController@updateStatusPensiun')->name('updatestatuspensiun');
     Route::patch('/data-jemaat/profile/{id}/update2', 'DataJemaatController@updateStatusMeninggal')->name('updatestatusmeninggal');
     Route::patch('/data-jemaat/profile/{id}/update3', 'DataJemaatController@destroy')->name('hapusdatajemaat');
-    
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
     
     Route::get('/kartu-jemaat', 'KartuJemaatController@index')->name('kartujemaat');
     Route::get('/kartu-jemaat/{data_jemaat}', 'KartuJemaatController@show')->name('lihatdatakk');
-
     Route::get('/cetak-kartu/{data_jemaat}', 'KartuJemaatController@cetak_pdf')->name('cetakpdf');
-
     Route::get('/cetakpdf', 'KartuJemaatController@cetakkartu')->name('cetakkartu');
 
+    Route::get('/data-jemaatmeninggal', 'JemaatInAktifController@meninggal')->name('datameninggal');
+    Route::get('/data-jemaatpindah', 'JemaatInAktifController@pindah')->name('datapindah');
+
     Route::get('/rekap-lingkungan', 'RekapDataController@lingkungan');
+    Route::get('/rekap-kepalakeluarga', 'RekapDataController@kepalakeluarga');
     Route::get('/rekap-jenis-kelamin', 'RekapDataController@jeniskelamin');
     Route::get('/rekap-jenis-usia', 'RekapDataController@jenisusia');
     Route::get('/rekap-status-perkawinan', 'RekapDataController@statusperkawinan');

@@ -20,7 +20,7 @@ class DataJemaatController extends Controller
      */
     public static function index()
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','!=','del')->orderBy('id', 'DESC')->get();
+        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC')->get();
 
         return view('pages.jemaat.data-jemaat', compact('datajemaats'));
     }

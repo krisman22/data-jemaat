@@ -39,6 +39,33 @@ class RekapDataController extends Controller
         return view('pages.rekapData.lingkungan', compact('grouped','data_jemaats'));
     }
 
+    public function kepalakeluarga()
+    {
+        $datalingkungans = master_lingkungan::orderBy('nomor_lingkungan', 'ASC')->get();
+        $grouped = $datalingkungans->groupBy('nama_lingkungan');
+        $data_kks=[];
+        $total = 0;
+        foreach($grouped as $data=>$lingkungans){
+            $group_jemaat_total = 0;
+            foreach($lingkungans as $lingkungan){
+                $jumlah_jemaat = data_jemaat::where('jemaat_status_aktif', '=', 't')
+                    ->where('id_lingkungan', '=', $lingkungan->nomor_lingkungan)
+                    ->where('jemaat_kk_status', true)
+                    ->count();
+
+                $data_kks[$lingkungan->nomor_lingkungan] = $jumlah_jemaat;
+                $group_jemaat_total += $jumlah_jemaat;
+            }
+            $data_kks[$data] = $group_jemaat_total;
+            $total += $group_jemaat_total;
+        }
+        $data_kks['total']=$total;
+
+        // dd($data_kks);
+
+        return view('pages.rekapData.kepalakeluarga', compact('grouped','data_kks'));
+    }
+
     public function jeniskelamin()
     {
         $datalingkungans = master_lingkungan::orderBy('nomor_lingkungan', 'ASC')->get();
@@ -429,7 +456,7 @@ class RekapDataController extends Controller
             foreach($lingkungans as $lingkungan){
                 $jum_ling_tahun = 0;
                 $total_tahun = 0;
-                $ju = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS INT), jemaat_status_aktif, id_lingkungan FROM data_jemaats where jemaat_status_aktif = 't' AND id_lingkungan = '$lingkungan->nomor_lingkungan' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS INT) < '$year_min2'"));
+                $ju = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, id_lingkungan FROM data_jemaats where jemaat_status_aktif = 't' AND id_lingkungan = '$lingkungan->nomor_lingkungan' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) < '$year_min2'"));
                 $bergabung[$lingkungan->nomor_lingkungan.'under'] = $ju;
                 foreach($years as $year){
                     if(Arr::exists($bergabung, $data.'-'.$year) != true){
@@ -445,7 +472,7 @@ class RekapDataController extends Controller
                         $bergabung['total'.$data] = $bergabung['total'.$data];
                     }                    
 
-                    $j = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS INT), jemaat_status_aktif, id_lingkungan FROM data_jemaats where jemaat_status_aktif = 't' AND id_lingkungan = '$lingkungan->nomor_lingkungan' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS INT)='$year'"));
+                    $j = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, id_lingkungan FROM data_jemaats where jemaat_status_aktif = 't' AND id_lingkungan = '$lingkungan->nomor_lingkungan' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED)='$year'"));
                     
                     $bergabung[$lingkungan->nomor_lingkungan.$year] = $j;
                     $total_tahun = $total_tahun + $j;

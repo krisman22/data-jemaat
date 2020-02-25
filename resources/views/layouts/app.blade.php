@@ -146,9 +146,17 @@
 								</a>
                         </li>
                         <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table"></span> <span class="mini-click-non">Jemaat InAktif</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li class="{{Request::is("data-jemaatmeninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaatmeninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
+                                <li class="{{Request::is("data-jemaatpindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaatpindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
+                            </ul>
+                        </li>
+                        <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table"></span> <span class="mini-click-non">Rekap Data</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("rekap-lingkungan") ? 'active' : ''}}"><a href="{{asset('/rekap-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
+                                <li class="{{Request::is("rekap-kepalakeluarga") ? 'active' : ''}}"><a href="{{asset('/rekap-kepalakeluarga')}}"><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
                                 <li class="{{Request::is("rekap-jenis-kelamin") ? 'active' : ''}}"><a href="{{asset('/rekap-jenis-kelamin')}}"><span class="mini-sub-pro">Jenis Kelamin</span></a></li>                            
                                 <li class="{{Request::is("rekap-jenis-usia") ? 'active' : ''}}"><a href="{{asset('/rekap-jenis-usia')}}"><span class="mini-sub-pro">Jenis Usia</span></a></li>                            
                                 <li class="{{Request::is("rekap-status-perkawinan") ? 'active' : ''}}"><a href="{{asset('/rekap-status-perkawinan')}}"><span class="mini-sub-pro">Status Perkawinan</span></a></li>                            
