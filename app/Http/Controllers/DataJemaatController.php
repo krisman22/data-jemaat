@@ -37,7 +37,7 @@ class DataJemaatController extends Controller
         $data_pekerjaans = master_pekerjaan::all();
         $dataKK = data_jemaat::where('jemaat_kk_status', true)->get();
         
-        return view('pages.jemaat.tambah-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans','data_pekerjaans', 'dataKK'));
+        return view('pages.jemaat.tambah-jemaat', compact('data_pendidikans','data_lingkungans','data_pekerjaans', 'dataKK'));
     }
 
     /**
