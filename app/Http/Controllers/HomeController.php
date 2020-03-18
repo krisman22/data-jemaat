@@ -55,8 +55,16 @@ class HomeController extends Controller
 
         $perempuan[3] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
 
-        // dd($perempuan);
+        $total_jemaat = data_jemaat::where('jemaat_status_aktif','t')->count();
+        
+        $total_kk = data_jemaat::where('jemaat_kk_status', '=', true)
+                        ->where('jemaat_status_aktif', 't')
+                        ->count();
+        $total_lingkungan = master_lingkungan::count();
 
-        return view('pages.index', compact('years','laki','perempuan'));
+        $total_bergabung_thisyear = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif FROM data_jemaats where jemaat_status_aktif = 't' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
+
+
+        return view('pages.index', compact('years','laki','perempuan','thisyear','total_jemaat', 'total_kk', 'total_lingkungan', 'total_bergabung_thisyear'));
     }
 }

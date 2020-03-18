@@ -38,6 +38,7 @@
 					@csrf
 
 					<span class="login100-form-title">
+						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Username harus diisi">
@@ -77,6 +78,12 @@
 							Login
 						</button>
 					</div>
+					
+					<div class="text-center p-t-94">
+						<span class="txt1">
+						</span>
+					</div>
+
 				</form>
 			</div>
 		</div>

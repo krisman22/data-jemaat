@@ -21,7 +21,7 @@ class KartuJemaatController extends Controller
     public static function index()
     {
         $datajemaats = data_jemaat::where('jemaat_kk_status', '=', true)
-                        ->where('jemaat_status_aktif','!=','del')
+                        ->where('jemaat_status_aktif','t')
                         ->get();
 
         return view('pages.kartujemaat.kartujemaat', compact('datajemaats'));
