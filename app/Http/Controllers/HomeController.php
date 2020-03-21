@@ -67,4 +67,25 @@ class HomeController extends Controller
 
         return view('pages.index', compact('years','laki','perempuan','thisyear','total_jemaat', 'total_kk', 'total_lingkungan', 'total_bergabung_thisyear'));
     }
+
+    static function countNewDataToday()
+    {
+        $today = Carbon::today();
+        return $total = data_jemaat::where('created_at',$today)->count();
+    }
+    static function countNewDataWeekly()
+    {
+        $today = Carbon::today();
+        $data_jemaat = data_jemaat::where('created_at', '>', $today->subDays(7))->get();
+        $totalCount = $data_jemaat->count(); //Should return your total number of events from past 7 days
+        $response = array();
+        $i = 0;
+        while ($i < 7) {
+            $dayOfWeek = $today->subDays($i);
+            $totaldataweekly = $data_jemaat->where('created_at', $dayOfWeek);
+            $response[$dayOfWeek] = $eventsForThisDay->count();
+            $i++;
+        }
+        return $response;
+    }
 }

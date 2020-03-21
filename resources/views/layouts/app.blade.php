@@ -117,7 +117,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href={{ asset('/') }}><img class="main-logo" src={{ asset('img/logo/logo.png') }} alt="" /></a>
+                <a href={{ asset('/') }}><img class="main-logo" width="200px" src={{ asset('img/logo/logo.png') }} style="width:200px" alt="" /></a>
                 <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.png') }} width="30px" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -189,7 +189,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="{{asset('/')}}"><img class="main-logo" src="{{asset('img/logo/logo.png')}}" alt="" /></a>
+                        <a href="{{asset('/')}}"><img class="main-logo" width="200px" src="{{asset('img/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
                                             <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-													<i class="educate-icon educate-nav"></i>
+													<i class="educate-icon educate-nav" style="color : #5c5c5c"></i>
 												</button>
                                         </div>
                                     </div>
@@ -215,9 +215,9 @@
                                             <ul class="nav navbar-nav mai-top-nav header-right-menu">
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="{{asset('img/logo/cross-logo.jpg')}}" alt="" />
+															<img src="{{asset('img/logo/cross-logo.jpg')}}" style="border:1px solid #5c5c5c; border-radius:30px;" alt="" />
 															<span class="admin-name">{{ Auth::user()->name }}</span>
-															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+															<i class="fa fa-angle-down edu-icon edu-down-arrow" style="color : #5c5c5c"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                         <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>

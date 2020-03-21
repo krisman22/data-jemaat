@@ -86,6 +86,12 @@ body {}
 /*----------------------------------------*/
 /*  2. Helper Class
 /*----------------------------------------*/
+.mg-tb-20{
+	margin:20px 0px;
+}
+.mg-tb-25{
+	margin:25px 0px;
+}
 .mg-tb-30{
 	margin:30px 0px;
 }
@@ -153,7 +159,8 @@ body {}
 	position:fixed;
     transition: all 0.3s;
 	z-index:999;
-	height:100%;
+    height:100%;
+    box-shadow :  0 2px 7px 0 rgba(0,0,0,0.1); 
 }
 .mini-navbar .all-content-wrapper {
     margin-left: 80px;
@@ -194,7 +201,7 @@ body {}
     margin-bottom: 5px;
 }
 #sidebar.active .sidebar-header .main-logo{
-	display:none;
+    display:none;
 }
 #sidebar.active .sidebar-header h3{
 	display:none;
@@ -286,7 +293,7 @@ body {}
 }
 .menu-switcher-pro button{
 	background: none;
-	border:none;
+    border:none;
 }
 .menu-switcher-pro button:hover, .menu-switcher-pro button:focus, .menu-switcher-pro button:active, .menu-switcher-pro button:visited{
 	background: none;
@@ -493,7 +500,7 @@ body {}
 }
 .header-right-info .admin-name{
 	display: inline-block;
-    color: #fff;
+    color:#5c5c5c;
     font-size: 16px;
     position: relative;
     top: -2px;
@@ -3651,7 +3658,8 @@ div#sparklinehome canvas {
     width: 100% !important;
 }
 .header-top-area {
-    background: #006DF0;
+    background: #fff;
+    box-shadow: 0px 2px 5px 0 rgba(0,0,0,0.1);
 }
 .sidebar-nav .metismenu{
 	background: #fff;
@@ -3674,7 +3682,7 @@ div#sparklinehome canvas {
 }
 
 .sidebar-nav .metismenu li.active{
-    background: #F6F8FA;
+    background: #ecf3fb;
 }
 
 #sidebar.active .sidebar-nav .metismenu a:hover, #sidebar.active .sidebar-nav .metismenu a:focus, #sidebar.active .sidebar-nav .metismenu a:active{
@@ -3710,9 +3718,6 @@ div#sparklinehome canvas {
 }
 .header-top-menu .navbar-nav>li>a:hover {
     color: #fff;
-}
-#sidebar {
-    background: #fff;
 }
 #sidebar .sidebar-header {
     background: #fff;
@@ -4731,4 +4736,16 @@ div#sparklinehome canvas {
 .footer-copy-right a{
 	color:#fff;
 	text-decoration:none;
+}
+
+/*----------------------------------------*/
+/*  24. additional
+/*----------------------------------------*/
+
+.card-radius{
+    border-radius : 13px;
+}
+
+.card-shadow{
+    box-shadow: 2px 2px 15px silver;
 }
