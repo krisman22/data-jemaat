@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/grafik-pekerjaan', 'GrafikController@pekerjaan');
     Route::get('/grafik-jemaat-bergabung', 'GrafikController@jemaatbergabung');
 
+    Route::get('/data-lingkungan', 'DataMasterController@index')->name('datalingkungan');
+    Route::post('/data-lingkungan', 'DataMasterController@storeLingkungan')->name('lingkungan.store');
 
 
 });

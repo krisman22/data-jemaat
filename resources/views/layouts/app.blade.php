@@ -16,7 +16,7 @@
     
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/cross-logo.png')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -110,17 +110,13 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-    <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
                 <a href={{ asset('/') }}><img class="main-logo" width="200px" src={{ asset('img/logo/logo.png') }} style="width:200px" alt="" /></a>
-                <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.png') }} width="30px" alt="" /></a></strong>
+                <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.jpg') }} style="border:1px solid #5c5c5c; border-radius:30px;"  width="45px" alt="" /></a></strong>
             </div>
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+            <div class="left-custom-menu-adp-wrap comment-scrollbar mg-t-25">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1" style='font-size:17px'>
                         <li class="{{Request::is("/")?'active':''}}" >
@@ -150,6 +146,14 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-jemaatmeninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaatmeninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
                                 <li class="{{Request::is("data-jemaatpindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaatpindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-database"></span> <span class="mini-click-non">Data Master</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li class="{{Request::is("data-lingkungan") ? 'active' : ''}}"><a href="{{asset('/data-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
+                                <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pekerjaan</span></a></li>                            
+                                <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pendidikan</span></a></li>                            
                             </ul>
                         </li>
                         <li>
@@ -203,7 +207,7 @@
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn" style="background:none">
 													<i class="educate-icon educate-nav" style="color : #5c5c5c"></i>
 												</button>
                                         </div>
@@ -220,7 +224,7 @@
 															<i class="fa fa-angle-down edu-icon edu-down-arrow" style="color : #5c5c5c"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                        {{-- <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a> --}}
                                                         </li>
                                                         <li><a href="{{ route('logout') }}"
                                                         onclick="event.preventDefault();
@@ -252,7 +256,8 @@
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">                                        
                                         <li><a href="{{asset('/')}}">Dashboard</a></li>
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Data Jemaat <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        <li>
+                                            <a data-toggle="collapse" href="#" aria-expanded="false"><span class="fas fa-user-friends"> </span><span class="mini-click-non">Data Jemaat</span></a>
                                             <ul class="collapse dropdown-header-top">
                                                 <li><a href="{{asset('/data-jemaat')}}">Data Jemaat</a></li>
                                                 <li><a href="{{asset('/tambah-jemaat')}}">Tambah Jemaat</a></li>
@@ -294,6 +299,16 @@
                                                 <li class="{{Request::is("grafik-pekerjaan") ? 'active' : ''}} || {{Request::is("grafik-pekerjaan/*") ? 'active' : ''}}"><a href="{{asset('/grafik-pekerjaan')}}"><span class="mini-sub-pro">Pekerjaan</span></a></li>                            
                                                 <li class="{{Request::is("grafik-jemaat-bergabung") ? 'active' : ''}}"><a href="{{asset('/grafik-jemaat-bergabung')}}"><span class="mini-sub-pro">Jemaat Bergabung</span></a></li>  
                                             </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                <span class="edu-icon edu-locked author-log-ic"></span>Log Out                                                         
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </li>
                                     </ul>
                                 </nav>

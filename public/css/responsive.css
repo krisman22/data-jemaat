@@ -174,8 +174,9 @@
 		float: left !important;
 	}
 	.header-top-area {
-		position: relative;
-		left: 0px;
+		/* position: relative;
+		left: 0px; */
+		display: none;
 	}
 	.analysis-progrebar-ctn {
 		margin-top: 0px !important;
@@ -336,6 +337,7 @@
 	.logo-pro{
 		display:block;
 		text-align:center;
+		background:#fff;
 	}
 	.menu-switcher-pro{
 		display:none;
@@ -454,8 +456,9 @@
 		height: 100%;
 	}
 	.header-top-area {
-		position: relative;
-		left: 0px;
+		/* position: relative;
+		left: 0px; */
+		display: none;
 	}
 	.analysis-progrebar-ctn {
 		margin-top: 0px;
