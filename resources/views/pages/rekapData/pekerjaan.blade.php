@@ -13,13 +13,20 @@
                             </div>
                             <div class="form-group-inner" style="padding-bottom:2%">
                                 <div class="row">
-                                    <div class="col-lg-7 col-md-7 col-sm-7"></div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
                                     <form action="{{route('getPekerjaan')}}" method="get" enctype="multipart/form-data" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
                                         {{ csrf_field() }}
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
+                                            <select id="jemaatfilter" class="form-control" name="id_jemaatfilter" style="padding:0px;">
+                                                <option disabled selected></option>
+                                                <option {{ old('id_jemaatfilter') == 'f' ? 'selected' : '' }} value="f" >Semua Jemaat</option>
+                                                <option {{ old('id_jemaatfilter') == 't' ? 'selected' : '' }} value="t" >Kepala Keluarga</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5">
                                             <select id="pekerjaanid" class="form-control" name="id_pekerjaan" style="padding:0px;">
                                                 <option disabled selected></option>
-                                                
                                                 @foreach($data_pekerjaans as $data_pekerjaan)
                                                     <option value="{{$data_pekerjaan->id}}" {{ old('id_pekerjaan') == $data_pekerjaan->id ? 'selected' : '' }} 
                                                         @if ($id_pekerjaan != null)
@@ -31,8 +38,8 @@
                                                 @endforeach 
                                             </select>
                                         </div>
-                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-                                            <button  class="btn btn-primary btn-md waves-effect waves-light btn-block" type="submit">Pilih</button>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            <button  class="btn btn-primary btn-md waves-effect waves-light btn-block" style="padding-top:9px; padding-bottom:9px" type="submit">Pilih</button>
                                             
                                         </div>
                                     </form>
@@ -103,16 +110,10 @@
       });
 </script>
 
-{{-- <script type="text/javascript">
-    $(document).ready(function () {
-    $("#pekerjaanid").change(function () {
-        var val = $(this).val();
-        var val2 = $(this).find('option:selected').attr('value2');
-        if (val == val) {
-            $("#header_pekerjaan").html("<th>"+val2+"</th>");
-        }
-    });
-});
-</script> --}}
+<script type="text/javascript">
+    $("#jemaatfilter").select2({
+          placeholder: "Pilih Data Jemaat"
+      });
+</script>
 
 @endsection

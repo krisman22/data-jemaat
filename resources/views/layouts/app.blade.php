@@ -114,42 +114,43 @@
         <nav id="sidebar" class="">
             <div class="sidebar-header">
                 <a href={{ asset('/') }}><img class="main-logo" width="200px" src={{ asset('img/logo/logo.png') }} style="width:200px" alt="" /></a>
-                <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.jpg') }} style="border:1px solid #5c5c5c; border-radius:30px;"  width="45px" alt="" /></a></strong>
+                <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.jpg') }} style="border:1px solid #5c5c5c; border-radius:30px;"  width="37px" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar mg-t-25">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1" style='font-size:17px'>
                         <li class="{{Request::is("/")?'active':''}}" >
                             <a title="Home" href={{ asset('/') }}>
-								   <span class="fas fa-church"></span>
+								   <span class="fas fa-church fa-fw" style="font-size:17px"></span>
 								   <span class="mini-click-non">Dashboard</span>
 								</a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends fa-fw" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-jemaat")?'active':''}} || {{Request::is("data-jemaat/profile/*")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
                                 {{-- <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li> --}}
                                 <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Tambah Jemaat" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Tambah Jemaat</span></a></li>
                                 {{-- <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li> --}}
                                 {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
+                                <li class="{{Request::is("data-kepalakeluarga")?'active':''}}"><a title="Data Kepala Keluarga" href={{asset('/data-kepalakeluarga')}}><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
                             </ul>
                         </li>
                         <li class="{{Request::is("kartu-jemaat")?'active':''}}" >
                             <a title="Kartu Jemaat" href={{ asset('/kartu-jemaat') }}>
-								   <span class="fas fa-id-card" style='font-size:17px'></span>
+								   <span class="fas fa-id-card fa-fw" style='font-size:17px'></span>
 								   <span class="mini-click-non">Kartu Jemaat</span>
 								</a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table"></span> <span class="mini-click-non">Jemaat Inaktif</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table fa-fw"></span> <span class="mini-click-non">Jemaat Inaktif</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-jemaatmeninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaatmeninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
                                 <li class="{{Request::is("data-jemaatpindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaatpindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-database"></span> <span class="mini-click-non">Data Master</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-database fa-fw"></span> <span class="mini-click-non">Data Master</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-lingkungan") ? 'active' : ''}}"><a href="{{asset('/data-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
                                 <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pekerjaan</span></a></li>                            
@@ -157,7 +158,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table"></span> <span class="mini-click-non">Rekap Data</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table fa-fw"></span> <span class="mini-click-non">Rekap Data</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("rekap-lingkungan") ? 'active' : ''}}"><a href="{{asset('/rekap-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
                                 <li class="{{Request::is("rekap-kepalakeluarga") ? 'active' : ''}}"><a href="{{asset('/rekap-kepalakeluarga')}}"><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
@@ -170,7 +171,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-chart-bar"></span> <span class="mini-click-non">Grafik</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-chart-bar fa-fw"></span> <span class="mini-click-non">Grafik</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("grafik-lingkungan") ? 'active' : ''}}"><a href="{{asset('/grafik-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
                                 <li class="{{Request::is("grafik-jenis-kelamin") ? 'active' : ''}}"><a href="{{asset('/grafik-jenis-kelamin')}}"><span class="mini-sub-pro">Jenis Kelamin</span></a></li>                            

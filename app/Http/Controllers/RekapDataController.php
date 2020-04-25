@@ -313,6 +313,8 @@ class RekapDataController extends Controller
 
         $data_pekerjaans = master_pekerjaan::all();
 
+        $kk_filter = request('id_jemaatfilter');
+
         $id_pekerjaan = request('id_pekerjaan');
         $nama_pekerjaan = master_pekerjaan::where('id', $id_pekerjaan)->first();
 
@@ -323,10 +325,19 @@ class RekapDataController extends Controller
         foreach($grouped as $data=>$lingkungans){
             $total_data_pekerjaan=0;
             foreach($lingkungans as $lingkungan){
-                $data_pekerjaan = data_jemaat::where('jemaat_status_aktif', '=', 't')
-                    ->where('id_lingkungan', '=', $lingkungan->nomor_lingkungan)
-                    ->where('id_pekerjaan', '=', $id_pekerjaan)
-                    ->count();
+                if($kk_filter == 't'){
+                    $data_pekerjaan = data_jemaat::where('jemaat_status_aktif', '=', 't')
+                        ->where('jemaat_kk_status', true)
+                        ->where('id_lingkungan', '=', $lingkungan->nomor_lingkungan)
+                        ->where('id_pekerjaan', '=', $id_pekerjaan)
+                        ->count();
+                }
+                else{
+                    $data_pekerjaan = data_jemaat::where('jemaat_status_aktif', '=', 't')
+                        ->where('id_lingkungan', '=', $lingkungan->nomor_lingkungan)
+                        ->where('id_pekerjaan', '=', $id_pekerjaan)
+                        ->count();
+                }
                 $data_pekerjaan_perlingkungan[$lingkungan->nomor_lingkungan]= $data_pekerjaan;
                 $total_data_pekerjaan += $data_pekerjaan;
             }

@@ -122,8 +122,11 @@ body {}
 .mg-t-10{
 	margin-top:10px;
 }
+.mg-tb-10{
+    margin: 10px 0;
+}
 .mg-b-15{
-	margin-bottom:20px;
+	margin-bottom:15px;
 }
 .mt-b-30{
 	margin-bottom:30px;
