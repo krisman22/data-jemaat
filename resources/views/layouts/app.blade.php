@@ -157,6 +157,12 @@
                                 <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pendidikan</span></a></li>                            
                             </ul>
                         </li>
+                        <li class="{{Request::is("laporan")?'active':''}}" >
+                            <a title="Kartu Jemaat" href={{ asset('/laporan') }}>
+								   <span class="fas fa-scroll fa-fw" style='font-size:17px'></span>
+								   <span class="mini-click-non">Laporan</span>
+								</a>
+                        </li>
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table fa-fw"></span> <span class="mini-click-non">Rekap Data</span></a>
                             <ul class="submenu-angle" aria-expanded="false">

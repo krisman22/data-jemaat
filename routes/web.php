@@ -25,6 +25,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
 
     Route::get('/data-kepalakeluarga', 'KepalaKeluargaController@index')->name('data-kk');
+
+    Route::get('/import-data','ImportExportController@importIndex')->name('import.index');
+    Route::post('/import','ImportExportController@import')->name('import.datajemaat');
+    
     
     Route::get('/kartu-jemaat', 'KartuJemaatController@index')->name('kartujemaat');
     Route::get('/kartu-jemaat/{data_jemaat}', 'KartuJemaatController@show')->name('lihatdatakk');
@@ -33,6 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/data-jemaatmeninggal', 'JemaatInAktifController@meninggal')->name('datameninggal');
     Route::get('/data-jemaatpindah', 'JemaatInAktifController@pindah')->name('datapindah');
+
+    Route::get('/laporan','LaporanController@index');
+    
 
     Route::get('/rekap-lingkungan', 'RekapDataController@lingkungan');
     Route::get('/rekap-kepalakeluarga', 'RekapDataController@kepalakeluarga');

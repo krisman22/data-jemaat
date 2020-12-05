@@ -14,13 +14,6 @@
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                            {{-- <div id="toolbar">
-                                <select class="form-control dt-tb">
-                                    <option value="">Export Basic</option>
-                                    <option value="all">Export All</option>
-                                    <option value="selected">Export Selected</option>
-                                </select>
-                            </div> --}}                            
                             @if ($message = Session::get('update'))
                                 <div class="row">
                                     <div class="col-md-12">
@@ -40,33 +33,14 @@
                                     </div>
                                 </div>
                             @endif
-                            {{-- <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="false" data-resizable="true" data-cookie="true"
-                                data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar"> --}}
-                                
                             <table id="table" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                    {{-- <tr>
-                                        <th data-field="nama">Nama</th>
-                                        <th data-field="namaalias">Nama Alias</th>
-                                        <th data-field="nomorstambuk">Nomor Stambuk</th>
-                                        <th data-field="lingkungan">Lingkungan </th>
-                                        {{-- <th data-field="ttl">TTL</th> --}}
-                                        {{-- <th data-field="complete">Completed</th> --}}
-                                        {{-- <th data-field="status">Status Jemaat</th> --}}
-                                        {{-- <th data-field="date" data-editable="true">Date</th>
-                                        <th data-field="price" data-editable="true">Price</th> --}}
-                                        {{-- <th data-field="action"></th>
-                                    </tr>  --}}
+                                <thead>
                                     <tr>
                                         <th>Nama</th>
                                         <th>Nama Alias</th>
                                         <th>Nomor Stambuk</th>
                                         <th>Lingkungan </th>
-                                        {{-- <th data-field="ttl">TTL</th> --}}
-                                        {{-- <th data-field="complete">Completed</th> --}}
                                         <th>Status Jemaat</th>
-                                        {{-- <th data-field="date" data-editable="true">Date</th>
-                                        <th data-field="price" data-editable="true">Price</th> --}}
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -77,7 +51,6 @@
                                         <td>{{ $datajemaat->jemaat_nama_alias}}</td>                                        
                                         <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
                                         <td>{{ $datajemaat->lingkungan->nomor_lingkungan}} - {{ $datajemaat->lingkungan->nama_lingkungan}}</td>
-                                        {{-- <td>{{ $datajemaat->jemaat_tempat_lahir}}, {{ $datajemaat->jemaat_tanggal_lahir->format('d M Y') }}</td> --}}
                                         <td style="text-align: center">@if($datajemaat->jemaat_status_aktif == "t")
                                             <span style="font-size:10pt" class="label label-primary">Aktif</span>
                                             @elseif($datajemaat->jemaat_keterangan_status == "Pindah")
@@ -116,7 +89,9 @@
                 { "width": "15%", "targets": 3 },
                 { "width": "13%", "className": "text-right", "targets": 4 },
                 { "width": "15%", "targets": 5 },
-            ]
+            ],
+            "scrollX": true,
+            "scrollCollapse": true,
         });
     });
 </script>

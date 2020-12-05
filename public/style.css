@@ -111,10 +111,7 @@ body {}
 	margin-top:30px;
 }
 .mg-b-10{
-	margin-bottom:23px;
-}
-.mg-ub-10{
-	margin-bottom:17px;
+	margin-bottom:10px;
 }
 .mg-t-15{
 	margin-top:15px;
@@ -3224,7 +3221,12 @@ td.text-right.mail-date {
 
 .main-sparkline8-hd h1, .main-sparkline9-hd h1, .main-spark7-hd h1, .main-sparkline10-hd h1, .main-sparkline11-hd h1, .main-sparkline12-hd h1, .main-sparkline13-hd h1, .main-sparkline14-hd h1{
 	font-size:20px;
-	color:#303030;
+    color:#303030;
+    padding-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(124, 124, 124, 0.151);
+    margin-bottom: 15px;
 }
 .basic-choropleth {
     height: 400px;
