@@ -12,6 +12,11 @@
                             <h1>Data Jemaat</h1>
                         </div>
                     </div>
+                    <div class="row mg-b-15">
+                        <div class="col-md-4">
+                            <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}">Export Data Jemaat</a>
+                        </div>
+                    </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
                             @if ($message = Session::get('update'))

@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/data-jemaat/profile/{id}/update3', 'DataJemaatController@destroy')->name('hapusdatajemaat');
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
+    Route::get('/data-jemaat/export','DataJemaatController@exportDataJemaat')->name('export.datajemaat');
+    
 
     Route::get('/data-kepalakeluarga', 'KepalaKeluargaController@index')->name('data-kk');
 

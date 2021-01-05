@@ -10,6 +10,8 @@ use App\master_pekerjaan;
 use App\DataKeluarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\DataJemaatExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataJemaatController extends Controller
 {
@@ -20,7 +22,7 @@ class DataJemaatController extends Controller
      */
     public static function index()
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC')->get();
+        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC');
 
         return view('pages.jemaat.data-jemaat', compact('datajemaats'));
     }
@@ -482,5 +484,11 @@ class DataJemaatController extends Controller
         // return "berhasil";
 
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
+    }
+
+    public function exportDataJemaat()
+    {
+        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        return Excel::download(new DataJemaatExport, 'Data Jemaat ' .$now. '.xlsx');
     }
 }

@@ -17,6 +17,6 @@ class ImportExportController extends Controller
         set_time_limit(300);
         Excel::import(new DataJemaatImport,request()->file('file'));
            
-        return back()->with(['success' => 'Import Data Jemaat berhasil di tambahkan']);
+        return redirect()->route('all-dampingan.program')->with(['success' => 'Import Data Jemaat berhasil di tambahkan']);
     }
 }

@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use App\master_pendidikan;
 
 class data_jemaat extends Model
 {
@@ -50,6 +49,10 @@ class data_jemaat extends Model
     public function statusdikeluarga()
     {
         return $this->belongsTo('\App\master_status_dikeluarga', 'jemaat_status_dikeluarga');
+    }
+    public function datakeluarga()
+    {
+        return $this->belongsTo('\App\DataKeluarga', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
     
 }
