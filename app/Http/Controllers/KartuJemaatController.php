@@ -10,6 +10,7 @@ use App\DataKeluarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use App\NomorKartu;
 
 class KartuJemaatController extends Controller
 {
@@ -50,8 +51,43 @@ class KartuJemaatController extends Controller
 
     public function cetak_pdf(data_jemaat $data_jemaat)
     {
-        $idparent = $data_jemaat->id;     
+        $idparent = $data_jemaat->id;
+        $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
         
+        // generate nomor kartu
+        // $dataKK = data_jemaat::where('jemaat_status_aktif', 't')
+        // ->where('jemaat_kk_status', true)
+        // ->orderBy('jemaat_nama', 'asc')
+        // ->get();
+        
+        // foreach($dataKK as $data){
+        //     $adaIsi = NomorKartu::where('no_stambuk', $data->jemaat_nomor_stambuk)->first();
+        //     $lastId = NomorKartu::orderBy('id', 'desc')->first();
+            
+        //     if($adaIsi == null){
+        //         $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
+        //         $nomor = new NomorKartu;
+        //         $nomor->no_stambuk = $data->jemaat_nomor_stambuk;
+        //         $nomor->nomor_kartu = $nomor_kartu;
+        //         $nomor->save();
+        //     }
+        //     else{
+        //         $nomor_kartu = $adaIsi->nomor_kartu;
+        //     }
+        // }
+
+        $lastId = NomorKartu::orderBy('id', 'desc')->first();
+        if($isNomorKartu == null){
+            $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
+            $nomor = new NomorKartu;
+            $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
+            $nomor->nomor_kartu = $nomor_kartu;
+            $nomor->save();
+        }
+        else{
+            $nomor_kartu = $isNomorKartu->nomor_kartu;
+        }
+
         $dataKartuKeluargas = data_jemaat::where('id_parent', '=', $idparent)
             ->where('jemaat_status_aktif', '=', 't')
             ->orderBy('jemaat_status_dikeluarga', 'ASC')
@@ -68,7 +104,7 @@ class KartuJemaatController extends Controller
         $customPaper = array(0,0,609.44,935.43);
 
         $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
-            compact('data_jemaat','dataKartuKeluargas','data_keluargas'))
+            compact('data_jemaat','dataKartuKeluargas','data_keluargas','nomor_kartu'))
                 ->setPaper($customPaper, 'landscape');
         
         return $pdf->download($name);

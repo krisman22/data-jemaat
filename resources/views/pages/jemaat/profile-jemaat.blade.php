@@ -89,41 +89,68 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
-                                                            <div class="col-md-3" style="padding-right:0px;">
-                                                                <a href={{ route('jemaateditprofile', $data_jemaat) }}> <button type="button" class="btn btn-warning btn-block">Edit</button></a>
-                                                            </div>
-                                                            <div class="col-md-4" style="padding-left:0px; padding-right:0px">
-                                                                <div class="dropdown">
-                                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ubah Status Jemaat
-                                                                        <span class="caret"></span></button>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="#" data-toggle="modal" data-target="#PrimaryModalalert">Pindah</a></li>
-                                                                        <li><a href="#" data-toggle="modal" data-target="#DangerModalalert">Meninggal</a></li>                                                                            
-                                                                    </ul>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-2 col-md-offset-2">
+                                                                    <a href="#" data-toggle="modal" data-target="#jadikankkmodal"> <button type="button" class="btn btn-info btn-block">Jadikan KK</button></a>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <a href={{ route('jemaateditprofile', $data_jemaat) }}> <button type="button" class="btn btn-warning btn-block">Edit</button></a>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="dropdown">
+                                                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ubah Status Jemaat
+                                                                            <span class="caret"></span></button>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li><a href="#" data-toggle="modal" data-target="#PrimaryModalalert">Pindah</a></li>
+                                                                            <li><a href="#" data-toggle="modal" data-target="#DangerModalalert">Meninggal</a></li>                                                                            
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                     <a href="#" data-toggle="modal" data-target="#DangerModalalert1">
+                                                                        <button type="button" class="btn btn-danger btn-block">Hapus </button>
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3" style="padding-left:0px;">
-                                                                <a href="#" data-toggle="modal" data-target="#DangerModalalert1">
-                                                                    <button type="button" class="btn btn-danger btn-block">Hapus </button></a>
+                                                        </div>
 
-                                                                <div id="DangerModalalert1" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <form action="{{ route('hapusdatajemaat', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                                                                                {{ csrf_field() }}
-                                                                                {{ method_field('PATCH') }}
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
+                                                            <div id="DangerModalalert1" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <form action="{{ route('hapusdatajemaat', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                                            {{ csrf_field() }}
+                                                                            {{ method_field('PATCH') }}
+                                                                        <div class="modal-close-area modal-close-df">
+                                                                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Hapus Data : </p><h4>{{$data_jemaat->jemaat_nama}}</h4>
+                                                                        </div>
+                                                                        <div class="modal-footer danger-md">
+                                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="jadikankkmodal" class="modal modal-edu-general FullColor-popup-InfoModal fade" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <form action="{{ route('jadikankk', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                                            {{ csrf_field() }}
+                                                                            {{ method_field('PATCH') }}
                                                                             <div class="modal-close-area modal-close-df">
                                                                                 <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <p>Hapus Data dari : </p><h4>{{$data_jemaat->jemaat_nama}}</h4>
+                                                                                <p>Jadikan Kepala Keluarga : </p><h4>{{$data_jemaat->jemaat_nama}}</h4>
                                                                             </div>
-                                                                            <div class="modal-footer danger-md">
-                                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                                            <div class="modal-footer info-md">
+                                                                                <button type="submit" class="btn btn-info">Simpan</button>
                                                                             </div>
-                                                                            </form>
-                                                                        </div>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -134,7 +161,7 @@
                                                             <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog"> 
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        <form action="{{ route('updatestatuspensiun', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                                        <form action="{{ route('updatestatuspindah', $data_jemaat)}}" method="POST"  class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('PATCH') }}
                                                                             <div class="modal-close-area modal-close-df">

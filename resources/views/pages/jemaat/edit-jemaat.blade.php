@@ -298,23 +298,6 @@
                                                                     <div class="row">
                                                                         <div class="col-md-4" style="padding-right:0">
                                                                             <div class="form-group" style="">
-                                                                                <input style="text-align:right" type="text" class="form-control" value="Status dikeluarga" readonly="readonly">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-8" style="padding-left:0">
-                                                                            <div class="form-group">
-                                                                                {{-- <input style="border=0;" type="text" class="form-control" name="jemaat_status_dikeluarga" value="{{$data_jemaat->jemaat_status_dikeluarga}}"> --}}
-                                                                                <select class="form-control" name="jemaat_status_dikeluarga">
-                                                                                    <option @if($data_jemaat->jemaat_status_dikeluarga == "1") selected="" @endif value="0">Ayah</option>
-                                                                                    <option @if($data_jemaat->jemaat_status_dikeluarga == "2") selected="" @endif value="1">Ibu</option>
-                                                                                    <option @if($data_jemaat->jemaat_status_dikeluarga == "3") selected="" @endif value="2">Anak</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-4" style="padding-right:0">
-                                                                            <div class="form-group" style="">
                                                                                 <input style="text-align:right" type="text" class="form-control" value="Golongan Darah" readonly="readonly">
                                                                             </div>
                                                                         </div>
@@ -421,11 +404,28 @@
                                                                     <div class="col-md-8" style="padding-left:0">
                                                                         <div class="form-group">
                                                                             <select class="form-control" name="jemaat_status_dikeluarga">
-                                                                                <option @if($data_jemaat->jemaat_status_dikeluarga == "l") selected="" @endif value="1">Kepala Keluarga</option>
+                                                                                <option @if($data_jemaat->jemaat_status_dikeluarga == "1") selected="" @endif value="1">Kepala Keluarga</option>
                                                                                 <option @if($data_jemaat->jemaat_status_dikeluarga == "2") selected="" @endif value="2">Istri</option>
                                                                                 <option @if($data_jemaat->jemaat_status_dikeluarga == "3") selected="" @endif value="3">Anak</option>
                                                                                 <option @if($data_jemaat->jemaat_status_dikeluarga == "4") selected="" @endif value="4">Adik Kandung</option>
                                                                                 <option @if($data_jemaat->jemaat_status_dikeluarga == "5") selected="" @endif value="5">Famili</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4" style="padding-right:0">
+                                                                        <div class="form-group" style="">
+                                                                            <input style="text-align:right" type="text" class="form-control" value="Pilih Kepala Keluarga" readonly="readonly">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-8" style="padding-left:0">
+                                                                        <div class="form-group">
+                                                                            <select id="nameid" class="form-control" name="id_parent" style="padding:0px;">
+                                                                                <option disabled selected></option>
+                                                                                @foreach($dataKK as $data)
+                                                                                    <option @if($data->id_parent == $data_jemaat->id_parent) selected="" @endif value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}}</option>
+                                                                                @endforeach                                                                        
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -489,5 +489,12 @@
         $('.selectpicker').selectpicker();
     });
 </script> 
+
+<script type="text/javascript">
+
+    $("#nameid").select2({
+          placeholder: "Pilih KK"
+      });
+</script>
 
 @endsection

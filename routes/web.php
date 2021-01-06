@@ -18,15 +18,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-jemaat/profile/{data_jemaat}', 'DataJemaatController@show')->name('profiledetail');
     Route::get('/data-jemaat/profile/{data_jemaat}/edit', 'DataJemaatController@edit')->name('jemaateditprofile');
     Route::patch('/data-jemaat/{id}/update', 'DataJemaatController@update')->name('jemaatupdate');
-    Route::patch('/data-jemaat/profile/{id}/update1', 'DataJemaatController@updateStatusPensiun')->name('updatestatuspensiun');
+    Route::patch('/data-jemaat/profile/{id}/update1', 'DataJemaatController@updateStatusPindah')->name('updatestatuspindah');
     Route::patch('/data-jemaat/profile/{id}/update2', 'DataJemaatController@updateStatusMeninggal')->name('updatestatusmeninggal');
     Route::patch('/data-jemaat/profile/{id}/update3', 'DataJemaatController@destroy')->name('hapusdatajemaat');
+    Route::patch('/data-jemaat/profile/{id}/update4', 'DataJemaatController@jadikankk')->name('jadikankk');
     Route::get('/tambah-jemaat', 'DataJemaatController@create')->name('tambahjemaat');
     Route::post('/tambah-jemaat', 'DataJemaatController@store')->name('tambahdatajemaat');
     Route::get('/data-jemaat/export','DataJemaatController@exportDataJemaat')->name('export.datajemaat');
     
 
     Route::get('/data-kepalakeluarga', 'KepalaKeluargaController@index')->name('data-kk');
+    Route::get('/data-kepalakeluarga/export','KepalaKeluargaController@exportDataKK')->name('export.dataKK');
 
     Route::get('/import-data','ImportExportController@importIndex')->name('import.index');
     Route::post('/import','ImportExportController@import')->name('import.datajemaat');

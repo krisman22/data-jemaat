@@ -22,7 +22,7 @@ class DataJemaatController extends Controller
      */
     public static function index()
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC');
+        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC')->get();
 
         return view('pages.jemaat.data-jemaat', compact('datajemaats'));
     }
@@ -37,7 +37,7 @@ class DataJemaatController extends Controller
         $data_pendidikans = master_pendidikan::all();
         $data_lingkungans = master_lingkungan::all();
         $data_pekerjaans = master_pekerjaan::all();
-        $dataKK = data_jemaat::where('jemaat_kk_status', true)->get();
+        $dataKK = data_jemaat::where('jemaat_kk_status', true)->where('jemaat_status_aktif', 't')->get();
         
         return view('pages.jemaat.tambah-jemaat', compact('data_pendidikans','data_lingkungans','data_pekerjaans', 'dataKK'));
     }
@@ -306,8 +306,11 @@ class DataJemaatController extends Controller
         $data_keluarga = DataKeluarga::where('no_stambuk', '=', $no_stambuk)
             ->first();
         // dd($data_keluarga);
+        $dataKK = data_jemaat::where('jemaat_kk_status', true)->where('jemaat_status_aktif', 't')->get();
 
-        return view('pages.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans', 'data_pekerjaans', 'data_keluarga'));      
+
+
+        return view('pages.jemaat.edit-jemaat', compact('data_jemaat', 'data_pendidikans','data_lingkungans', 'data_pekerjaans', 'data_keluarga','dataKK'));      
     }
 
     /**
@@ -425,6 +428,7 @@ class DataJemaatController extends Controller
             'jemaat_nomor_hp' => request('jemaat_nomor_hp'),
             'jemaat_email' => request('jemaat_email'),
             'id_pekerjaan' => request('id_pekerjaan'),
+            'id_parent' => request('id_parent'),
             'jemaat_status_dikeluarga' => request('jemaat_status_dikeluarga'),
             'jemaat_golongan_darah' => request('jemaat_golongan_darah'),
         ]);
@@ -456,7 +460,7 @@ class DataJemaatController extends Controller
         return redirect()->route('datajemaat')->with(['delete' => 'Data Jemaat berhasil di hapus']);
     }
 
-    public function updateStatusPensiun(Request $request, $id)
+    public function updateStatusPindah(Request $request, $id)
     {
         // dd("hello");
         $data_jemaat = data_jemaat::find($id);
@@ -466,7 +470,16 @@ class DataJemaatController extends Controller
             'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
         ]);
 
-        // return "berhasil";
+        if($data_jemaat->jemaat_kk_status == true){
+            $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
+            foreach($dataKeluargas as $dataKeluarga){
+                $dataKeluarga->update([
+                    'jemaat_keterangan_status' => "Pindah",
+                    'jemaat_status_aktif' => 'f',
+                    'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
+                ]);
+            } 
+        }
 
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
     }
@@ -481,9 +494,68 @@ class DataJemaatController extends Controller
             'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
         ]);
 
+        if($data_jemaat->jemaat_status_dikeluarga == 1){
+            $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
+                ->where('jemaat_status_dikeluarga','2')    
+                ->first();
+            
+            if($dataSI->jemaat_jenis_kelamin == 'l'){
+                $dataSI->jemaat_status_perkawinan = 3;
+                $dataSI->save();
+            }
+            else{
+                $dataSI->jemaat_status_perkawinan = 4;
+                $dataSI->save();
+            }
+        }
+        else if($data_jemaat->jemaat_status_dikeluarga == 2){
+            $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
+                ->where('jemaat_status_dikeluarga','1')    
+                ->first();
+            
+            if($dataSI->jemaat_jenis_kelamin == 'l'){
+                $dataSI->jemaat_status_perkawinan = 3;
+                $dataSI->save();
+            }
+            else{
+                $dataSI->jemaat_status_perkawinan = 4;
+                $dataSI->save();
+            }
+        }
+
+        if($data_jemaat->jemaat_kk_status == true){
+            $switchKK = data_jemaat::where('id_parent', $id)
+                ->where('jemaat_status_aktif', 't')
+                ->orderBy('jemaat_status_dikeluarga','asc')
+                ->orderBy('jemaat_tanggal_lahir','desc')
+                ->first();
+            
+            $switchKK->jemaat_status_dikeluarga = 1;
+            $switchKK->jemaat_kk_status = true;
+            $switchKK->save();
+            
+            $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
+            foreach($dataKeluargas as $dataKeluarga){
+                $dataKeluarga->id_parent = $switchKK->id;
+                $dataKeluarga->save();
+            } 
+        }
+
         // return "berhasil";
 
-        return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
+        return back()->with(['update' => 'Data Jemaat berhasil di Update']);
+    }
+
+    public function jadikankk(Request $request, $id)
+    {
+        $data_jemaat = data_jemaat::find($id);
+        $data_jemaat->update([
+            'jemaat_kk_status' => true,
+            'jemaat_status_dikeluarga' => 1,
+            'id_parent' => $id
+        ]);
+
+        return back()->with(['update' => 'Data Jemaat berhasil dijadikan Kepala Keluarga']);
     }
 
     public function exportDataJemaat()

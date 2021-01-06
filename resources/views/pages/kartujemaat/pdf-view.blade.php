@@ -114,7 +114,7 @@
         </div>
         <div class="col-md-6" style="text-align:center">
             <h1 style="margin-left:0.4cm; margin-top:0px; padding-top:0px">KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1> <br>
-            <h2 style="font-size: 18pt; font-weight:bold; text-align:center">NOMOR : </h2>
+            <h2 style="font-size: 18pt; font-weight:bold; text-align:center">NOMOR : {{$nomor_kartu}}</h2>
         </div>
     </div>
 

@@ -12,6 +12,11 @@
                             <h1>Data Kepala Keluarga</h1>
                         </div>
                     </div>
+                    <div class="row mg-b-15">
+                        <div class="col-md-4">
+                            <a class="btn btn-success btn-sm" href="{{ route('export.dataKK') }}">Export Data Kepala Keluarga</a>
+                        </div>
+                    </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
                             <table id="tableKartuJemaat" class="table table-striped table-bordered" style="width:100%">
