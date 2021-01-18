@@ -43,9 +43,22 @@ class KartuJemaatController extends Controller
             ->join('data_keluargas','data_keluargas.no_stambuk','=','data_jemaats.jemaat_nomor_stambuk')
             ->where(['data_jemaats.id_parent' => $idparent])
             ->get();
+
+        $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
+        $lastId = NomorKartu::orderBy('id', 'desc')->first();
+        if($isNomorKartu == null){
+            $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
+            $nomor = new NomorKartu;
+            $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
+            $nomor->nomor_kartu = $nomor_kartu;
+            $nomor->save();
+        }
+        else{
+            $nomor_kartu = $isNomorKartu->nomor_kartu;
+        }
         
         return view('pages.kartujemaat.detail-kartu', 
-            compact('data_jemaat','dataKartuKeluargas','data_keluargas'));
+            compact('data_jemaat','dataKartuKeluargas','data_keluargas', 'nomor_kartu'));
         
     }
 
@@ -107,7 +120,8 @@ class KartuJemaatController extends Controller
             compact('data_jemaat','dataKartuKeluargas','data_keluargas','nomor_kartu'))
                 ->setPaper($customPaper, 'landscape');
         
-        return $pdf->download($name);
+        // return $pdf->download($name);
+        return $pdf->stream();
     }
 
     public function cetakkartu()
@@ -124,5 +138,6 @@ class KartuJemaatController extends Controller
         $pdf = PDF::loadView('pages.kartujemaat.contoh_pdf', $data);
         $name = $id . '_' . date('m-d-Y') . '.pdf';
         return $pdf->download($name);
+        // return response()->file($name);
     }
 }
