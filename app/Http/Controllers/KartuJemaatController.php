@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use App\NomorKartu;
+use Storage;
 
 class KartuJemaatController extends Controller
 {
@@ -30,21 +31,9 @@ class KartuJemaatController extends Controller
 
     public function show(data_jemaat $data_jemaat)
     {
-        $idparent = $data_jemaat->id;     
-        
-        $dataKartuKeluargas = data_jemaat::where('id_parent', '=', $idparent)
-            ->where('jemaat_status_aktif', '=', 't')
-            ->orderBy('jemaat_status_dikeluarga', 'ASC')
-            ->orderBy('jemaat_tanggal_lahir', 'ASC')
-            ->get();            
-        
-        $data_keluargas = DB::table('data_jemaats')
-            ->select('data_keluargas.no_stambuk','data_keluargas.nama_ayah','data_keluargas.nama_ibu')
-            ->join('data_keluargas','data_keluargas.no_stambuk','=','data_jemaats.jemaat_nomor_stambuk')
-            ->where(['data_jemaats.id_parent' => $idparent])
-            ->get();
-
+        $idparent = $data_jemaat->id;
         $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
+        
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
             $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
@@ -56,9 +45,22 @@ class KartuJemaatController extends Controller
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
+
+        $dataKartuKeluargas = data_jemaat::with('datakeluarga')
+            ->where('id_parent', '=', $idparent)
+            ->where('jemaat_status_aktif', '=', 't')
+            ->orderBy('jemaat_status_dikeluarga', 'ASC')
+            ->orderBy('jemaat_tanggal_lahir', 'ASC')
+            ->get();
+
+        $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
+        $customPaper = array(0,0,609.44,935.43);
+
+        $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
+            compact('data_jemaat','dataKartuKeluargas','nomor_kartu'))
+                ->setPaper($customPaper, 'landscape');
         
-        return view('pages.kartujemaat.detail-kartu', 
-            compact('data_jemaat','dataKartuKeluargas','data_keluargas', 'nomor_kartu'));
+        return $pdf->stream();
         
     }
 
@@ -101,43 +103,49 @@ class KartuJemaatController extends Controller
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
 
-        $dataKartuKeluargas = data_jemaat::where('id_parent', '=', $idparent)
+        $dataKartuKeluargas = data_jemaat::with('datakeluarga')
+            ->where('id_parent', '=', $idparent)
             ->where('jemaat_status_aktif', '=', 't')
             ->orderBy('jemaat_status_dikeluarga', 'ASC')
             ->orderBy('jemaat_tanggal_lahir', 'ASC')
-            ->get();            
-        
-        $data_keluargas = DB::table('data_jemaats')
-            ->select('data_keluargas.no_stambuk','data_keluargas.nama_ayah','data_keluargas.nama_ibu')
-            ->join('data_keluargas','data_keluargas.no_stambuk','=','data_jemaats.jemaat_nomor_stambuk')
-            ->where(['data_jemaats.id_parent' => $idparent])
             ->get();
 
         $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
 
         $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
-            compact('data_jemaat','dataKartuKeluargas','data_keluargas','nomor_kartu'))
+            compact('data_jemaat','dataKartuKeluargas','nomor_kartu'))
                 ->setPaper($customPaper, 'landscape');
         
-        // return $pdf->download($name);
-        return $pdf->stream();
-    }
-
-    public function cetakkartu()
-    {
-        $id = 123456;
-        
-        $data = [
-          'content' => 'Lorem lorem lorem data lorem 2'];
-
-        // $datajemaats = data_jemaat::where('jemaat_kk_status', '=', true)
-        //                 ->where('jemaat_status_aktif','!=','del')
-        //                 ->get();
-
-        $pdf = PDF::loadView('pages.kartujemaat.contoh_pdf', $data);
-        $name = $id . '_' . date('m-d-Y') . '.pdf';
         return $pdf->download($name);
-        // return response()->file($name);
     }
+
+    public function downloadZip()
+    {
+        // set_time_limit(300);
+        $dataAllKk = data_jemaat::where('jemaat_kk_status', '=', true)
+                        ->where('jemaat_status_aktif','t')
+                        ->get();
+
+        foreach($dataAllKk as $data_jemaat){
+            $idparent = $data_jemaat->id;
+            $nomor_kartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first()->nomor_kartu ?? null;
+
+            $dataKartuKeluargas = data_jemaat::with('datakeluarga')
+                ->where('id_parent', '=', $idparent)
+                ->where('jemaat_status_aktif', '=', 't')
+                ->orderBy('jemaat_status_dikeluarga', 'ASC')
+                ->orderBy('jemaat_tanggal_lahir', 'ASC')
+                ->get();            
+            
+            $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
+            $customPaper = array(0,0,609.44,935.43);
+
+            $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
+                compact('data_jemaat','dataKartuKeluargas','nomor_kartu'))
+                    ->setPaper($customPaper, 'landscape');
+            Storage::put('public/kartu-keluarga/'.$name, $pdf->output());
+        }
+    }
+    
 }
