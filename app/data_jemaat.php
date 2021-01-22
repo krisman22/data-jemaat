@@ -54,5 +54,9 @@ class data_jemaat extends Model
     {
         return $this->belongsTo('\App\DataKeluarga', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
+    public function kartukeluarga()
+    {
+        return $this->belongsTo('\App\NomorKartu', 'jemaat_nomor_stambuk', 'no_stambuk');
+    }
     
 }

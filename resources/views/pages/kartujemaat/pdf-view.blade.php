@@ -20,7 +20,7 @@
         .tablepdf th,
         .tablepdf tbody {
             border: 1px solid #000;
-            font-size: 11px;
+            font-size: 10px;
             padding: 0 0 0 2px;
         }
 
@@ -192,7 +192,7 @@
                         @elseif ($dataKartuKeluarga->jemaat_status_dikeluarga == 2) ISTRI
                         @elseif ($dataKartuKeluarga->jemaat_status_dikeluarga == 3) ANAK
                         @elseif ($dataKartuKeluarga->jemaat_status_dikeluarga == 4) FAMILI
-                        @elseif ($dataKartuKeluarga->jemaat_status_dikeluarga == 5) ADIK KANDUNG
+                        @elseif ($dataKartuKeluarga->jemaat_status_dikeluarga == 5) SAUDARA KANDUNG
                     @endif
                 </td>
                 <td @if($dataKartuKeluarga->jemaat_nama_alias != null) rowspan="2" @endif>@if($dataKartuKeluarga->jemaat_jenis_kelamin == "l") LAKI-LAKI
@@ -284,8 +284,8 @@
                         @else -
                         @endif
                     </td>
-                        <td colspan="2"> {{$dataKartuKeluarga->nama_ayah}} </td>
-                        <td colspan="2"> {{$dataKartuKeluarga->nama_ibu}} </td>
+                        <td colspan="2"> {{$dataKartuKeluarga->datakeluarga->nama_ayah}} </td>
+                        <td colspan="2"> {{$dataKartuKeluarga->datakeluarga->nama_ibu}} </td>
                     <td>{{$dataKartuKeluarga->jemaat_nomor_stambuk}}</td>
                     <td>
                         @if($dataKartuKeluarga->jemaat_tanggal_status != null){{$$dataKartuKeluarga->jemaat_tanggal_status->formatLocalized('%d %B %Y')}}
@@ -313,17 +313,36 @@
             @endif
         </tbody>
     </table>
-    @php
-        $mytime = Carbon\Carbon::now();
-    @endphp
-    <div class="row" style="margin-left:35px;">
-        <p style="font-size:11px; text-transform:none"> Dikeluarkan tanggal : {{ $mytime->formatLocalized('%d %B %Y')}} <br>
-        Keterangan : <br>
-        -  Lembar 1 : Untuk Kepala Keluarga yang bersangkutan (Warna Kuning) <br>
-        -  Lembar 2 : Untuk BPMJ/sekretaris Jemaat (Warna Putih) <br>
-        -  Lembar 3 : Untuk Database (Warna Biru) <br>
-        -  Lembar 4 : Untuk SNK Lingkungan (Warna Merah)
-        </p>
+    <div class="row" style="margin-left:35px;font-size:11px; text-transform:none">
+        <div class="col-md-4">
+            <p> Dikeluarkan tanggal : 10 November 2020 <br>
+            Keterangan : <br>
+            -  Lembar 1 : Untuk Kepala Keluarga yang bersangkutan (Warna Kuning) <br>
+            -  Lembar 2 : Untuk BPMJ/sekretaris Jemaat (Warna Putih) <br>
+            -  Lembar 3 : Untuk Database (Warna Biru) <br>
+            -  Lembar 4 : Untuk SNK Lingkungan (Warna Merah)
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p> 
+                <br>
+                Keterangan Nomor Stambuk : <br>
+                - Digit 1 - 4 &nbsp;&nbsp;: Tahun Lahir <br>
+                - Digit 5 - 6 &nbsp;&nbsp;: Bulan Lahir <br>
+                - Digit 7 - 8 &nbsp;&nbsp;: Tanggal Lahir <br>
+                - Digit 9 - 12 : Tahun Baptis
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p> 
+                <br>
+                <br>
+                - Digit 13 - 14 : Bulan Baptis <br>
+                - Digit 15 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Jenis Kelamin <br>
+                - Digit 16 - 18 : Nomor Urut
+            </p>
+        </div>
+        
     </div>
 
     <div class="row" id="fixed">

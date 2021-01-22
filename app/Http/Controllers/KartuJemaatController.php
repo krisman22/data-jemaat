@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use PDF;
 use App\NomorKartu;
 use Storage;
+use File;
+use ZipArchive;
 
 class KartuJemaatController extends Controller
 {
@@ -26,7 +28,9 @@ class KartuJemaatController extends Controller
                         ->where('jemaat_status_aktif','t')
                         ->get();
 
-        return view('pages.kartujemaat.kartujemaat', compact('datajemaats'));
+        $namaLingkungan = master_lingkungan::orderBy('nomor_lingkungan', 'ASC')->get()->groupBy('nama_lingkungan');
+
+        return view('pages.kartujemaat.kartujemaat', compact('datajemaats','namaLingkungan'));
     }
 
     public function show(data_jemaat $data_jemaat)
@@ -120,16 +124,33 @@ class KartuJemaatController extends Controller
         return $pdf->download($name);
     }
 
-    public function downloadZip()
+    public function downloadZip(Request $request)
     {
-        // set_time_limit(300);
-        $dataAllKk = data_jemaat::where('jemaat_kk_status', '=', true)
+        set_time_limit(300);
+        $namaLingkungan = request('lingkungan');
+
+        $dataAllKk = data_jemaat::with('lingkungan')
+                        ->whereHas('lingkungan', function($q) use ($namaLingkungan){
+                            $q->where('nama_lingkungan', $namaLingkungan);
+                        })
+                        ->where('jemaat_kk_status', '=', true)
                         ->where('jemaat_status_aktif','t')
                         ->get();
 
         foreach($dataAllKk as $data_jemaat){
             $idparent = $data_jemaat->id;
-            $nomor_kartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first()->nomor_kartu ?? null;
+            $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
+            $lastId = NomorKartu::orderBy('id', 'desc')->first();
+            if($isNomorKartu == null){
+                $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
+                $nomor = new NomorKartu;
+                $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
+                $nomor->nomor_kartu = $nomor_kartu;
+                $nomor->save();
+            }
+            else{
+                $nomor_kartu = $isNomorKartu->nomor_kartu;
+            }
 
             $dataKartuKeluargas = data_jemaat::with('datakeluarga')
                 ->where('id_parent', '=', $idparent)
@@ -144,8 +165,26 @@ class KartuJemaatController extends Controller
             $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
                 compact('data_jemaat','dataKartuKeluargas','nomor_kartu'))
                     ->setPaper($customPaper, 'landscape');
-            Storage::put('public/kartu-keluarga/'.$name, $pdf->output());
+            Storage::put('public/kartu-keluarga/'.$namaLingkungan.'/'.$name, $pdf->output());
         }
+
+        $zip = new ZipArchive;
+   
+        $fileName = $namaLingkungan.'-kartu-jemaat.zip';
+   
+        if ($zip->open(storage_path('app/public/kartu-keluarga/' . $fileName), ZipArchive::CREATE) === TRUE)
+        {
+            $files = Storage::files(storage_path('app/public/kartu-keluarga/' . $namaLingkungan));
+   
+            foreach ($files as $key => $value) {
+                $relativeNameInZipFile = basename($value);
+                $zip->addFile($value, $relativeNameInZipFile);
+            }
+             
+            $zip->close();
+        }
+    
+        return response()->download(storage_path('app/public/kartu-keluarga/' . $fileName));
     }
     
 }

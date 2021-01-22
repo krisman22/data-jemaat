@@ -41,6 +41,7 @@
                             <table id="table" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Nama</th>
                                         <th>Nama Alias</th>
                                         <th>Nomor Stambuk</th>
@@ -52,6 +53,7 @@
                                 <tbody>
                                     @foreach ($datajemaats as $datajemaat)
                                     <tr>
+                                        <td></td>
                                         <td>{{ $datajemaat->jemaat_nama}}</td>
                                         <td>{{ $datajemaat->jemaat_nama_alias}}</td>                                        
                                         <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
@@ -86,18 +88,27 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('#table').DataTable( {
+        var table = $('#table').DataTable( {
             "columnDefs": [
-                { "width": "22%", "targets": 0 },
-                { "width": "18%", "targets": 1 },
+                { "width": "2%", "targets": 0 },
+                { "width": "22%", "targets": 1 },
                 { "width": "17%", "targets": 2 },
-                { "width": "15%", "targets": 3 },
-                { "width": "13%", "className": "text-right", "targets": 4 },
-                { "width": "15%", "targets": 5 },
+                { "width": "16%", "targets": 3 },
+                { "width": "15%", "targets": 4 },
+                { "width": "13%", "className": "text-right", "targets": 5 },
+                { "width": "15%", "targets": 6 },
             ],
             "scrollX": true,
             "scrollCollapse": true,
+            "pageLength" : 25,
+            "order": [[ 1, "asc" ]]
         });
+        
+        table.on( 'order.dt search.dt', function () {
+            table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
     });
 </script>
 @endsection

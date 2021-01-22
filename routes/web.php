@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     
     Route::get('/kartu-jemaat', 'KartuJemaatController@index')->name('kartujemaat');
-    Route::get('/kartu-jemaat/download-all', 'KartuJemaatController@downloadZip')->name('download.all');
+    Route::post('/kartu-jemaat/download-all', 'KartuJemaatController@downloadZip')->name('download.all');
     Route::get('/kartu-jemaat/{data_jemaat}', 'KartuJemaatController@show')->name('lihatdatakk');
     Route::get('/kartu-jemaat/cetak-kartu/{data_jemaat}', 'KartuJemaatController@cetak_pdf')->name('cetakpdf');
 
