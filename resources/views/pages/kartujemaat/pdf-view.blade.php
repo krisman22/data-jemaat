@@ -67,8 +67,8 @@
             transform: scale(1.13, 2.4);
         }
         .logo{
-            width: 100px;
-            height: 100px;
+            width: 70px;
+            height: 105px;
             margin: 0 0 0 40px;
         }
 
@@ -84,7 +84,7 @@
             text-align: center;
         }
         #bluehead{
-            background-color: rgba(204, 204, 204, 0.822);
+            background-color: rgba(146, 145, 145, 0.678);
         }
         #bluehead td{
             text-align: center;
@@ -109,40 +109,40 @@
 {{-- <div class="col-md-12"> --}}
     <div class="row">
         <div class="col-md-3">
-            <img  src="img/logo-bnkp.jpg" class="logo" alt="">
+            <img  src="img/logo-bnkp-pdf.jpg" class="logo" alt="">
         </div>
         <div class="col-md-6" style="text-align:center">
             <h1 style="margin-left:0.4cm; margin-top:0px; padding-top:0px">KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1> <br>
-            <h2 style="font-size: 18pt; font-weight:bold; text-align:center">NOMOR : {{$nomor_kartu}}</h2>
+            <h2 style="font-size: 18pt; font-weight:bold; text-align:center; margin-top:5px">NOMOR : {{$nomor_kartu}}</h2>
         </div>
     </div>
 
     <div class=row style="clear: both;">
         <div class="col-md-3" style="height:20px; width: 230px; padding-left:35px;">
-            <h5 style="font-size:11px; margin-top:5px">NAMA KEPALA KELUARGA </h5> <br>
+            <h5 style="font-size:11px; margin-top:5px; ">NAMA KEPALA KELUARGA </h5> <br>
         </div>
         <div class="col-md-5" style="height:20px; padding-left:1px;">
-            <h5 style="font-size:11px; margin-top:5px">: {{$data_jemaat->jemaat_nama}} </h5> <br>
+            <h5 style="font-size:10pt; margin-top:5px; font-weight:900"><span style="font-weight:normal">:</span> {{$data_jemaat->jemaat_nama}} </h5> <br>
         </div>
         <div class="col-md-1" style="height:20px; width:137px; padding-left:30px;">
-            <h5 style="font-size:11px; margin-top:5px">LINGKUNGAN NOMOR</h5> <br>
+            <h5 style="font-size:11px; margin-top:5px; ">LINGKUNGAN NOMOR</h5> <br>
         </div>
         <div class="col-md-3" style="height:20px;">
-            <h5 style="font-size:11px; margin-top:5px">: {{$data_jemaat->id_lingkungan}} {{$data_jemaat->lingkungan->nama_lingkungan}}</h5> <br>
+            <h5 style="font-size:11px; margin-top:5px; ">: {{$data_jemaat->id_lingkungan}} {{$data_jemaat->lingkungan->nama_lingkungan}}</h5> <br>
         </div>
     </div>
     <div class="row" style="clear: both;">
         <div class="col-md-3" style="height:20px; width: 230px; padding-left:35px;">
-            <h5 style="font-size:11px; margin-top:0px">ALAMAT LENGKAP/DESA/LURAH</h5> <br>
+            <h5 style="font-size:11px; margin-top:0px; ">ALAMAT LENGKAP/DESA/LURAH</h5> <br>
         </div>
         <div class="col-md-5" style="height:20px; padding-left:1px;">
-            <h5 style="font-size:11px; margin-top:0px">: {{$data_jemaat->jemaat_alamat_rumah}}</h5> <br>
+            <h5 style="font-size:11px; margin-top:0px; ">: {{$data_jemaat->jemaat_alamat_rumah}}</h5> <br>
         </div>
         <div class="col-md-1" style="height:20px; width:137px; padding-left:30px;">
-            <h5 style="font-size:11px; margin-top:0px;">SNK Lingkungan</h5> <br>
+            <h5 style="font-size:11px; margin-top:0px; ">SNK Lingkungan</h5> <br>
         </div>
         <div class="col-md-3" style="height:20px;">
-            <h5 style="font-size:11px; margin-top:0px;">: SNK.{{$data_jemaat->lingkungan->nama_snk}}</h5> <br>
+            <h5 style="font-size:11px; margin-top:0px; ">: SNK.{{$data_jemaat->lingkungan->nama_snk}}</h5> <br>
         </div>
     </div>
   
