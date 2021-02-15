@@ -32,7 +32,8 @@ class DataJemaatExport implements FromCollection, WithHeadings, WithMapping, Wit
         return [
             $this->i++,
             $datajemaat->jemaat_nomor_stambuk .' ',
-            $datajemaat->jemaat_nama,
+            $this->namaGelar($datajemaat->jemaat_nama, $datajemaat->jemaat_gelar_depan, $datajemaat->jemaat_gelar_belakang),
+            $datajemaat->jemaat_nama_alias,
             $datajemaat->statusdikeluarga->nama_status_dikeluarga,
             $datajemaat->lingkungan->nomor_lingkungan .' - '. $datajemaat->lingkungan->nama_lingkungan,
             $datajemaat->jemaat_jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan',
@@ -56,6 +57,7 @@ class DataJemaatExport implements FromCollection, WithHeadings, WithMapping, Wit
             'NO',
             'NOMOR STAMBUK',
             'NAMA JEMAAT',
+            'NAMA ALIAS',
             'STATUS DIKELUARGA',
             'LINGKUNGAN',
             'JENIS KELAMIN',
@@ -102,6 +104,21 @@ class DataJemaatExport implements FromCollection, WithHeadings, WithMapping, Wit
         }
         elseif($value == 4){
             return "Janda";
+        }
+    }
+    public function namaGelar($nama, $gelarDepan, $gelarBelakang)
+    {
+        if($gelarDepan != null && $gelarBelakang != null){
+            return $gelarDepan . '. ' .$nama . ', ' . $gelarBelakang; 
+        }
+        elseif($gelarDepan == null && $gelarBelakang != null){
+            return $nama . ', ' . $gelarBelakang; 
+        }
+        elseif($gelarDepan != null && $gelarBelakang == null){
+            return $gelarDepan . '. ' .$nama; 
+        }
+        else{
+            return $nama;
         }
     }
 }

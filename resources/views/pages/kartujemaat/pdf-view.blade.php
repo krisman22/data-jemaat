@@ -54,7 +54,7 @@
 
         #fixed {
             position: fixed;
-            bottom: 85px;
+            bottom: 98px;
             /* border : 1px solid greenyellow; */
         }
         

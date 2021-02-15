@@ -174,7 +174,7 @@ class KartuJemaatController extends Controller
    
         if ($zip->open(storage_path('app/public/kartu-keluarga/' . $fileName), ZipArchive::CREATE) === TRUE)
         {
-            $files = Storage::files(storage_path('app/public/kartu-keluarga/' . $namaLingkungan));
+            $files = File::files(storage_path('app/public/kartu-keluarga/' . $namaLingkungan));
    
             foreach ($files as $key => $value) {
                 $relativeNameInZipFile = basename($value);
@@ -183,7 +183,6 @@ class KartuJemaatController extends Controller
              
             $zip->close();
         }
-    
         return response()->download(storage_path('app/public/kartu-keluarga/' . $fileName));
     }
     
