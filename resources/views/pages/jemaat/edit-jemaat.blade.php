@@ -424,7 +424,7 @@
                                                                             <select id="nameid" class="form-control" name="id_parent" style="padding:0px;">
                                                                                 <option disabled selected></option>
                                                                                 @foreach($dataKK as $data)
-                                                                                    <option @if($data->id_parent == $data_jemaat->id_parent) selected="" @endif value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}}</option>
+                                                                                    <option @if($data->id_parent == $data_jemaat->id_parent) selected="" @endif value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}} ({{$data->jemaat_nama_alias ?? "-"}})</option>
                                                                                 @endforeach                                                                        
                                                                             </select>
                                                                         </div>
