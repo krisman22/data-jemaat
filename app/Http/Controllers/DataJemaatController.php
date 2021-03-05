@@ -441,6 +441,18 @@ class DataJemaatController extends Controller
             'nama_ibu' => request('namaIbu'),
         ]);
 
+        /**
+         * Anggota keluarga ikut dipindahkan ketika Kepala Keluarga berpindah lingkungan
+         */
+        if($data_jemaat->jemaat_kk_status == true){
+            $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
+            foreach($dataKeluargas as $dataKeluarga){
+                $dataKeluarga->update([
+                    'id_lingkungan' => request('id_lingkungan'),
+                ]);
+            } 
+        }
+
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
     }
 
