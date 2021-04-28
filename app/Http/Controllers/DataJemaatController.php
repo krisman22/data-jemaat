@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Exports\DataJemaatExport;
 use Maatwebsite\Excel\Facades\Excel;
+use DataTables;
 
 class DataJemaatController extends Controller
 {
@@ -20,11 +21,29 @@ class DataJemaatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public static function index()
+    public static function index(Request $request)
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','t')->orderBy('id', 'DESC')->get();
+        $datajemaats = data_jemaat::where('jemaat_status_aktif','t');
 
-        return view('pages.jemaat.data-jemaat', compact('datajemaats'));
+        if($request->ajax()){  
+            return DataTables::of($datajemaats)
+                ->editColumn('lingkungan', function($datajemaats) { 
+                    return $datajemaats->id_lingkungan . ' - ' . $datajemaats->lingkungan->nama_lingkungan ;
+                })
+                ->addColumn('jemaat_status_aktif', function($datajemaats) { return '<span class="label label-primary">Aktif</span>'; })
+                ->addColumn('action', function($data){
+                    $button = '<a href="'. Route('profiledetail', $data->id) .'" target="_blank" class="btn btn-icon btn-sm btn-primary" id="btnDetail" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fa fa-eye" style="width: 20px;"></i>Lihat</a>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<a href="'. Route('jemaateditprofile', $data->id) .'" target="_blank" class="btn btn-icon btn-sm btn-warning" id="btnEdit" data-toggle="tooltip" data-placement="top" title="Edit"><i i class="fa fa-edit" style="width:20px"></i>Edit</a>';
+                    return $button;
+                })
+                ->rawColumns(['action','jemaat_status_aktif'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+            
+        return view('pages.jemaat.data-jemaat');
+
     }
 
     /**
