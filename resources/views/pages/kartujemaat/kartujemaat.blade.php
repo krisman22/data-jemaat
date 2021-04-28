@@ -33,12 +33,12 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-info btn-sm" type="submit">Download Per Lingkungan</button>
+                                <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-download"></i> Download</button>
                             </div>
                         </form>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div class="table-responsive">
                             <table id="tableKartuJemaat" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                     <tr>
@@ -49,28 +49,9 @@
                                         <th>Nomor Kartu</th>
                                         <th>No Ling</th>
                                         <th>Lingkungan </th>
-                                        <th>Status Jemaat</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($datajemaats as $datajemaat)
-                                        <tr>
-                                            <td></td>
-                                            <td>{{ $datajemaat->jemaat_nama}}</td>
-                                            <td>{{ $datajemaat->jemaat_nama_alias}}</td>                                        
-                                            <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
-                                            <td>{{ $datajemaat->kartukeluarga->nomor_kartu ?? null }}</td>
-                                            <td>{{ $datajemaat->lingkungan->nomor_lingkungan }}</td>
-                                            <td>{{ $datajemaat->lingkungan->nama_lingkungan}}</td>
-                                            <td> @if($jemaat_kk_status=true)Kepala Keluarga @endif</td>
-                                            <td style="text-align: center">
-                                                <a href={{ route('lihatdatakk', $datajemaat)  }} target="_blank"><button type="button" class="btn btn-primary btn-sm">Lihat Data</button></a>
-                                                <a href={{ route('cetakpdf', $datajemaat)  }} target="_blank"><button type="button" class="btn btn-success btn-sm">Cetak Kartu</button></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -84,27 +65,51 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        var table = $('#tableKartuJemaat').DataTable( {
-            "columnDefs": [
-                { "width": "2%", "targets": 0, "ordering" : false },
-                { "width": "18%", "targets": 1 },
-                { "width": "15%", "targets": 2 },
-                { "width": "15%", "targets": 3 },
-                { "width": "6%", "targets": 4 },
-                { "width": "4%", "targets": 5 },
-                { "width": "10%", "targets": 6 },
-                { "width": "10%", "targets": 7 },
-                { "width": "20%", "targets": 8 },
-            ],
-            "pageLength" : 25,
-            "order": [[ 1, "asc" ]]
-        });
+        var table = $('#tableKartuJemaat').DataTable({
+            scrollX : true,
+            pageLength : 25,
+            processing: true,
+            serverSide: true, //aktifkan server-side 
+            ajax: {
+                url: "{{ route('kartujemaat') }}",
+                type: 'GET',
+            },
+            columns: [{
+                    data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false,
+                },
+                {
+                    data: 'jemaat_nama',
+                    name: 'jemaat_nama'
+                },
+                {
+                    data: 'jemaat_nama_alias',
+                    name: 'jemaat_nama_alias'
+                },
+                {
+                    data: 'jemaat_nomor_stambuk',
+                    name: 'jemaat_nomor_stambuk'
+                },
+                {
+                    data: 'nomor_kartu',
+                    name: 'kartukeluarga.nomor_kartu',
+                },
+                {
+                    data: 'id_lingkungan',
+                    name: 'id_lingkungan'
+                },
+                {
+                    data: 'lingkungan',
+                    name: 'lingkungan.nama_lingkungan'
+                },
+                {
+                    data: 'action', name: 'action', orderable: false, searchable: false,
+                },
 
-        table.on( 'order.dt search.dt', function () {
-            table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                cell.innerHTML = i+1;
-            } );
-        } ).draw();
+            ],
+            order: [
+                [1, 'asc']
+            ],
+        });
     });
 </script>
 @endsection

@@ -14,6 +14,7 @@ use App\NomorKartu;
 use Storage;
 use File;
 use ZipArchive;
+use DataTables;
 
 class KartuJemaatController extends Controller
 {
@@ -22,15 +23,37 @@ class KartuJemaatController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public static function index()
+    public static function index(Request $request)
     {
-        $datajemaats = data_jemaat::where('jemaat_kk_status', '=', true)
-                        ->where('jemaat_status_aktif','t')
-                        ->get();
+        $datajemaats = data_jemaat::with('pekerjaan','lingkungan','kartukeluarga')
+            ->where('jemaat_kk_status', '=', true)
+            ->where('jemaat_status_aktif','t');
+        
+        if($request->ajax()){  
+            return DataTables::of($datajemaats)
+                ->editColumn('lingkungan', function($datajemaats) { 
+                    return $datajemaats->lingkungan->nama_lingkungan ;
+                })
+                ->editColumn('pekerjaan', function($datajemaats) {
+                    return $datajemaats->pekerjaan->jenis_pekerjaan;
+                })
+                ->editColumn('nomor_kartu', function($datajemaats){
+                    return $datajemaats->kartukeluarga->nomor_kartu ?? "0";
+                })
+                ->addColumn('action', function($data){
+                    $button = '<a href="'. Route('lihatdatakk', $data) .'" target="_blank" class="btn btn-icon btn-sm btn-primary" id="btnDetail" data-toggle="tooltip" data-placement="top" title="Lihat" style="padding:5px"><i class="fa fa-eye" style="width: 20px;"></i>Lihat</a>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<a href="'. Route('cetakpdf', $data) .'" target="_blank" class="btn btn-icon btn-sm btn-success" id="btnEdit" data-toggle="tooltip" data-placement="top" title="Edit" style="padding:5px"><i i class="fa fa-print" style="width:20px"></i>Cetak</a>';
+                    return $button;
+                })
+            ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
 
         $namaLingkungan = master_lingkungan::orderBy('nomor_lingkungan', 'ASC')->get()->groupBy('nama_lingkungan');
 
-        return view('pages.kartujemaat.kartujemaat', compact('datajemaats','namaLingkungan'));
+        return view('pages.kartujemaat.kartujemaat', compact('namaLingkungan'));
     }
 
     public function show(data_jemaat $data_jemaat)
