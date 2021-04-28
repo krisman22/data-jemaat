@@ -14,7 +14,7 @@
                     </div>
                     <div class="row mg-b-15">
                         <div class="col-md-4">
-                            <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}"><i class="fas fa-download"></i> Export Data Jemaat</a>
+                            <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}"><i class="fas fa-download"></i> Export Data</a>
                         </div>
                     </div>
                     <div class="sparkline13-graph">

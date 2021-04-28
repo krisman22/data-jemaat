@@ -133,7 +133,7 @@
                                 <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Tambah Jemaat" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Tambah Jemaat</span></a></li>
                                 {{-- <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li> --}}
                                 {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
-                                <li class="{{Request::is("data-kepalakeluarga")?'active':''}}"><a title="Data Kepala Keluarga" href={{asset('/data-kepalakeluarga')}}><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
+                                <li class="{{Request::is("data-kepala-keluarga")?'active':''}}"><a title="Data Kepala Keluarga" href={{asset('/data-kepala-keluarga')}}><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
                             </ul>
                         </li>
                         <li class="{{Request::is("kartu-jemaat")?'active':''}}" >
@@ -268,6 +268,7 @@
                                             <ul class="collapse dropdown-header-top">
                                                 <li><a href="{{asset('/data-jemaat')}}">Data Jemaat</a></li>
                                                 <li><a href="{{asset('/tambah-jemaat')}}">Tambah Jemaat</a></li>
+                                                <li><a href="{{asset('/data-kepala-keluarga')}}">Kepala Keluarga</a></li>
                                             </ul>
                                         </li>
                                         <li class="{{Request::is("kartu-jemaat")?'active':''}}" >

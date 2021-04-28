@@ -14,40 +14,24 @@
                     </div>
                     <div class="row mg-b-15">
                         <div class="col-md-4">
-                            <a class="btn btn-success btn-sm" href="{{ route('export.dataKK') }}">Export Data Kepala Keluarga</a>
+                            <a class="btn btn-success btn-sm" href="{{ route('export.dataKK') }}"><i class="fas fa-download"></i> Export Data</a>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright">
-                            <table id="tableKartuJemaat" class="table table-striped table-bordered" style="width:100%">
+                        <div class="table-responsive">
+                            <table id="tableKepalaKeluarga" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Nama</th>
                                         <th>Nama Alias</th>
                                         <th>Nomor Stambuk</th>
                                         <th>Pekerjaan</th>
                                         <th>Nomor Lingkungan</th>
                                         <th>Nama Lingkungan </th>
-                                        <th>Status Jemaat</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($datajemaats as $datajemaat)
-                                        <tr>
-                                            <td>{{ $datajemaat->jemaat_nama}}</td>
-                                            <td>{{ $datajemaat->jemaat_nama_alias}}</td>                                        
-                                            <td>{{ $datajemaat->jemaat_nomor_stambuk}}</td>
-                                            <td>{{$datajemaat->pekerjaan->jenis_pekerjaan}}</td>
-                                            <td>{{ $datajemaat->lingkungan->nomor_lingkungan}}</td>
-                                            <td>{{ $datajemaat->lingkungan->nama_lingkungan}}</td>
-                                            <td> @if($jemaat_kk_status=true)Kepala Keluarga @endif</td>
-                                            <td style="text-align: center">
-                                                <a href={{ route('profiledetail', $datajemaat) }} target="_blank"><button type="button" class="btn btn-primary btn-sm">Lihat Detail</button></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -61,16 +45,50 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('#tableKartuJemaat').DataTable( {
-            "columnDefs": [
-                { "width": "20%", "targets": 0 },
-                { "width": "16%", "targets": 1 },
-                { "width": "16%", "targets": 2 },
-                { "width": "16%", "targets": 3 },
-                { "width": "10%", "targets": 4 },
-                { "width": "10%", "targets": 5 },
-                { "width": "12%", "targets": 6 },
-            ]
+        var table = $('#tableKepalaKeluarga').DataTable({
+            scrollX : true,
+            pageLength : 25,
+            processing: true,
+            serverSide: true, //aktifkan server-side 
+            ajax: {
+                url: "{{ route('data-kk') }}",
+                type: 'GET',
+            },
+            columns: [{
+                    data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false,
+                },
+                {
+                    data: 'jemaat_nama',
+                    name: 'jemaat_nama'
+                },
+                {
+                    data: 'jemaat_nama_alias',
+                    name: 'jemaat_nama_alias'
+                },
+                {
+                    data: 'jemaat_nomor_stambuk',
+                    name: 'jemaat_nomor_stambuk'
+                },
+                {
+                    data: 'pekerjaan',
+                    name: 'pekerjaan.jenis_pekerjaan'
+                },
+                {
+                    data: 'id_lingkungan',
+                    name: 'id_lingkungan'
+                },
+                {
+                    data: 'lingkungan',
+                    name: 'lingkungan.nama_lingkungan'
+                },
+                {
+                    data: 'action', name: 'action', orderable: false, searchable: false,
+                },
+
+            ],
+            order: [
+                [1, 'asc']
+            ],
         });
     });
 </script>

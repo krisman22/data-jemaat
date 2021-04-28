@@ -27,8 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-jemaat/export','DataJemaatController@exportDataJemaat')->name('export.datajemaat');
     
 
-    Route::get('/data-kepalakeluarga', 'KepalaKeluargaController@index')->name('data-kk');
-    Route::get('/data-kepalakeluarga/export','KepalaKeluargaController@exportDataKK')->name('export.dataKK');
+    Route::get('/data-kepala-keluarga', 'KepalaKeluargaController@index')->name('data-kk');
+    Route::get('/data-kepala-keluarga/export','KepalaKeluargaController@exportDataKK')->name('export.dataKK');
 
     Route::get('/import-data','ImportExportController@importIndex')->name('import.index');
     Route::post('/import','ImportExportController@import')->name('import.datajemaat');
