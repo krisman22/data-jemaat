@@ -384,11 +384,11 @@ class DataJemaatController extends Controller
         }
         $tglbergabung = date('Y-m-d', strtotime($tglbergabung));
 
-        $curentTglLahir = $data_jemaat->jemaat_tanggal_lahir;
-        $curentTglBaptis = $data_jemaat->jemaat_tanggal_baptis;
-
-        if($tglLahir != $curentTglLahir || $tglbaptis != $curentTglBaptis)
-        {
+        $oldTanggalLahir = date('Y-m-d', strtotime($data_jemaat->jemaat_tanggal_lahir));
+        $oldTanggalBaptis = date('Y-m-d', strtotime($data_jemaat->jemaat_tanggal_baptis));
+        $oldJenisKelamin = $data_jemaat->jemaat_jenis_kelamin;
+        
+        if($tglLahir != $oldTanggalLahir || $tglbaptis != $oldTanggalBaptis || request('jemaat_jenis_kelamin') != $oldJenisKelamin){
             $tls = substr($tglLahir, 0, 4) . substr($tglLahir, 5, 2) . substr($tglLahir, 8, 2);
             if(request('jemaat_tanggal_baptis') != null){
                 $baps = substr($tglbaptis, 0, 4) . substr($tglbaptis, 5, 2);
