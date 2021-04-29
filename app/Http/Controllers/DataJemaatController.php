@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Exports\DataJemaatExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
+use App\RiwayatInaktif;
 
 class DataJemaatController extends Controller
 {
@@ -493,25 +494,39 @@ class DataJemaatController extends Controller
 
     public function updateStatusPindah(Request $request, $id)
     {
-        // dd("hello");
-        $data_jemaat = data_jemaat::find($id);
-        $data_jemaat->update([
-            'jemaat_keterangan_status' => "Pindah",
-            'jemaat_status_aktif' => 'f',
-            'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
-        ]);
-
-        if($data_jemaat->jemaat_kk_status == true){
-            $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
-            foreach($dataKeluargas as $dataKeluarga){
-                $dataKeluarga->update([
+        DB::beginTransaction();
+        try {
+            $data_jemaat = data_jemaat::find($id);
+            if($data_jemaat->jemaat_kk_status == true){
+                $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
+                foreach($dataKeluargas as $dataKeluarga){
+                    $dataKeluarga->update([
+                        'jemaat_status_aktif' => 'f',
+                    ]);
+                    RiwayatInaktif::create([
+                        'no_stambuk' => $dataKeluarga->jemaat_nomor_stambuk,
+                        'jemaat_keterangan_status' => "Pindah",
+                        'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
+                        'jemaat_pindah_ke' => request('jemaat_pindah_ke')
+                    ]);
+                } 
+            }
+            else{
+                $data_jemaat->jemaat_status_aktif = 'f';
+                $data_jemaat->save();
+                RiwayatInaktif::create([
+                    'no_stambuk' => $data_jemaat->jemaat_nomor_stambuk,
                     'jemaat_keterangan_status' => "Pindah",
-                    'jemaat_status_aktif' => 'f',
                     'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
+                    'jemaat_pindah_ke' => request('jemaat_pindah_ke')
                 ]);
-            } 
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+            // return back()->with(['error' => 'Error ada kesalahan perubahan data']);
         }
-
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
     }
 

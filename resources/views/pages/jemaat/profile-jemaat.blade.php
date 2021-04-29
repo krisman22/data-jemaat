@@ -88,6 +88,13 @@
                                                                     <strong>{{ $message }}</strong>
                                                                 </div>
                                                             </div>
+                                                        @elseif ($message = Session::get('error'))
+                                                            <div class="col-md-12">
+                                                                <div class="alert alert-danger alert-block">
+                                                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                    <strong>{{ $message }}</strong>
+                                                                </div>
+                                                            </div>
                                                         @endif
                                                         <div class="col-md-12">
                                                             <div class="row">
@@ -177,7 +184,19 @@
                                                                                     </div>
                                                                                     <div class="col-md-8" style="padding-left:0">
                                                                                         <div class="form-group">
-                                                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" value="@if($data_jemaat->jemaat_tanggal_status != null) {{$data_jemaat->jemaat_tanggal_status->format('Y-m-d')}} @endif" placeholder="yyyy-mm-dd" required>
+                                                                                            <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" placeholder="yyyy-mm-dd" required autocomplete="off">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4" style="padding-right:0">
+                                                                                        <div class="form-group">
+                                                                                            <input style="text-align:right" type="text" class="form-control" value="Pindah Ke" readonly="readonly">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-8" style="padding-left:0">
+                                                                                        <div class="form-group">
+                                                                                            <input class="form-control" type="text" name="jemaat_pindah_ke" autocomplete="off">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
