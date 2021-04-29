@@ -26,9 +26,11 @@ class JemaatInAktifController extends Controller
     
     public static function pindah()
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','f')
-            ->where('jemaat_keterangan_status','pindah')
-            ->orderBy('id', 'DESC')->get();
+        $datajemaats = data_jemaat::with('riwayatinaktif')
+            ->whereHas('riwayatinaktif', function ($query) {
+                $query->where('jemaat_keterangan_status', 'pindah');
+            })
+            ->where('jemaat_status_aktif','f')->get();
 
         return view('pages.jemaatinaktif.pindah', compact('datajemaats'));
     }

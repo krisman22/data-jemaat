@@ -9,7 +9,7 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Data Jemaat</h1>
+                            <h1>Data Jemaat Meninggal</h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
