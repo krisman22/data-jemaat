@@ -39,8 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kartu-jemaat/{data_jemaat}', 'KartuJemaatController@show')->name('lihatdatakk');
     Route::get('/kartu-jemaat/cetak-kartu/{data_jemaat}', 'KartuJemaatController@cetak_pdf')->name('cetakpdf');
 
-    Route::get('/data-jemaatmeninggal', 'JemaatInAktifController@meninggal')->name('datameninggal');
-    Route::get('/data-jemaatpindah', 'JemaatInAktifController@pindah')->name('datapindah');
+    Route::get('/data-jemaat-meninggal', 'JemaatInAktifController@meninggal')->name('datameninggal');
+    Route::get('/data-jemaat-pindah', 'JemaatInAktifController@pindah')->name('datapindah');
 
     Route::get('/laporan','LaporanController@index');
     

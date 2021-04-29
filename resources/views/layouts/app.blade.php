@@ -145,8 +145,8 @@
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table fa-fw"></span> <span class="mini-click-non">Jemaat Inaktif</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li class="{{Request::is("data-jemaatmeninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaatmeninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
-                                <li class="{{Request::is("data-jemaatpindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaatpindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
+                                <li class="{{Request::is("data-jemaat-meninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaat-meninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
+                                <li class="{{Request::is("data-jemaat-pindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaat-pindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
                             </ul>
                         </li>
                         <li>
@@ -280,8 +280,8 @@
                                         <li>
                                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table"></span> <span class="mini-click-non">Jemaat Inaktif</span></a>
                                             <ul class="submenu-angle" aria-expanded="false">
-                                                <li class="{{Request::is("data-jemaatmeninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaatmeninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
-                                                <li class="{{Request::is("data-jemaatpindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaatpindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
+                                                <li class="{{Request::is("data-jemaat-meninggal") ? 'active' : ''}}"><a href="{{asset('/data-jemaat-meninggal')}}"><span class="mini-sub-pro">Meninggal</span></a></li>                            
+                                                <li class="{{Request::is("data-jemaat-pindah") ? 'active' : ''}}"><a href="{{asset('/data-jemaat-pindah')}}"><span class="mini-sub-pro">Pindah</span></a></li>                            
                                             </ul>
                                         </li>
                                         <li>

@@ -58,5 +58,9 @@ class data_jemaat extends Model
     {
         return $this->belongsTo('\App\NomorKartu', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
+    public function riwayatinaktif()
+    {
+        return $this->belongsTo('\App\RiwayatInaktif', 'jemaat_nomor_stambuk', 'no_stambuk');
+    }
     
 }

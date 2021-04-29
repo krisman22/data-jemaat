@@ -15,10 +15,12 @@ class JemaatInAktifController extends Controller
     //
     public static function meninggal()
     {
-        $datajemaats = data_jemaat::where('jemaat_status_aktif','f')
-            ->where('jemaat_keterangan_status','meninggal')
-            ->orderBy('id', 'DESC')->get();
-
+        $datajemaats = data_jemaat::with('riwayatinaktif')
+            ->whereHas('riwayatinaktif', function ($query) {
+                $query->where('jemaat_keterangan_status', 'meninggal');
+            })
+            ->where('jemaat_status_aktif','f')->get();
+        
         return view('pages.jemaatinaktif.meninggal', compact('datajemaats'));
     }
     
