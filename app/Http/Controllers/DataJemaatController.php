@@ -524,70 +524,77 @@ class DataJemaatController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
-            // return back()->with(['error' => 'Error ada kesalahan perubahan data']);
+            return back()->with(['error' => 'Error ada kesalahan perubahan data']);
         }
         return back()->with(['update' => 'Data Jemaat berhasil di ubah']);
     }
 
     public function updateStatusMeninggal(Request $request, $id)
     {
-        // dd("hello");
-        $data_jemaat = data_jemaat::find($id);
-        $data_jemaat->update([
-            'jemaat_keterangan_status' => "Meninggal",
-            'jemaat_status_aktif' => 'f',
-            'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
-        ]);
+        DB::beginTransaction();
+        try {
+            $data_jemaat = data_jemaat::find($id);
+            $data_jemaat->jemaat_status_aktif = 'f';
+            $data_jemaat->save();
+            RiwayatInaktif::create([
+                'no_stambuk' => $data_jemaat->jemaat_nomor_stambuk,
+                'jemaat_keterangan_status' => "Meninggal",
+                'jemaat_tanggal_status' => request('jemaat_tanggal_status'),
+                'jemaat_tanggal_dikebumikan' => request('jemaat_tanggal_dikebumikan')
+            ]);
 
-        if($data_jemaat->jemaat_status_dikeluarga == 1){
-            $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
-                ->where('jemaat_status_dikeluarga','2')    
-                ->first();
-            
-            if($dataSI->jemaat_jenis_kelamin == 'l'){
-                $dataSI->jemaat_status_perkawinan = 3;
-                $dataSI->save();
+            if($data_jemaat->jemaat_status_dikeluarga == 1){
+                $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
+                    ->where('jemaat_status_dikeluarga','2')    
+                    ->first();
+                
+                if($dataSI->jemaat_jenis_kelamin == 'l'){
+                    $dataSI->jemaat_status_perkawinan = 3;
+                    $dataSI->save();
+                }
+                else{
+                    $dataSI->jemaat_status_perkawinan = 4;
+                    $dataSI->save();
+                }
             }
-            else{
-                $dataSI->jemaat_status_perkawinan = 4;
-                $dataSI->save();
+            else if($data_jemaat->jemaat_status_dikeluarga == 2){
+                $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
+                    ->where('jemaat_status_dikeluarga','1')    
+                    ->first();
+                
+                if($dataSI->jemaat_jenis_kelamin == 'l'){
+                    $dataSI->jemaat_status_perkawinan = 3;
+                    $dataSI->save();
+                }
+                else{
+                    $dataSI->jemaat_status_perkawinan = 4;
+                    $dataSI->save();
+                }
             }
-        }
-        else if($data_jemaat->jemaat_status_dikeluarga == 2){
-            $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
-                ->where('jemaat_status_dikeluarga','1')    
-                ->first();
-            
-            if($dataSI->jemaat_jenis_kelamin == 'l'){
-                $dataSI->jemaat_status_perkawinan = 3;
-                $dataSI->save();
-            }
-            else{
-                $dataSI->jemaat_status_perkawinan = 4;
-                $dataSI->save();
-            }
-        }
 
-        if($data_jemaat->jemaat_kk_status == true){
-            $switchKK = data_jemaat::where('id_parent', $id)
-                ->where('jemaat_status_aktif', 't')
-                ->orderBy('jemaat_status_dikeluarga','asc')
-                ->orderBy('jemaat_tanggal_lahir','desc')
-                ->first();
+            if($data_jemaat->jemaat_kk_status == true){
+                $switchKK = data_jemaat::where('id_parent', $id)
+                    ->where('jemaat_status_aktif', 't')
+                    ->orderBy('jemaat_status_dikeluarga','asc')
+                    ->orderBy('jemaat_tanggal_lahir','desc')
+                    ->first();
+                
+                $switchKK->jemaat_status_dikeluarga = 1;
+                $switchKK->jemaat_kk_status = true;
+                $switchKK->save();
+                
+                $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
+                foreach($dataKeluargas as $dataKeluarga){
+                    $dataKeluarga->id_parent = $switchKK->id;
+                    $dataKeluarga->save();
+                } 
+            }
             
-            $switchKK->jemaat_status_dikeluarga = 1;
-            $switchKK->jemaat_kk_status = true;
-            $switchKK->save();
-            
-            $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
-            foreach($dataKeluargas as $dataKeluarga){
-                $dataKeluarga->id_parent = $switchKK->id;
-                $dataKeluarga->save();
-            } 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with(['error' => 'Error ada kesalahan perubahan data']);
         }
-
-        // return "berhasil";
 
         return back()->with(['update' => 'Data Jemaat berhasil di Update']);
     }

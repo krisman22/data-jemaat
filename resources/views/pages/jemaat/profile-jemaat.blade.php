@@ -222,11 +222,23 @@
                                                                         <div class="modal-body">
                                                                             <h4>Update Status Jemaat - <span style="text-transform: uppercase">{{$data_jemaat->jemaat_nama}}</span> (Meninggal)</h4>
                                                                             <div class="row">
-                                                                                <div class="col-md-4" style="padding-right:0">
-                                                                                    <input style="text-align:right" type="text" class="form-control" value="Tanggal" readonly="readonly">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-md-4" style="padding-right:0">
+                                                                                        <input style="text-align:right" type="text" class="form-control" value="Tanggal Meninggal" readonly="readonly">
+                                                                                    </div>
+                                                                                    <div class="col-md-8" style="padding-left:0">
+                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" autocomplete="off" placeholder="yyyy-mm-dd">
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-md-8" style="padding-left:0">
-                                                                                    <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" value="@if($data_jemaat->jemaat_tanggal_status != null) {{$data_jemaat->jemaat_tanggal_status->format('Y-m-d')}} @endif" placeholder="yyyy-mm-dd">
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-md-4" style="padding-right:0">
+                                                                                        <input style="text-align:right" type="text" class="form-control" value="Tgl Dikebumikan" readonly="readonly">
+                                                                                    </div>
+                                                                                    <div class="col-md-8" style="padding-left:0">
+                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" autocomplete="off" placeholder="yyyy-mm-dd">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
