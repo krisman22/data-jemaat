@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\master_lingkungan;
+use App\data_jemaat;
 
-class DataMasterController extends Controller
+class LingkunganMasterController extends Controller
 {
     public function index()
     {
@@ -13,7 +14,7 @@ class DataMasterController extends Controller
 
         return view('pages.data-master.lingkungan', compact('data_lingkungan'));
     }
-    public function storeLingkungan(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'nomor_lingkungan' => 'required|numeric',
@@ -30,11 +31,21 @@ class DataMasterController extends Controller
         master_lingkungan::updateOrCreate(['nomor_lingkungan' => $request->nomor_lingkungan],
                 ['nama_lingkungan' => $request->nama_lingkungan, 'nama_snk' => $request->nama_snk]);        
    
-        return redirect()->route('datalingkungan')->with( ['data_lingkungan' => datalingkungan()])->with(['success' => 'Data Lingkungan berhasil ditambahkan']);        
+        return back()->with(['success' => 'Data Lingkungan ditambahkan']);        
     }
 
-    static function datalingkungan()
+    public function destroy($id)
     {
-        return master_lingkungan::all();
+        $lingkungan = master_lingkungan::find($id);
+        $checkLingkunganDataJemaat = data_jemaat::where('id_lingkungan', $lingkungan->id)->first();
+
+        if($checkLingkunganDataJemaat){
+            return back()->with(['error' => 'Data Lingkungan terkait dengan data Jemaat']); 
+        }
+        else{
+            $lingkungan->delete();
+        }
+
+        return back()->with(['warning' => 'Data Lingkungan dihapus']); 
     }
 }

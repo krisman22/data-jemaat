@@ -79,7 +79,6 @@
                                                     <!--End of Detail Top -->
 
                                                     <!--Button Navigation -->
-                                                    @if($data_jemaat->jemaat_status_aktif == "t")
                                                     <div class="col-md-12">
                                                         @if ($message = Session::get('update'))
                                                             <div class="col-md-12">
@@ -96,6 +95,9 @@
                                                                 </div>
                                                             </div>
                                                         @endif
+                                                    </div>
+                                                    @if($data_jemaat->jemaat_status_aktif == "t")
+                                                    <div class="col-md-12">
                                                         <div class="col-md-12">
                                                             <div class="row">
                                                                 <div class="col-md-2 col-md-offset-2">
@@ -115,7 +117,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-2">
-                                                                     <a href="#" data-toggle="modal" data-target="#DangerModalalert1">
+                                                                    <a href="#" data-toggle="modal" data-target="#DangerModalalert1">
                                                                         <button type="button" class="btn btn-danger btn-block">Hapus </button>
                                                                     </a>
                                                                 </div>
