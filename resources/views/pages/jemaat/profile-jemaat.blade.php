@@ -198,7 +198,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-8" style="padding-left:0">
                                                                                         <div class="form-group">
-                                                                                            <input class="form-control" type="text" name="jemaat_pindah_ke" autocomplete="off">
+                                                                                            <input class="form-control" type="text" name="jemaat_pindah_ke" autocomplete="off" placeholder="Jemaat/Gereja">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -229,7 +229,7 @@
                                                                                         <input style="text-align:right" type="text" class="form-control" value="Tanggal Meninggal" readonly="readonly">
                                                                                     </div>
                                                                                     <div class="col-md-8" style="padding-left:0">
-                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" autocomplete="off" placeholder="yyyy-mm-dd">
+                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" autocomplete="off" placeholder="yyyy-mm-dd" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -239,7 +239,7 @@
                                                                                         <input style="text-align:right" type="text" class="form-control" value="Tgl Dikebumikan" readonly="readonly">
                                                                                     </div>
                                                                                     <div class="col-md-8" style="padding-left:0">
-                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_status" autocomplete="off" placeholder="yyyy-mm-dd">
+                                                                                        <input class="datepicker form-control" type="text" name="jemaat_tanggal_dikebumikan" autocomplete="off" placeholder="yyyy-mm-dd" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
