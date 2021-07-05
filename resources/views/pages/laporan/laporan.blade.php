@@ -12,13 +12,13 @@
                             <h1>Laporan Rekap Data</h1>
                         </div>
                     </div>
-                    <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright">
-                            <table id="laporan" class="table table-striped table-bordered" style="width:100%">
+                    <div class="table-responsive" style="width:100%">
+                        <div class="datatable-dashv1-list custom-datatable-overright" style="overflow-x: auto;">
+                            <table id="laporan" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="vertical-align:middle" rowspan="2">No. Lingkungan</th>    
-                                        <th style="vertical-align:middle" rowspan="2">Nama Lingkungan</th>    
+                                        <th style="vertical-align:middle" rowspan="2">No. Ling</th>    
+                                        <th style="vertical-align:middle" rowspan="2">Nama Ling</th>    
                                         <th class="text-center" colspan="6">Pendidikan</th>    
                                         <th class="text-center" colspan="6">Pekerjaan</th>    
                                     </tr>

@@ -33,27 +33,28 @@ class HomeController extends Controller
         $thisyear = Carbon::now()->year;
         $year_min1 = $thisyear - 1;
         $year_min2 = $thisyear - 2;
-        $years = ["<2018",$year_min2,$year_min1,$thisyear];
+        // $year_min3 = $thisyear - 3;
+        $years = [$year_min2,$year_min1,$thisyear];
         
         $laki = []; 
 
-        $laki[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) < '$year_min2'"));
+        // $laki[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min3'"));
 
-        $laki[1] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min2'"));
+        $laki[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min2'"));
 
-        $laki[2] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min1'"));
+        $laki[1] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min1'"));
 
-        $laki[3] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
+        $laki[2] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
 
         $perempuan = [];
 
-        $perempuan[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) < '$year_min2'"));
+        // $perempuan[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min3'"));
 
-        $perempuan[1] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min2'"));
+        $perempuan[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min2'"));
 
-        $perempuan[2] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min1'"));
+        $perempuan[1] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min1'"));
 
-        $perempuan[3] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
+        $perempuan[2] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
 
         $total_jemaat = data_jemaat::where('jemaat_status_aktif','t')->count();
         

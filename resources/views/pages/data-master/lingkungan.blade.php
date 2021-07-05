@@ -100,11 +100,10 @@
                                     @foreach ($data_lingkungan as $lingkungan)
                                         <tr>
                                             <td style="text-align:center">{{$lingkungan->nomor_lingkungan}}</td>
-                                            <td>{{$lingkungan->nomor_lingkungan}} {{$lingkungan->nama_lingkungan}}</td>
+                                            <td>{{$lingkungan->nama_lingkungan}}</td>
                                             <td>{{$lingkungan->nama_snk}}</td>
                                             <td style="text-align:center">
                                                 <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
-                                                {{-- <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Hapus </a> --}}
                                                 <form action="{{ route('lingkungan.destroy', $lingkungan->id)}}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
