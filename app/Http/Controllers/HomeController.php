@@ -56,17 +56,22 @@ class HomeController extends Controller
 
         $perempuan[2] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'p' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
 
-        $total_jemaat = data_jemaat::where('jemaat_status_aktif','t')->count();
-        
-        $total_kk = data_jemaat::where('jemaat_kk_status', '=', true)
-                        ->where('jemaat_status_aktif', 't')
-                        ->count();
-        $total_lingkungan = master_lingkungan::count();
+        $data = [];
 
-        $total_bergabung_thisyear = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif FROM data_jemaats where jemaat_status_aktif = 't' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
+        //count Total jemaat
+        $data['total_jemaat'] = data_jemaat::where('jemaat_status_aktif','t')->count();
+        //count Total kepala keluarga
+        $data['total_kk'] = data_jemaat::where('jemaat_kk_status', '=', true)->where('jemaat_status_aktif', 't')->count();
+        //count Total lingkungan                
+        $data['total_lingkungan'] = master_lingkungan::count();
+        //count Total jemaat yang bergabung di tahun ini
+        $data['total_bergabung_thisyear'] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif FROM data_jemaats where jemaat_status_aktif = 't' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$thisyear'"));
+        //count Total seluruh Laki-laki
+        $data['total_laki_laki'] = data_jemaat::where('jemaat_jenis_kelamin', 'l')->where('jemaat_status_aktif','t')->count();
+        //count Total seluruh Perempuan
+        $data['total_perempuan'] = data_jemaat::where('jemaat_jenis_kelamin', 'p')->where('jemaat_status_aktif','t')->count();
 
-
-        return view('pages.index', compact('years','laki','perempuan','thisyear','total_jemaat', 'total_kk', 'total_lingkungan', 'total_bergabung_thisyear'));
+        return view('pages.index', compact('years','laki','perempuan','thisyear','data'));
     }
 
     static function countNewDataToday()

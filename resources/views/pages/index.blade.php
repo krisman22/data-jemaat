@@ -4,11 +4,11 @@
 <div class="widgets-programs-area mg-tb-15">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                <div class="hpanel widget-int-shape responsive-mg-b-30 card-radius card-shadow">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
                     <div class="panel-body" style="min-height:109px;">
                         <div class="pull-left">
-                            <h2 style="color:#5C6BC0">{{$total_jemaat}}</h2>
+                            <h2 style="color:#5C6BC0">{{$data['total_jemaat']}}</h2>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="fa fa-users fa-2x"></i>
@@ -20,11 +20,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                <div class="hpanel widget-int-shape responsive-mg-b-30 card-radius card-shadow">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
                     <div class="panel-body" style="min-height:109px;">
                         <div class="pull-left">
-                            <h2 style="color:#26A69A">{{$total_kk}}</h2>
+                            <h2 style="color:#26A69A">{{$data['total_kk']}}</h2>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="fa fa-user fa-2x"></i>
@@ -36,11 +36,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                <div class="hpanel widget-int-shape responsive-mg-b-30 card-radius card-shadow">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
                     <div class="panel-body" style="min-height:109px;">
                         <div class="pull-left">
-                            <h2 style="color:#9CCC65">{{$total_lingkungan}}</h2>
+                            <h2 style="color:#9CCC65">{{$data['total_lingkungan']}}</h2>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="fas fa-map fa-2x"></i>
@@ -52,11 +52,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                <div class="hpanel widget-int-shape responsive-mg-b-30 card-radius card-shadow">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
                     <div class="panel-body" style="min-height:109px;">
                         <div class="pull-left">
-                            <h2 style="color:#FDD835">{{$total_bergabung_thisyear}}</h2>
+                            <h2 style="color:#FDD835">{{$data['total_bergabung_thisyear']}}</h2>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="fa fa-users fa-2x"></i>
@@ -68,11 +68,43 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
+                    <div class="panel-body" style="min-height:109px;">
+                        <div class="pull-left">
+                            <h2 style="color:#20cac2">{{$data['total_laki_laki']}}</h2>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="fa fa-users fa-2x"></i>
+                        </div>
+                        <div class="m-t-xl widget-cl-3">
+                            <br>
+                            <h4 class="stats-title">Total Laki-laki</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mg-b-15">
+                <div class="hpanel widget-int-shape responsive card-radius card-shadow">
+                    <div class="panel-body" style="min-height:109px;">
+                        <div class="pull-left">
+                            <h2 style="color:#fc6e2d">{{$data['total_perempuan']}}</h2>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="fa fa-users fa-2x"></i>
+                        </div>
+                        <div class="m-t-xl widget-cl-3">
+                            <br>
+                            <h4 class="stats-title">Total Perempuan</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="product-sales-area mg-tb-15">
+<div class="product-sales-area mg-b-15">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
