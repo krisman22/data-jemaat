@@ -129,10 +129,7 @@
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-user-friends fa-fw" style='font-size:17px'></span> <span class="mini-click-non">Jemaat</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-jemaat")?'active':''}} || {{Request::is("data-jemaat/profile/*")?'active':''}}"><a title="Data Jemaat" href={{asset('/data-jemaat')}}><span class="mini-sub-pro">Data Jemaat</span></a></li>                            
-                                {{-- <li class="{{Request::is("all-jemaat")?'active':''}}"><a title="All Students" href={{asset('/all-jemaat')}}><span class="mini-sub-pro">All Students</span></a></li> --}}
                                 <li class="{{Request::is("tambah-jemaat")?'active':''}}"><a title="Tambah Jemaat" href={{asset('/tambah-jemaat')}}><span class="mini-sub-pro">Tambah Jemaat</span></a></li>
-                                {{-- <li class="{{Request::is("lihat-data-jemaat")?'active':''}}"><a title="Edit Students" href={{asset('/lihat-data-jemaat')}}><span class="mini-sub-pro">Edit Student</span></a></li> --}}
-                                {{-- <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li> --}}
                                 <li class="{{Request::is("data-kepala-keluarga")?'active':''}}"><a title="Data Kepala Keluarga" href={{asset('/data-kepala-keluarga')}}><span class="mini-sub-pro">Kepala Keluarga</span></a></li>                            
                             </ul>
                         </li>
@@ -155,6 +152,13 @@
                                 <li class="{{Request::is("data-lingkungan") ? 'active' : ''}}"><a href="{{asset('/data-lingkungan')}}"><span class="mini-sub-pro">Lingkungan</span></a></li>                            
                                 <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pekerjaan</span></a></li>                            
                                 <li class="{{Request::is("#") ? 'active' : ''}}"><a href="{{asset('#')}}"><span class="mini-sub-pro">Pendidikan</span></a></li>                            
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-exclamation-triangle fa-fw"></span> <span class="mini-click-non">Data Warning</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li class="{{Request::is("data-warning/tanggal-lahir") ? 'active' : ''}}"><a href="{{asset('/data-warning/tanggal-lahir')}}"><span class="mini-sub-pro">Tanggal Lahir</span></a></li>                            
+                                <li class="{{Request::is("data-warning/data-ganda") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-ganda')}}"><span class="mini-sub-pro">Data Ganda</span></a></li>                            
                             </ul>
                         </li>
                         <li class="{{Request::is("laporan")?'active':''}}" >
