@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('data-warning')->group(function () {
         Route::get('/tanggal-lahir', 'DataWarningController@tanggalLahir')->name('warning.tanggal-lahir');
-        // Route::get('/data-ganda', 'DataWarningController');
+        Route::get('/data-ganda', 'DataWarningController@duplicate')->name('warning.data-ganda');
     });
     
 });

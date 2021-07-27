@@ -9,7 +9,7 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Warning Tanggal Lahir</h1>
+                            <h1>Warning Data Ganda</h1>
                         </div>
                     </div>
                     <div class="row mg-b-15">
@@ -70,7 +70,7 @@
             processing: true,
             serverSide: true, //aktifkan server-side 
             ajax: {
-                url: "{{ route('warning.tanggal-lahir') }}",
+                url: "{{ route('warning.data-ganda') }}",
                 type: 'GET',
             },
             columns: [{
