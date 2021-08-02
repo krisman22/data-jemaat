@@ -11,6 +11,7 @@
                         <div class="main-sparkline13-hd">
                             <h1>Warning Data Ganda</h1>
                         </div>
+                        <p>Data ganda merupakan data yang mempunyai kesamaan Nama dan Tanggal lahir yang identik</p>
                     </div>
                     <div class="row mg-b-15">
                         <div class="col-md-4">

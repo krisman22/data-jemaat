@@ -28,6 +28,10 @@ class data_jemaat extends Model
                 ->format('%y Tahun, %m Bulan, %d Hari');
     }
 
+    public function countAge(){        
+        return $this->jemaat_tanggal_lahir->diff(Carbon::now())->y;
+    }
+
     public function getYearBergabung(){
         return $this->jemaat_tanggal_bergabung->year;
     }

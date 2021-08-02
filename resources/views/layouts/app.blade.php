@@ -13,27 +13,51 @@
     <!-- inline css/script
 		============================================ -->
     @yield('scriptshead')
-    
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/cross-logo.png')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <script src ="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
-    <script src ="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js" defer ></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!-- Jquery JS CSS
+		============================================ -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
-    <!-- Bootstrap CSS
+    <!-- DataTable CSS
+		============================================ -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <!-- DataTable JS
+		============================================ -->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <!-- DataTable Button CSS
+		============================================ -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+    <!-- DataTable Button JS
+		============================================ -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    {{-- <!-- Waypoints JS
+		============================================ -->
+    <script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script> --}}
+    <!-- Moment JS
+		============================================ -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <!-- DateTimePicker CSS
+		============================================ -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- DateTimePicker JS
+		============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Select Select2 CSS
+		============================================ -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS
 		============================================ -->
     <link rel="stylesheet" href={{ asset('css/font-awesome.min.css') }}>
     <!-- owl.carousel CSS
@@ -158,14 +182,16 @@
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-exclamation-triangle fa-fw"></span> <span class="mini-click-non">Data Warning</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-warning/tanggal-lahir") ? 'active' : ''}}"><a href="{{asset('/data-warning/tanggal-lahir')}}"><span class="mini-sub-pro">Tanggal Lahir</span></a></li>                            
+                                <li class="{{Request::is("data-warning/data-tunggal") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-tunggal')}}"><span class="mini-sub-pro">Data Tunggal</span></a></li>                            
                                 <li class="{{Request::is("data-warning/data-ganda") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-ganda')}}"><span class="mini-sub-pro">Data Ganda</span></a></li>                            
                             </ul>
                         </li>
-                        <li class="{{Request::is("laporan")?'active':''}}" >
-                            <a title="Kartu Jemaat" href={{ asset('/laporan') }}>
-								   <span class="fas fa-scroll fa-fw" style='font-size:17px'></span>
-								   <span class="mini-click-non">Laporan</span>
-								</a>
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-scroll fa-fw"></span> <span class="mini-click-non">Laporan</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li class="{{Request::is("laporan/laporan-tahunan") ? 'active' : ''}}"><a href="{{asset('/laporan/laporan-tahunan')}}"><span class="mini-sub-pro">Tahunan</span></a></li>                            
+                                <li class="{{Request::is("laporan/laporan-statistik") ? 'active' : ''}}"><a href="{{asset('/laporan/laporan-statistik')}}"><span class="mini-sub-pro">Statistik</span></a></li>                            
+                            </ul>
                         </li>
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-table fa-fw"></span> <span class="mini-click-non">Rekap Data</span></a>
@@ -365,8 +391,8 @@
 
     <!-- jquery
 		============================================ -->
-    <script src={{ asset('js/vendor/jquery-1.12.4.min.js') }}></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script src={{ asset('js/vendor/jquery-1.12.4.min.js') }}></script> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
     <!-- bootstrap JS
 		============================================ -->
     <script src={{ asset('js/bootstrap.min.js') }}></script>
@@ -435,17 +461,6 @@
     <script src={{ asset('js/main.js') }}></script>
     <!-- tawk chat JS
 		============================================ -->
-    {{-- <script src={{ asset('js/tawk-chat.js') }}></script> --}}
-    <!-- data table JS
-        ============================================ -->
-    <script src={{ asset('js/data-table/bootstrap-table.js') }}></script>
-    <script src={{ asset('js/data-table/tableExport.js') }}></script>
-    <script src={{ asset('js/data-table/data-table-active.js') }}></script>
-    <script src={{ asset('js/data-table/bootstrap-table-editable.js') }}></script>
-    <script src={{ asset('js/data-table/bootstrap-editable.js') }}></script>
-    <script src={{ asset('js/data-table/bootstrap-table-resizable.js') }}></script>
-    <script src={{ asset('js/data-table/colResizable-1.5.source.js') }}></script>
-    <script src={{ asset('js/data-table/bootstrap-table-export.js') }}></script>
     <!-- Moment JS
         ============================================ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>

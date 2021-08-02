@@ -9,12 +9,13 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Data Jemaat</h1>
+                            <h1>Warning Data Tunggal</h1>
                         </div>
+                        <p>Data Tunggal merupakan data yang tidak terikat dengan data </p>
                     </div>
                     <div class="row mg-b-15">
                         <div class="col-md-4">
-                            <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}"><i class="fas fa-download"></i> Export Data</a>
+                            {{-- <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}"><i class="fas fa-download"></i> Export Data</a> --}}
                         </div>
                     </div>
                     <div class="sparkline13-graph">
@@ -38,16 +39,16 @@
                                     </div>
                                 </div>
                             @endif
-                            <table id="tableDataJemaat" class="table table-striped table-bordered table-hover" style="width: 100%">
+                            <table id="tableDataJemaat" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th></th>
                                         <th>Nama</th>
                                         <th>Nama Alias</th>
-                                        <th>Nomor Stambuk</th>
+                                        <th style="width: 15%">Tanggal Lahir</th>
                                         <th>Lingkungan </th>
                                         <th>Status Jemaat</th>
-                                        <th></th>
+                                        <th style="width: 15%"></th>
                                     </tr>
                                 </thead>
                                 
@@ -70,7 +71,7 @@
             processing: true,
             serverSide: true, //aktifkan server-side 
             ajax: {
-                url: "{{ route('datajemaat') }}",
+                url: "{{ route('warning.data-tunggal') }}",
                 type: 'GET',
             },
             columns: [{
@@ -85,8 +86,8 @@
                     name: 'jemaat_nama_alias'
                 },
                 {
-                    data: 'jemaat_nomor_stambuk',
-                    name: 'jemaat_nomor_stambuk'
+                    data: 'jemaat_tanggal_lahir',
+                    name: 'jemaat_tanggal_lahir'
                 },
                 {
                     data: 'lingkungan',

@@ -39,7 +39,7 @@
                     </div>
                     <div class="sparkline13-graph">
                         <div class="table-responsive">
-                            <table id="tableKartuJemaat" class="table table-striped table-bordered" style="width:100%">
+                            <table id="tableKartuJemaat" class="table table-striped table-bordered table-hover" style="width:100%">
                                     <thead>
                                     <tr>
                                         <th></th>

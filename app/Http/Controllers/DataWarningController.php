@@ -86,4 +86,8 @@ class DataWarningController extends Controller
 
         return view('pages.data-warning.data-ganda');
     }
+    public function tunggal(Request $request)
+    {
+        
+    }
 }

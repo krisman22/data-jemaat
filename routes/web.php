@@ -42,8 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-jemaat-meninggal', 'JemaatInAktifController@meninggal')->name('datameninggal');
     Route::get('/data-jemaat-pindah', 'JemaatInAktifController@pindah')->name('datapindah');
 
-    Route::get('/laporan','LaporanController@index');
-    
+    Route::prefix('laporan')->group(function () {
+        Route::get('/laporan-tahunan', 'LaporanController@tahunan')->name('laporan.tahunan');
+        Route::get('/laporan-statistik', 'LaporanController@statistik')->name('laporan.statistik');
+    });
 
     Route::get('/rekap-lingkungan', 'RekapDataController@lingkungan');
     Route::get('/rekap-kepalakeluarga', 'RekapDataController@kepalakeluarga');
@@ -69,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('data-warning')->group(function () {
         Route::get('/tanggal-lahir', 'DataWarningController@tanggalLahir')->name('warning.tanggal-lahir');
+        Route::get('/data-tunggal', 'DataWarningController@tunggal')->name('warning.data-tunggal');
         Route::get('/data-ganda', 'DataWarningController@duplicate')->name('warning.data-ganda');
     });
     
