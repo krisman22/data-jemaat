@@ -14,7 +14,7 @@
                     </div>
                     <div class="table-responsive" style="width:100%">
                         <div class="datatable-dashv1-list custom-datatable-overright" style="overflow-x: auto;">
-                            <table id="laporan" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                            <table id="laporan" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="vertical-align:middle" rowspan="3">No. Ling</th>    
@@ -28,7 +28,7 @@
                                     <tr>
                                         <th style="vertical-align:middle" colspan="2">Dewasa</th>
                                         <th style="vertical-align:middle" rowspan="2">Jumlah</th>
-                                        <th style="vertical-align:middle" colspan="2">Anak-<br>anak</th>
+                                        <th style="vertical-align:middle" colspan="2">Anak-anak</th>
                                         <th style="vertical-align:middle" rowspan="2">Jumlah</th>
                                         <th style="vertical-align:middle" rowspan="2">SD</th>
                                         <th style="vertical-align:middle" rowspan="2">SMP</th>

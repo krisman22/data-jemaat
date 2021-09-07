@@ -198,7 +198,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-8" style="padding-left:0">
                                                                                         <div class="form-group">
-                                                                                            <input class="form-control" type="text" name="jemaat_pindah_ke" autocomplete="off" placeholder="Jemaat/Gereja">
+                                                                                            <input class="form-control" type="text" name="jemaat_pindah_ke" autocomplete="off" required placeholder="Jemaat/Gereja">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

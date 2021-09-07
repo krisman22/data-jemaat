@@ -66,7 +66,7 @@
                     <!--  End of Modal -->
 
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright">
+                        <div class="table-responsive">
                             @if ($message = Session::get('warning'))
                                 <div class="row">
                                     <div class="col-md-12">

@@ -37,8 +37,6 @@ class DataJemaatImport implements ToCollection, WithHeadingRow
                 'jemaat_nomor_hp' => $row['jemaat_nomor_hp'],
                 'jemaat_email' => $row['jemaat_email'],
                 'jemaat_status_aktif' => "t", //hardcode
-                'jemaat_keterangan_status' => $row['jemaat_keterangan_status'],
-                'jemaat_tanggal_status' => null,
                 'id_pekerjaan' => $row['id_pekerjaan'],
                 'jemaat_status_dikeluarga' => $row['jemaat_status_dikeluarga'],
                 'id_parent' => $row['id_parent'],

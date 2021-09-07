@@ -36,6 +36,7 @@ class HomeController extends Controller
         // $year_min3 = $thisyear - 3;
         $years = [$year_min2,$year_min1,$thisyear];
         
+        
         $laki = []; 
 
         // $laki[0] = count(DB::select("SELECT CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED), jemaat_status_aktif, jemaat_jenis_kelamin FROM data_jemaats where jemaat_status_aktif = 't' AND jemaat_jenis_kelamin = 'l' AND CAST(SUBSTRING(jemaat_tanggal_bergabung, 1, 4) AS UNSIGNED) = '$year_min3'"));
@@ -58,6 +59,8 @@ class HomeController extends Controller
 
         $data = [];
 
+        $total = [$laki[0]+$perempuan[0],$laki[1]+$perempuan[1],$laki[2]+$perempuan[2]];
+
         //count Total jemaat
         $data['total_jemaat'] = data_jemaat::where('jemaat_status_aktif','t')->count();
         //count Total kepala keluarga
@@ -71,7 +74,7 @@ class HomeController extends Controller
         //count Total seluruh Perempuan
         $data['total_perempuan'] = data_jemaat::where('jemaat_jenis_kelamin', 'p')->where('jemaat_status_aktif','t')->count();
 
-        return view('pages.index', compact('years','laki','perempuan','thisyear','data'));
+        return view('pages.index', compact('years','laki','perempuan','thisyear','data', 'total'));
     }
 
     static function countNewDataToday()
