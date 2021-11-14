@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Http\Controllers\Laporan;
+
+use Carbon\Carbon;
+use App\data_jemaat;
+use App\master_lingkungan;
+use Illuminate\Http\Request;
+use DataTables;
+use App\Http\Controllers\Controller;
+
+class SidiController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request)
+    {
+        $lingkungan = master_lingkungan::all();
+
+        foreach($lingkungan as $d){
+            //count Jumlah Kepala keluarga setiap lingkungan
+            $jumlahKK[$d->nomor_lingkungan]['jumlahKK'] = data_jemaat::where('id_lingkungan', $d->nomor_lingkungan)
+                ->where('jemaat_kk_status', true)->where('jemaat_status_aktif','t')->count();
+            
+            //count Jumlah jiwa laki/perempuan tiap lingkungan, Dewasa >17 Tahun
+            $DL = 0; //DL Dewasa Laki laki
+            $DP = 0; //DP Dewasa Perempuan
+            $tempOfJumlahJiwa = data_jemaat::where('id_lingkungan', $d->nomor_lingkungan)
+                ->where('jemaat_status_aktif','t')->get();
+                    foreach($tempOfJumlahJiwa as $data){
+                        if($data->countAge() >= 17 &&  $data->jemaat_jenis_kelamin == 'l'){
+                            $DL += 1;
+                        }
+                        elseif($data->countAge() >= 17 && $data->jemaat_jenis_kelamin == 'p'){
+                            $DP += 1;
+                        }
+                    }
+
+            $jumlahJiwa[$d->nomor_lingkungan]['dewasa']['l'] = $DL;
+            $jumlahJiwa[$d->nomor_lingkungan]['dewasa']['p'] = $DP;
+        }
+
+        return view('pages.laporan.sidi', compact('lingkungan', 'jumlahKK', 'jumlahJiwa'));
+    }
+
+    public function nama(Request $request)
+    {   
+        $datajemaats = data_jemaat::select('id', 'jemaat_nama', 'jemaat_nama_alias', 'jemaat_jenis_kelamin','jemaat_tanggal_lahir', 'id_lingkungan')
+            ->where('jemaat_status_aktif','t')
+            ->where('jemaat_tanggal_lahir', '<=', Carbon::now()->subYears(17))
+            ->orderBy('id_lingkungan', 'ASC')
+            ->orderBy('jemaat_nama', 'ASC');
+
+        if($request->ajax()){  
+            return DataTables::of($datajemaats)
+                ->editColumn('lingkungan', function($datajemaats) { 
+                    return $datajemaats->lingkungan->nama_lingkungan ;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('pages.laporan.data-sidi');
+    }
+}

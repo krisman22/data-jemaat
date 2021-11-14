@@ -43,8 +43,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-jemaat-pindah', 'JemaatInAktifController@pindah')->name('datapindah');
 
     Route::prefix('laporan')->group(function () {
-        Route::get('/laporan-tahunan', 'LaporanController@tahunan')->name('laporan.tahunan');
-        Route::get('/laporan-statistik', 'LaporanController@statistik')->name('laporan.statistik');
+        Route::get('/tahunan', 'LaporanController@tahunan')->name('laporan.tahunan');
+        Route::get('/statistik', 'LaporanController@statistik')->name('laporan.statistik');
+        Route::get('/sidi','Laporan\SidiController')->name('laporan.sidi');
+        Route::get('/data-sidi','Laporan\SidiController@nama')->name('laporan.namasidi');
+        
     });
 
     Route::get('/rekap-lingkungan', 'RekapDataController@lingkungan');

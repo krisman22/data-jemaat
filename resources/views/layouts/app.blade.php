@@ -189,8 +189,10 @@
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-scroll fa-fw"></span> <span class="mini-click-non">Laporan</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li class="{{Request::is("laporan/laporan-tahunan") ? 'active' : ''}}"><a href="{{asset('/laporan/laporan-tahunan')}}"><span class="mini-sub-pro">Tahunan</span></a></li>                            
-                                <li class="{{Request::is("laporan/laporan-statistik") ? 'active' : ''}}"><a href="{{asset('/laporan/laporan-statistik')}}"><span class="mini-sub-pro">Statistik</span></a></li>                            
+                                {{-- <li class="{{Request::is("laporan/tahunan") ? 'active' : ''}}"><a href="{{asset('/laporan/tahunan')}}"><span class="mini-sub-pro">Tahunan</span></a></li>                             --}}
+                                <li class="{{Request::is("laporan/statistik") ? 'active' : ''}}"><a href="{{asset('/laporan/statistik')}}"><span class="mini-sub-pro">Statistik</span></a></li>                            
+                                <li class="{{Request::is("laporan/sidi") ? 'active' : ''}}"><a href="{{asset('/laporan/sidi')}}"><span class="mini-sub-pro">Sidi</span></a></li>                            
+                                <li class="{{Request::is("laporan/data-sidi") ? 'active' : ''}}"><a href="{{asset('/laporan/data-sidi')}}"><span class="mini-sub-pro">Data Sidi</span></a></li>                            
                             </ul>
                         </li>
                         <li>
