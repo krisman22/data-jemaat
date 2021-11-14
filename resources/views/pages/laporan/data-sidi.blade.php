@@ -17,6 +17,7 @@
                             <table id="laporan" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th style="vertical-align:middle">No. Ling</th>    
                                         <th style="vertical-align:middle">Nama Lingkungan</th>
                                         <th style="vertical-align:middle">Jenis Kelamin</th>    
@@ -24,17 +25,6 @@
                                         <th class="text-center">Nama Alias</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    @foreach ($data_jemaat as $d)
-                                        <tr>
-                                            <td>{{$d->lingkungan->nomor_lingkungan}}</td>
-                                            <td>{{$d->lingkungan->nama_lingkungan}}</td>
-                                            <td>{{$d->jemaat_jenis_kelamin == 'l' ? "L" : "P" }}</td>
-                                            <td>{{$d->jemaat_nama}}</td>
-                                            <td>{{$d->jemaat_nama_alias}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody> --}}
                             </table>
                         </div>
                     </div>
@@ -59,6 +49,9 @@
                 type: 'GET',
             },
             columns: [
+                {
+                    data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false,
+                },
                 {
                     data: 'id_lingkungan',
                     name: 'id_lingkungan'

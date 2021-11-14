@@ -39,6 +39,14 @@
                                             <td>{{$jumlahJiwa[$d->nomor_lingkungan]['dewasa']['l'] + $jumlahJiwa[$d->nomor_lingkungan]['dewasa']['p'] }}</td>
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{$total['kk']}}</td>
+                                        <td>{{$total['l']}}</td>
+                                        <td>{{$total['p']}}</td>
+                                        <td>{{$total['jumlah']}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
