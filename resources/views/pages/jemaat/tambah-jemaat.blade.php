@@ -266,7 +266,7 @@
                                                                 <option value="1" {{ old('jemaat_status_dikeluarga') == 1 ? 'selected' : '' }}>Kepala Keluarga</option>
                                                                 <option value="2" {{ old('jemaat_status_dikeluarga') == 2 ? 'selected' : '' }}>Istri</option>
                                                                 <option value="3" {{ old('jemaat_status_dikeluarga') == 3 ? 'selected' : '' }}>Anak</option>
-                                                                <option value="5" {{ old('jemaat_status_dikeluarga') == 5 ? 'selected' : '' }}>Adik Kandung</option>
+                                                                <option value="5" {{ old('jemaat_status_dikeluarga') == 5 ? 'selected' : '' }}>Saudara Kandung</option>
                                                                 <option value="4" {{ old('jemaat_status_dikeluarga') == 4 ? 'selected' : '' }}>Famili</option>
                                                             </select>
                                                         </div>
@@ -278,7 +278,7 @@
                                                             <label class="login2 pull-right pull-right-pro">Pilih Kepala Keluarga</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <select id="nameid" class="form-control" name="id_parent" style="padding:0px;">
+                                                            <select id="select2_kk" class="form-control" name="id_parent" style="padding:0px;">
                                                                 <option disabled selected></option>
                                                                 @foreach($dataKK as $data)
                                                                     <option value="{{$data->id}}" {{ old('id_parent') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}} ({{$data->jemaat_nama_alias ?? "-"}})</option>
@@ -287,6 +287,41 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group-inner" id="pilih_ayah">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Pilih Ayah</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select id="pilih_ayah" class="form-control" name="id_ayah" style="padding:0px;">
+                                                                <option disabled selected></option>
+                                                                @foreach($dataAyah as $data)
+                                                                    <option value="{{$data->id}}" {{ old('id_ayah') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}} ({{$data->jemaat_nama_alias ?? "-"}})</option>
+                                                                @endforeach                                                                        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group-inner" id="pilih_ibu">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                            <label class="login2 pull-right pull-right-pro">Pilih Ibu</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                            <select id="pilih_ibu" class="form-control" name="id_ibu" style="padding:0px;">
+                                                                <option disabled selected></option>
+                                                                @foreach($dataIbu as $data)
+                                                                    <option value="{{$data->id}}" {{ old('id_ibu') == $data->id ? 'selected' : '' }}>{{$data->jemaat_nama}} ({{$data->jemaat_nama_alias ?? "-"}})</option>
+                                                                @endforeach                                                                        
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+                                                <span>Input manual data orangtua</span><br>
+                                                <small>*Digunakan jika data ayah dan ibu belum terdaftar di sistem</small>
                                                 <div class="form-group-inner">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -353,8 +388,16 @@
             $('#div-status-dikeluarga').hide();
         }
 
-        $("#nameid").select2({
-            placeholder: "Pilih KK"
+        $("select#select2_kk").select2({
+            placeholder: "Pilih kepala keluarga"
+        });
+
+        $("select#pilih_ayah").select2({
+            placeholder: "Pilih Ayah"
+        });
+
+        $("select#pilih_ibu").select2({
+            placeholder: "Pilih Ibu"
         });
 
         $('.selectpicker').selectpicker();

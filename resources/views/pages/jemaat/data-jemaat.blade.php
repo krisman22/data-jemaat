@@ -14,6 +14,7 @@
                     </div>
                     <div class="row mg-b-15">
                         <div class="col-md-4">
+                            <a class="btn btn-info btn-sm" href="{{ route('tambahjemaat') }}"><i class="fas fa-plus"></i> Tambah Data</a>
                             <a class="btn btn-success btn-sm" href="{{ route('export.datajemaat') }}"><i class="fas fa-download"></i> Export Data</a>
                         </div>
                     </div>
