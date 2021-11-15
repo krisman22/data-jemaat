@@ -609,6 +609,9 @@ class DataJemaatController extends Controller
     public function jadikankk(Request $request, $id)
     {
         $data_jemaat = data_jemaat::find($id);
+        if($data_jemaat->jemaat_kk_status == true){
+            return back()->with(['warning' => 'Data Jemaat sudah berstatus kepala keluarga']);
+        }
         $data_jemaat->update([
             'jemaat_kk_status' => true,
             'jemaat_status_dikeluarga' => 1,
