@@ -244,20 +244,24 @@
                                                             <label class="login2 pull-right pull-right-pro">Kepala Keluarga </label>                                                            
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <div class="pull-left" style="width:100px; height:40px; padding: 8px 0px;">
+                                                            <div class="pull-left" id="is-kk" style="width:100px; height:40px; padding: 8px 0px;">
                                                                 <label>
-                                                                    <input type="checkbox" id="isKK" value="1" {{ old('jemaat_kk_status') == 1 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Ya </label>
+                                                                    <input type="radio" id="kk-true" value="1" {{ old('jemaat_kk_status') == 1 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Ya 
+                                                                </label>
+                                                                <label>    
+                                                                    <input type="radio" id="kk-false" value="0" {{ old('jemaat_kk_status') == 0 ? 'checked' : '' }} name="jemaat_kk_status"> <i></i> Bukan 
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group-inner">
+                                                <div class="form-group-inner" id="div-status-dikeluarga">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                             <label class="login2 pull-right pull-right-pro">Status dengan KK</label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <select class="form-control" name="jemaat_status_dikeluarga">
+                                                            <select class="form-control" name="jemaat_status_dikeluarga" id="jemaat_status_dikeluarga">
                                                                 <option selected disabled>--Status dikeluarga--</option>
                                                                 <option value="1" {{ old('jemaat_status_dikeluarga') == 1 ? 'selected' : '' }}>Kepala Keluarga</option>
                                                                 <option value="2" {{ old('jemaat_status_dikeluarga') == 2 ? 'selected' : '' }}>Istri</option>
@@ -330,38 +334,35 @@
 
 @section('scripts')
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#is-kk').on('click', function() {
+        if($('#kk-true').is(':checked')) {
+            $('#pilihKK').hide();
+            $("#jemaat_status_dikeluarga").val("1").change();
+            $('#div-status-dikeluarga').hide();
+        } else {
+            $('#pilihKK').show();
+            $('#jemaat_status_dikeluarga').prop('selectedIndex',0);        
+            $("#div-status-dikeluarga").show();
+        }
+        })
 
-    $('.datepicker').datepicker({
+        if($('#kk-true').is(':checked')) {
+            $('#pilihKK').hide();
+            $("#jemaat_status_dikeluarga").val("1").change();
+            $('#div-status-dikeluarga').hide();
+        }
 
-        format: 'dd/mm/yyyy'
+        $("#nameid").select2({
+            placeholder: "Pilih KK"
+        });
 
-    }); 
-</script> 
-
-<script type="text/javascript">
-    $(function() {
         $('.selectpicker').selectpicker();
+
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        }); 
     });
-</script>
-
-<script type="text/javascript">
-
-    $("#nameid").select2({
-          placeholder: "Pilih KK"
-      });
-</script>
-
-<script>
-   $(document).ready(function() {
-    // $('#isKK').hide();
-     $('#isKK').click(function() {
-       if ($(this).prop("checked") == true) {
-         $('#pilihKK').hide();
-       } else {
-        $('#pilihKK').show();         
-       }
-     })
-   });
 </script>
 
 
