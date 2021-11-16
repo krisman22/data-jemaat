@@ -508,80 +508,40 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="product-status-wrap">
-                                        <h4>Daftar Nama Keluarga</h4>
-                                        <div class="add-product">
-                                            <a href="#">Tambah Daftar Keluarga</a>
-                                        </div>
                                         <div class="asset-inner">
                                             <table>
-                                                <tr>
-                                                    <th>No</th>
+                                                <thead>
                                                     <th>Nama</th>
                                                     <th>Status Keluarga</th>
-                                                </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            @if($dataAyahnon != null) {{$dataAyahnon}}
-                                                            @else -
-                                                            @endif
-                                                        </td>
-                                                        <td>Ayah Kandung</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            @if($dataIbunon != null){{$dataIbunon}}
-                                                            @else - 
-                                                            @endif</td>
-                                                        <td>Ibu Kandung</td>
-                                                    </tr>
-                                                    @php
-                                                        $i=3;
-                                                    @endphp
-                                                    @if($suami != null || $istri != null)
-                                                    <tr>
-                                                        <td>{{$i}}</td>
-                                                        <td>@if($suami != null) {{$suami->jemaat_nama}} @else {{$istri->jemaat_nama}} @endif</td>
-                                                        <td>@if($suami != null) Suami @else Istri @endif</td>
-                                                    </tr>
+                                                    <th>Aksi</th>
+                                                </thead>
+                                                <tbody>
+                                                    @if ($dataKeluarga->nama_ayah != null)
+                                                        <tr>
+                                                            <td id="nama_ayah_n">{{$dataKeluarga->nama_ayah}}</td>
+                                                            <td>Ayah Kandung</td>
+                                                            <td><a href="javascript:void(0)" id="edit_ayah" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="nama_ibu_n">{{$dataKeluarga->nama_ibu}}</td>
+                                                            <td>Ibu Kandung</td>
+                                                            <td><a href="javascript:void(0)" id="edit_ibu" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                        </tr>
+                                                    @else
+                                                        <tr>
+                                                            <td id="nama_ayah_n">{{$dataKeluarga->ayah->jemaat_nama}}</td>
+                                                            <td>Ayah Kandung</td>
+                                                            <td><a href="{{route('profiledetail', $dataKeluarga->id_ayah)}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="nama_ibu_n">{{$dataKeluarga->ibu->jemaat_nama}}</td>
+                                                            <td>Ibu Kandung</td>
+                                                            <td><a href="{{route('profiledetail', $dataKeluarga->id_ibu)}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                        </tr>
                                                     @endif
-                                                    @if($anaks!=null)
-                                                        @foreach ($anaks as $anak)
-                                                            <tr>
-                                                                <td>{{$i}}</td>
-                                                                <td>@if($anak != null){{$anak->jemaat_nama}} @else - @endif</td>
-                                                                <td>Anak</td>
-                                                                @php
-                                                                    $i+=1;
-                                                                @endphp
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
-                                                    @if($saudaras!=null)
-                                                        @foreach ($saudaras as $saudara)
-                                                            <tr>
-                                                                <td>{{$i}}</td>
-                                                                <td>@if($saudara != null){{$saudara->jemaat_nama}} @else - @endif</td>
-                                                                <td>Saudara Kandung</td>
-                                                                @php
-                                                                    $i+=1;
-                                                                @endphp
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
-                                                    @if($adiks != null)
-                                                        @foreach ($adiks as $adik)
-                                                            <tr>
-                                                                <td>{{$i}}</td>
-                                                                <td>@if($adik != null){{$adik->jemaat_nama}} @else - @endif</td>
-                                                                <td>Adik Kandung</td>
-                                                                @php
-                                                                    $i+=1;
-                                                                @endphp
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
+                                                    
+                                                </tbody>
+                                                
                                             </table>
                                         </div>
                                     </div>
@@ -621,15 +581,74 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal_edit_ortu" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ubah data Orangtua</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="updateOrtuForm">
+            @csrf
+            <input name="id" id="id" type="hidden">
+          <div class="form-group">
+            <label for="nama_ayah" class="col-form-label">Ayah</label>
+            <input type="text" class="form-control" name="nama_ayah" id="nama_ayah">
+          </div>
+          <div class="form-group">
+            <label for="nama_ibu" class="col-form-label">Ibu</label>
+            <input type="text" class="form-control" name="nama_ibu" id="nama_ibu">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="button" id="btnSaveOrtu" class="btn btn-primary">Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
 
     $('.datepicker').datepicker({
-
         format: 'yyyy-mm-dd'
+    });
 
-    }); 
+    $(document).ready(function(){
+        $('#edit_ayah, #edit_ibu').on('click', function(){
+            var id = $(this).data('id')
+            $('#updateOrtuForm')[0].reset();
+            const na = $('#nama_ayah_n').text()
+            const ni = $('#nama_ibu_n').text()
+            $('#id').val(id)
+            $('#nama_ayah').val(na)
+            $('#nama_ibu').val(ni)
+            $('#modal_edit_ortu').modal('show')
+        })
+
+        $('#btnSaveOrtu').on('click', function(){
+            var id = $('#id').val()
+            $.ajax({
+                url : "/data-keluarga/" + id,
+                type: "POST",
+                data : $('#updateOrtuForm').serialize(),
+                success: function(dataResult){
+                    $('#updateOrtuForm').trigger("reset")
+                    $('#modal_edit_ortu').modal('hide')
+                    window.location.reload()
+                    alert("Update Success")
+                },
+                error: function (err){
+                    console.log(err)
+                }
+            })
+        })
+    })
 </script> 
 @endsection

@@ -139,69 +139,10 @@ class DataJemaatController extends Controller
     {
         $parent = $data_jemaat->id_parent;
         $idjemaat = $data_jemaat->id;
-        $dataKeluargas = DataKeluarga::where('no_stambuk', '=', $data_jemaat->jemaat_nomor_stambuk)
-            ->where('status_hubungan', '=', 1)->first();        
-        $datapanggil = $data_jemaat->jemaat_status_aktif;
-        if($data_jemaat->jemaat_status_dikeluarga == 3 && $parent != null)
-        {
-            $saudaras = data_jemaat::where('id_parent', '=', $parent)
-                ->where('jemaat_status_dikeluarga', '=', '3')
-                ->where('id', '!=', $data_jemaat->id)
-                ->orderBy('jemaat_tanggal_lahir', 'ASC')
-                ->get();
-        }
-        else{
-            $saudaras = null;
-        }
-
-        if($dataKeluargas != null){
-            $dataAyahnon = $dataKeluargas->nama_ayah;
-            $dataIbunon = $dataKeluargas->nama_ibu;
-            // dd($dataAyahnon);
-        }
-        else{
-            $dataAyahnon = null;
-            $dataIbunon = null;
-        }
-        
-        if($data_jemaat->jemaat_status_dikeluarga == 1 || $data_jemaat->jemaat_status_dikeluarga == 2){
-            $anaks = data_jemaat::where('id_parent', '=', $idjemaat)
-                ->where('jemaat_status_dikeluarga', '=', '3')
-                ->orderBy('jemaat_tanggal_lahir', 'ASC')
-                ->get();
-
-            $suami = data_jemaat::where('id_parent', '=', $parent)
-                ->where('jemaat_status_dikeluarga', '=', '1')
-                ->where('id', '!=', $data_jemaat->id)
-                ->where('jemaat_jenis_kelamin', '=', "l")
-                ->first();
-
-            $istri = data_jemaat::where('id_parent', '=', $parent)
-                ->where('jemaat_status_dikeluarga', '=', '2')
-                ->where('id', '!=', $data_jemaat->id)
-                ->where('jemaat_jenis_kelamin', '=', "p")
-                ->first();
+        $dataKeluarga = DataKeluarga::with('ayah', 'ibu')->where('no_stambuk', '=', $data_jemaat->jemaat_nomor_stambuk)
+            ->where('status_hubungan', '=', 1)->first();
             
-            $adiks = data_jemaat::where('id_parent', '=', $idjemaat)
-                ->where('jemaat_status_dikeluarga', '=', '5')
-                ->orderBy('jemaat_tanggal_lahir', 'ASC')
-                ->get();
-        }
-        else {
-            $anaks =null;
-            $suami = null;
-            $istri = null;
-            $adiks = null;
-        }
-
-        if($datapanggil == "del"){
-            return redirect()->route('datajemaat');
-        }
-        else{
-            return view('pages.jemaat.profile-jemaat', 
-            compact('data_jemaat','suami','istri', 'saudaras','adiks','dataAyahnon', 'dataIbunon', 'anaks'));
-        }
-
+        return view('pages.jemaat.profile-jemaat', compact('data_jemaat', 'dataKeluarga'));
     }
 
     /**
@@ -606,5 +547,14 @@ class DataJemaatController extends Controller
     {
         $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
         return Excel::download(new DataJemaatExport, 'Data Jemaat ' .$now. '.xlsx');
+    }
+
+    public function updateDataKeluarga(Request $request, $id)
+    {
+        $data = DataKeluarga::findOrFail($id);
+
+        $data->nama_ayah = $request->nama_ayah;
+        $data->nama_ibu = $request->nama_ibu;
+        $data->save();
     }
 }

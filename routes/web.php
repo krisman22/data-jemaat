@@ -77,7 +77,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/data-tunggal', 'DataWarningController@tunggal')->name('warning.data-tunggal');
         Route::get('/data-ganda', 'DataWarningController@duplicate')->name('warning.data-ganda');
     });
-    
+
+    Route::post('/data-keluarga/{id}','DataJemaatController@updateDataKeluarga')->name('update.data-keluarga');
 });
 
 Auth::routes();
