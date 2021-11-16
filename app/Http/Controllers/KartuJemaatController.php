@@ -63,24 +63,14 @@ class KartuJemaatController extends Controller
         
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
-            $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
-            $nomor = new NomorKartu;
-            $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
-            $nomor->nomor_kartu = $nomor_kartu;
-            $nomor->save();
+            $this->generateNomorKartu($lastId);
         }
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
 
-        $dataKartuKeluargas = data_jemaat::with('datakeluarga.ayah.riwayatinaktif', 'datakeluarga.ibu.riwayatinaktif')
-            ->where('id_parent', '=', $idparent)
-            ->where('jemaat_status_aktif', '=', 't')
-            ->orderBy('jemaat_status_dikeluarga', 'ASC')
-            ->orderBy('jemaat_tanggal_lahir', 'ASC')
-            ->get();
+        $dataKartuKeluargas = $this->getDataKeluargaKK($idparent);
         
-        $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
 
         $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
@@ -95,47 +85,16 @@ class KartuJemaatController extends Controller
     {
         $idparent = $data_jemaat->id;
         $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
-        
-        // generate nomor kartu
-        // $dataKK = data_jemaat::where('jemaat_status_aktif', 't')
-        // ->where('jemaat_kk_status', true)
-        // ->orderBy('jemaat_nama', 'asc')
-        // ->get();
-        
-        // foreach($dataKK as $data){
-        //     $adaIsi = NomorKartu::where('no_stambuk', $data->jemaat_nomor_stambuk)->first();
-        //     $lastId = NomorKartu::orderBy('id', 'desc')->first();
-            
-        //     if($adaIsi == null){
-        //         $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
-        //         $nomor = new NomorKartu;
-        //         $nomor->no_stambuk = $data->jemaat_nomor_stambuk;
-        //         $nomor->nomor_kartu = $nomor_kartu;
-        //         $nomor->save();
-        //     }
-        //     else{
-        //         $nomor_kartu = $adaIsi->nomor_kartu;
-        //     }
-        // }
 
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
-            $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
-            $nomor = new NomorKartu;
-            $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
-            $nomor->nomor_kartu = $nomor_kartu;
-            $nomor->save();
+            $this->generateNomorKartu($lastId);
         }
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
 
-        $dataKartuKeluargas = data_jemaat::with('datakeluarga')
-            ->where('id_parent', '=', $idparent)
-            ->where('jemaat_status_aktif', '=', 't')
-            ->orderBy('jemaat_status_dikeluarga', 'ASC')
-            ->orderBy('jemaat_tanggal_lahir', 'ASC')
-            ->get();
+        $dataKartuKeluargas = $this->getDataKeluargaKK($idparent);
 
         $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
@@ -163,24 +122,16 @@ class KartuJemaatController extends Controller
         foreach($dataAllKk as $data_jemaat){
             $idparent = $data_jemaat->id;
             $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
+            
             $lastId = NomorKartu::orderBy('id', 'desc')->first();
             if($isNomorKartu == null){
-                $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
-                $nomor = new NomorKartu;
-                $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
-                $nomor->nomor_kartu = $nomor_kartu;
-                $nomor->save();
+                $this->generateNomorKartu($lastId);
             }
             else{
                 $nomor_kartu = $isNomorKartu->nomor_kartu;
             }
 
-            $dataKartuKeluargas = data_jemaat::with('datakeluarga')
-                ->where('id_parent', '=', $idparent)
-                ->where('jemaat_status_aktif', '=', 't')
-                ->orderBy('jemaat_status_dikeluarga', 'ASC')
-                ->orderBy('jemaat_tanggal_lahir', 'ASC')
-                ->get();            
+            $dataKartuKeluargas = $this->getDataKeluargaKK($idparent);            
             
             $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
             $customPaper = array(0,0,609.44,935.43);
@@ -207,6 +158,25 @@ class KartuJemaatController extends Controller
             $zip->close();
         }
         return response()->download(storage_path('app/public/kartu-keluarga/' . $fileName));
+    }
+
+    public function generateNomorKartu($lastId)
+    {
+        $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
+        $nomor = new NomorKartu;
+        $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
+        $nomor->nomor_kartu = $nomor_kartu;
+        $nomor->save();
+    }
+
+    public function getDataKeluargaKK($idparent)
+    {
+        return data_jemaat::with('datakeluarga.ayah.riwayatinaktif', 'datakeluarga.ibu.riwayatinaktif')
+            ->where('id_parent', '=', $idparent)
+            ->where('jemaat_status_aktif', '=', 't')
+            ->orderBy('jemaat_status_dikeluarga', 'ASC')
+            ->orderBy('jemaat_tanggal_lahir', 'ASC')
+            ->get();
     }
     
 }
