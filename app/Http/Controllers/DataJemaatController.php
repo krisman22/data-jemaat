@@ -516,36 +516,36 @@ class DataJemaatController extends Controller
                 'jemaat_tanggal_dikebumikan' => request('jemaat_tanggal_dikebumikan')
             ]);
 
-            //Cari apakah data tungga, sehingga tidak perlu mengubah otomatis kepala keluarga
-            $isSingleData = data_jemaat::where('id_parent', $data_jemaat->id_parent)
+            //Cari apakah data tunggal, sehingga tidak perlu mengubah otomatis kepala keluarga
+            $isSingleData = data_jemaat::where('id_parent', $data_jemaat->id_parent)->where('jemaat_status_aktif', 't')
                             ->count();
-            
-            if($isSingleData > 1){
-                if($data_jemaat->jemaat_status_dikeluarga == 1){
+
+            if($isSingleData > 0){
+                if($data_jemaat->jemaat_status_dikeluarga == 1 && $data_jemaat->jemaat_status_perkawinan == 1){
                     $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
                         ->where('jemaat_status_dikeluarga','2')    
                         ->first();
                     
                     if($dataSI->jemaat_jenis_kelamin == 'l'){
-                        $dataSI->jemaat_status_perkawinan = 3;
+                        $dataSI->jemaat_status_perkawinan = 3; //Duda
                         $dataSI->save();
                     }
                     else{
-                        $dataSI->jemaat_status_perkawinan = 4;
+                        $dataSI->jemaat_status_perkawinan = 4; //Janda
                         $dataSI->save();
                     }
                 }
-                else if($data_jemaat->jemaat_status_dikeluarga == 2){
+                else if($data_jemaat->jemaat_status_dikeluarga == 2 && $data_jemaat->jemaat_status_perkawinan == 1){
                     $dataSI = data_jemaat::where('id_parent', $data_jemaat->id_parent)
                         ->where('jemaat_status_dikeluarga','1')    
                         ->first();
                     
                     if($dataSI->jemaat_jenis_kelamin == 'l'){
-                        $dataSI->jemaat_status_perkawinan = 3;
+                        $dataSI->jemaat_status_perkawinan = 3; //Duda
                         $dataSI->save();
                     }
                     else{
-                        $dataSI->jemaat_status_perkawinan = 4;
+                        $dataSI->jemaat_status_perkawinan = 4; //Janda
                         $dataSI->save();
                     }
                 }
@@ -556,16 +556,24 @@ class DataJemaatController extends Controller
                         ->orderBy('jemaat_status_dikeluarga','asc')
                         ->orderBy('jemaat_tanggal_lahir','desc')
                         ->first();
-                    
-                    $switchKK->jemaat_status_dikeluarga = 1;
-                    $switchKK->jemaat_kk_status = true;
-                    $switchKK->save();
+
+                    $isSibling = false;
+                    if($switchKK->jemaat_status_dikeluarga == 3){
+                        $isSibling = true;
+                    }
                     
                     $dataKeluargas = data_jemaat::where('id_parent', $id)->get();
                     foreach($dataKeluargas as $dataKeluarga){
-                        $dataKeluarga->id_parent = $switchKK->id;
+                        $dataKeluarga->id_parent = $switchKK->id; //Ganti id parent ke id_kk baru
+                        if($isSibling == true && $dataKeluarga->jemaat_status_dikeluarga == 3){ //check if siblings and family member is 3 (anak)
+                            $dataKeluarga->jemaat_status_dikeluarga = 5; //if new parent is Anak, change another anak to Saudara Kandung
+                        }
                         $dataKeluarga->save();
                     } 
+
+                    $switchKK->jemaat_status_dikeluarga = 1;
+                    $switchKK->jemaat_kk_status = true;
+                    $switchKK->save();
                 }
             }
 

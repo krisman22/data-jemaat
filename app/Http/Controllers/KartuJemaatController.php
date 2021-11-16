@@ -63,7 +63,7 @@ class KartuJemaatController extends Controller
         
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
-            $this->generateNomorKartu($lastId);
+            $nomor_kartu = $this->generateNomorKartu($lastId, $data_jemaat->jemaat_nomor_stambuk);
         }
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
@@ -88,7 +88,7 @@ class KartuJemaatController extends Controller
 
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
-            $this->generateNomorKartu($lastId);
+            $nomor_kartu = $this->generateNomorKartu($lastId);
         }
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
@@ -125,7 +125,7 @@ class KartuJemaatController extends Controller
             
             $lastId = NomorKartu::orderBy('id', 'desc')->first();
             if($isNomorKartu == null){
-                $this->generateNomorKartu($lastId);
+                $nomor_kartu = $this->generateNomorKartu($lastId);
             }
             else{
                 $nomor_kartu = $isNomorKartu->nomor_kartu;
@@ -160,11 +160,11 @@ class KartuJemaatController extends Controller
         return response()->download(storage_path('app/public/kartu-keluarga/' . $fileName));
     }
 
-    public function generateNomorKartu($lastId)
+    public function generateNomorKartu($lastId, $jemaat_nomor_stambuk)
     {
         $nomor_kartu = str_pad(($lastId->id+1), 6, '0', STR_PAD_LEFT);
         $nomor = new NomorKartu;
-        $nomor->no_stambuk = $data_jemaat->jemaat_nomor_stambuk;
+        $nomor->no_stambuk = $jemaat_nomor_stambuk;
         $nomor->nomor_kartu = $nomor_kartu;
         $nomor->save();
     }
