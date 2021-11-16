@@ -284,8 +284,36 @@
                         @else -
                         @endif
                     </td>
-                        <td colspan="2"> {{$dataKartuKeluarga->datakeluarga->nama_ayah}} </td>
-                        <td colspan="2"> {{$dataKartuKeluarga->datakeluarga->nama_ibu}} </td>
+                        <td colspan="2"> 
+                            @if ($dataKartuKeluarga->datakeluarga->nama_ayah)
+                                {{$dataKartuKeluarga->datakeluarga->nama_ayah}}
+                            @else
+                                @if ($dataKartuKeluarga->datakeluarga->ayah->riwayatinaktif)
+                                    @if ($dataKartuKeluarga->datakeluarga->ayah->riwayatinaktif->jemaat_keterangan_status == "Meninggal")
+                                        {{$dataKartuKeluarga->datakeluarga->ayah->jemaat_nama."(Alm)"}}
+                                    @else
+                                        {{$dataKartuKeluarga->datakeluarga->ayah->jemaat_nama}}
+                                    @endif
+                                @else
+                                    {{$dataKartuKeluarga->datakeluarga->ayah->jemaat_nama}}
+                                @endif
+                            @endif
+                        </td>
+                        <td colspan="2">
+                            @if ($dataKartuKeluarga->datakeluarga->nama_ibu)
+                                {{$dataKartuKeluarga->datakeluarga->nama_ibu}}
+                            @else
+                                @if ($dataKartuKeluarga->datakeluarga->ibu->riwayatinaktif)
+                                    @if ($dataKartuKeluarga->datakeluarga->ibu->riwayatinaktif->jemaat_keterangan_status == "Meninggal")
+                                        {{$dataKartuKeluarga->datakeluarga->ibu->jemaat_nama."(Alm)"}}
+                                    @else
+                                        {{$dataKartuKeluarga->datakeluarga->ibu->jemaat_nama}}
+                                    @endif
+                                @else
+                                    {{$dataKartuKeluarga->datakeluarga->ibu->jemaat_nama}}
+                                @endif
+                            @endif
+                        </td>
                     <td>{{$dataKartuKeluarga->jemaat_nomor_stambuk}}</td>
                     <td>
                         @if($dataKartuKeluarga->jemaat_tanggal_status != null){{$$dataKartuKeluarga->jemaat_tanggal_status->formatLocalized('%d %B %Y')}}

@@ -73,13 +73,13 @@ class KartuJemaatController extends Controller
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
 
-        $dataKartuKeluargas = data_jemaat::with('datakeluarga')
+        $dataKartuKeluargas = data_jemaat::with('datakeluarga.ayah.riwayatinaktif', 'datakeluarga.ibu.riwayatinaktif')
             ->where('id_parent', '=', $idparent)
             ->where('jemaat_status_aktif', '=', 't')
             ->orderBy('jemaat_status_dikeluarga', 'ASC')
             ->orderBy('jemaat_tanggal_lahir', 'ASC')
             ->get();
-
+        
         $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
 
