@@ -179,10 +179,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-exclamation-triangle fa-fw"></span> <span class="mini-click-non">Data Warning</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fas fa-exclamation-triangle fa-fw"></span> <span class="mini-click-non">Data Warning<span> <i class="fa fa-exclamation-circle" style="color:red"></i> </span></span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li class="{{Request::is("data-warning/tanggal-lahir") ? 'active' : ''}}"><a href="{{asset('/data-warning/tanggal-lahir')}}"><span class="mini-sub-pro">Tanggal Lahir</span></a></li>                            
-                                <li class="{{Request::is("data-warning/data-tunggal") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-tunggal')}}"><span class="mini-sub-pro">Data Tunggal</span></a></li>                            
+                                {{-- <li class="{{Request::is("data-warning/data-tunggal") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-tunggal')}}"><span class="mini-sub-pro">Data Tunggal</span></a></li>                             --}}
                                 <li class="{{Request::is("data-warning/data-ganda") ? 'active' : ''}}"><a href="{{asset('/data-warning/data-ganda')}}"><span class="mini-sub-pro">Data Ganda</span></a></li>                            
                             </ul>
                         </li>
