@@ -141,8 +141,10 @@ class DataJemaatController extends Controller
         $idjemaat = $data_jemaat->id;
         $dataKeluarga = DataKeluarga::with('ayah', 'ibu')->where('no_stambuk', '=', $data_jemaat->jemaat_nomor_stambuk)
             ->where('status_hubungan', '=', 1)->first();
+
+        $kepalaKeluarga = data_jemaat::where('id_parent', $parent)->where('jemaat_kk_status', true)->first();
             
-        return view('pages.jemaat.profile-jemaat', compact('data_jemaat', 'dataKeluarga'));
+        return view('pages.jemaat.profile-jemaat', compact('data_jemaat', 'dataKeluarga', 'kepalaKeluarga'));
     }
 
     /**

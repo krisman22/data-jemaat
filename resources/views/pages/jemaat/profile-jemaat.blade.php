@@ -539,6 +539,11 @@
                                                             <td><a href="{{route('profiledetail', $dataKeluarga->id_ibu)}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
                                                         </tr>
                                                     @endif
+                                                    <tr>
+                                                        <td>{{$kepalaKeluarga->jemaat_nama}} - {{$kepalaKeluarga->jemaat_nomor_stambuk}}</td>
+                                                        <td>Kepala Keluarga</td>
+                                                        <td></td>
+                                                    </tr>
                                                     
                                                 </tbody>
                                                 
