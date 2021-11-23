@@ -69,7 +69,8 @@ class SidiController extends Controller
                 ->orWhere('jemaat_tanggal_lahir', '<=', Carbon::now()->subYears(17));
             })
             ->orderBy('id_lingkungan', 'ASC')
-            ->orderBy('jemaat_nama', 'ASC');
+            ->orderBy('id_parent', 'asc')
+            ->orderBy('jemaat_status_dikeluarga');
 
         if($request->ajax()){  
             return DataTables::of($datajemaats)
