@@ -88,7 +88,7 @@ class KartuJemaatController extends Controller
 
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
-            $nomor_kartu = $this->generateNomorKartu($lastId);
+            $nomor_kartu = $this->generateNomorKartu($lastId, $data_jemaat->jemaat_nomor_stambuk);
         }
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
@@ -125,7 +125,7 @@ class KartuJemaatController extends Controller
             
             $lastId = NomorKartu::orderBy('id', 'desc')->first();
             if($isNomorKartu == null){
-                $nomor_kartu = $this->generateNomorKartu($lastId);
+                $nomor_kartu = $this->generateNomorKartu($lastId, $data_jemaat->jemaat_nomor_stambuk);
             }
             else{
                 $nomor_kartu = $isNomorKartu->nomor_kartu;
