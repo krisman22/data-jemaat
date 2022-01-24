@@ -516,29 +516,16 @@
                                                     <th>Aksi</th>
                                                 </thead>
                                                 <tbody>
-                                                    @if ($dataKeluarga->nama_ayah != null)
-                                                        <tr>
-                                                            <td id="nama_ayah_n">{{$dataKeluarga->nama_ayah}}</td>
-                                                            <td>Ayah Kandung</td>
-                                                            <td><a href="javascript:void(0)" id="edit_ayah" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td id="nama_ibu_n">{{$dataKeluarga->nama_ibu}}</td>
-                                                            <td>Ibu Kandung</td>
-                                                            <td><a href="javascript:void(0)" id="edit_ibu" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
-                                                        </tr>
-                                                    @else
-                                                        <tr>
-                                                            <td id="nama_ayah_n">{{$dataKeluarga->ayah->jemaat_nama}}</td>
-                                                            <td>Ayah Kandung</td>
-                                                            <td><a href="{{route('profiledetail', $dataKeluarga->id_ayah)}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td id="nama_ibu_n">{{$dataKeluarga->ibu->jemaat_nama}}</td>
-                                                            <td>Ibu Kandung</td>
-                                                            <td><a href="{{route('profiledetail', $dataKeluarga->id_ibu)}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
-                                                        </tr>
-                                                    @endif
+                                                    <tr>
+                                                        <td id="nama_ayah_n">{{ $dataKeluarga->ayah->jemaat_nama ?? $dataKeluarga->nama_ayah}}</td>
+                                                        <td>Ayah Kandung</td>
+                                                        <td><a href="javascript:void(0)" id="edit_ayah" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td id="nama_ibu_n">{{ $dataKeluarga->ibu->jemaat_nama ?? $dataKeluarga->nama_ibu}}</td>
+                                                        <td>Ibu Kandung</td>
+                                                        <td><a href="javascript:void(0)" id="edit_ibu" data-id="{{$dataKeluarga->id}}" class="btn btn-icon btn-sm btn-warning">Edit</a></td>
+                                                    </tr>
                                                     <tr>
                                                         <td>{{$kepalaKeluarga->jemaat_nama}} - {{$kepalaKeluarga->jemaat_nomor_stambuk}}</td>
                                                         <td>Kepala Keluarga</td>
