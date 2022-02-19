@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,10 +13,10 @@ class DataKeluarga extends Model
 
     public function ayah()
     {
-        return $this->belongsTo('\App\data_jemaat', 'id_ayah', 'id');
+        return $this->belongsTo('\App\Models\data_jemaat', 'id_ayah', 'id');
     }
     public function ibu()
     {
-        return $this->belongsTo('\App\data_jemaat', 'id_ibu', 'id');
+        return $this->belongsTo('\App\Models\data_jemaat', 'id_ibu', 'id');
     }
 }

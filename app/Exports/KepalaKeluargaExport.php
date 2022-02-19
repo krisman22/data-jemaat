@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\data_jemaat as DataJemaat;
+use App\Models\data_jemaat as DataJemaat;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;

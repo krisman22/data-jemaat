@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\data_jemaat;
-use App\DataKeluarga;
+use App\Models\data_jemaat;
+use App\Models\DataKeluarga;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;

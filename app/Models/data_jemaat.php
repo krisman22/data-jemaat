@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -38,33 +38,33 @@ class data_jemaat extends Model
 
     public function pendidikan()
     {
-        return $this->belongsTo('App\master_pendidikan', 'id_pendidikan_akhir');
+        return $this->belongsTo('App\Models\master_pendidikan', 'id_pendidikan_akhir');
     }
 
     public function lingkungan()
     {
-        return $this->belongsTo('\App\master_lingkungan', 'id_lingkungan');
+        return $this->belongsTo('\App\Models\master_lingkungan', 'id_lingkungan');
     }
 
     public function pekerjaan()
     {
-        return $this->belongsTo('\App\master_pekerjaan', 'id_pekerjaan');
+        return $this->belongsTo('\App\Models\master_pekerjaan', 'id_pekerjaan');
     }
     public function statusdikeluarga()
     {
-        return $this->belongsTo('\App\master_status_dikeluarga', 'jemaat_status_dikeluarga');
+        return $this->belongsTo('\App\Models\master_status_dikeluarga', 'jemaat_status_dikeluarga');
     }
     public function datakeluarga()
     {
-        return $this->belongsTo('\App\DataKeluarga', 'jemaat_nomor_stambuk', 'no_stambuk');
+        return $this->belongsTo('\App\Models\DataKeluarga', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
     public function kartukeluarga()
     {
-        return $this->belongsTo('\App\NomorKartu', 'jemaat_nomor_stambuk', 'no_stambuk');
+        return $this->belongsTo('\App\Models\NomorKartu', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
     public function riwayatinaktif()
     {
-        return $this->belongsTo('\App\RiwayatInaktif', 'jemaat_nomor_stambuk', 'no_stambuk');
+        return $this->belongsTo('\App\Models\RiwayatInaktif', 'jemaat_nomor_stambuk', 'no_stambuk');
     }
     
 }

@@ -4,12 +4,12 @@
 namespace App\Http\Controllers;
 
 use DataTables;
-use App\data_jemaat;
-use App\DataKeluarga;
-use App\RiwayatInaktif;
-use App\master_pekerjaan;
-use App\master_lingkungan;
-use App\master_pendidikan;
+use App\Models\data_jemaat;
+use App\Models\DataKeluarga;
+use App\Models\RiwayatInaktif;
+use App\Models\master_pekerjaan;
+use App\Models\master_lingkungan;
+use App\Models\master_pendidikan;
 use Illuminate\Http\Request;
 use App\Exports\DataJemaatExport;
 use Illuminate\Support\Facades\DB;
@@ -132,7 +132,7 @@ class DataJemaatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\data_jemaat  $data_jemaat
+     * @param  \App\Models\data_jemaat  $data_jemaat
      * @return \Illuminate\Http\Response
      */
     public function show(data_jemaat $data_jemaat)
@@ -150,7 +150,7 @@ class DataJemaatController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\data_jemaat  $data_jemaat
+     * @param  \App\Models\data_jemaat  $data_jemaat
      * @return \Illuminate\Http\Response
      */
     public function edit(data_jemaat $data_jemaat)
@@ -175,7 +175,7 @@ class DataJemaatController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\data_jemaat  $data_jemaat
+     * @param  \App\Models\data_jemaat  $data_jemaat
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -317,7 +317,7 @@ class DataJemaatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\data_jemaat  $data_jemaat
+     * @param  \App\Models\data_jemaat  $data_jemaat
      * @return \Illuminate\Http\Response
      */
     public function destroy(data_jemaat $data_jemaat, $id)

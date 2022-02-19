@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Laporan;
 
 use Carbon\Carbon;
-use App\data_jemaat;
-use App\master_lingkungan;
+use App\Models\data_jemaat;
+use App\Models\master_lingkungan;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Http\Controllers\Controller;

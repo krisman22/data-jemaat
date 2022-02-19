@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\master_lingkungan;
-use App\data_jemaat;
+use App\Models\master_lingkungan;
+use App\Models\data_jemaat;
 
 class LingkunganMasterController extends Controller
 {

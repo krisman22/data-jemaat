@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\data_jemaat;
-use App\master_pendidikan;
-use App\master_lingkungan;
-use App\master_pekerjaan;
-use App\DataKeluarga;
+use App\Models\data_jemaat;
+use App\Models\master_pendidikan;
+use App\Models\master_lingkungan;
+use App\Models\master_pekerjaan;
+use App\Models\DataKeluarga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
-use App\NomorKartu;
+use App\Models\NomorKartu;
 use Storage;
 use File;
 use ZipArchive;

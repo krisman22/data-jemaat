@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\master_lingkungan;
-use App\data_jemaat;
-use App\master_pendidikan;
-use App\master_pekerjaan;
+use App\Models\master_lingkungan;
+use App\Models\data_jemaat;
+use App\Models\master_pendidikan;
+use App\Models\master_pekerjaan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;

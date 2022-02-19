@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\data_jemaat;
+use App\Models\data_jemaat;
 use Carbon\Carbon;
 use DataTables;
 use Illuminate\Support\Facades\DB;

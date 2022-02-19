@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\data_jemaat;
-use App\master_pendidikan;
-use App\master_lingkungan;
-use App\master_pekerjaan;
-use App\DataKeluarga;
+use App\Models\data_jemaat;
+use App\Models\master_pendidikan;
+use App\Models\master_lingkungan;
+use App\Models\master_pekerjaan;
+use App\Models\DataKeluarga;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
