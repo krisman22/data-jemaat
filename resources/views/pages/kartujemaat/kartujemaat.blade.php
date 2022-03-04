@@ -9,7 +9,7 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>Kartu Keluarga BNKP Jemaat Kota Gunungsitoli</h1>
+                            <h1>Kartu Keluarga GNKP Indonesia</h1>
                         </div>
                     </div>
                     <div class="row mg-b-15">

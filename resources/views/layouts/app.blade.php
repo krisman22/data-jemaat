@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@isset($title)
             {{ $title }} | 
-        @endisset Data Jemaat BNKP</title>
+        @endisset Data Jemaat GNKP</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -15,7 +15,7 @@
     @yield('scriptshead')
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/cross-logo.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/gnkp-logo.png')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -137,7 +137,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href={{ asset('/') }}><img class="main-logo" width="200px" src={{ asset('img/logo/logo.png') }} style="width:200px" alt="" /></a>
+                <a href={{ asset('/') }}><img class="main-logo mt-4" width="50px" src={{ asset('img/gnkp-logo.png') }} style="max-width:50px" alt="" /></a>
                 <strong><a href={{ asset('/') }}><img src={{ asset('img/logo/logosn.jpg') }} style="border:1px solid #5c5c5c; border-radius:30px;"  width="37px" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar mg-t-25">

@@ -109,10 +109,10 @@
 {{-- <div class="col-md-12"> --}}
     <div class="row">
         <div class="col-md-3">
-            <img  src="img/logo-bnkp-pdf.jpg" class="logo" alt="">
+            <img  src="img/gnkp-logo.png" class="logo" alt="">
         </div>
         <div class="col-md-6" style="text-align:center">
-            <h1 style="margin-left:0.4cm; margin-top:0px; padding-top:0px">KARTU KELUARGA BNKP JEMAAT KOTA GUNUNGSITOLI</h1> <br>
+            <h1 style="margin-left:0.4cm; margin-top:0px; padding-top:0px">KARTU KELUARGA JEMAAT GNKP-INDONESIA</h1> <br>
             <h2 style="font-size: 18pt; font-weight:bold; text-align:center; margin-top:5px">NOMOR : {{$nomor_kartu}}</h2>
         </div>
     </div>

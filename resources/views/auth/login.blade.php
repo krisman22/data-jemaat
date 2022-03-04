@@ -27,7 +27,7 @@
 				<div style="width:100%; text-align:center">
 				<div class="col-md-12" style="clear:left; float:right">
 					<h1>WEBSITE DATA JEMAAT<br>
-						BNKP KOTA GUNUNGSITOLI<br><br>
+						GNKP-INDONESIA<br><br>
 					</h1>
 				</div>
 			</div>
