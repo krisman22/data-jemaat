@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
+                    {{-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
                         <div id="modalDestroy" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
