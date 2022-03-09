@@ -232,7 +232,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="{{asset('/')}}"><img class="main-logo" width="200px" src="{{asset('img/logo/logo.png')}}" alt="" /></a>
+                        <a href="{{asset('/')}}"><img class="main-logo my-3" width="50px" src="{{asset('img/gnkp-logo.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
