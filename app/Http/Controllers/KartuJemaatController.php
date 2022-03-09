@@ -84,6 +84,7 @@ class KartuJemaatController extends Controller
     public function cetak_pdf(data_jemaat $data_jemaat)
     {
         $idparent = $data_jemaat->id;
+        dd($idparent);
         $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
 
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
