@@ -84,8 +84,8 @@ class KartuJemaatController extends Controller
     public function cetak_pdf(data_jemaat $data_jemaat)
     {
         $idparent = $data_jemaat->id;
-        dd($idparent);
         $isNomorKartu = NomorKartu::where('no_stambuk', $data_jemaat->jemaat_nomor_stambuk)->first();
+        
 
         $lastId = NomorKartu::orderBy('id', 'desc')->first();
         if($isNomorKartu == null){
@@ -94,12 +94,12 @@ class KartuJemaatController extends Controller
         else{
             $nomor_kartu = $isNomorKartu->nomor_kartu;
         }
-
+        
         $dataKartuKeluargas = $this->getDataKeluargaKK($idparent);
 
         $name = $data_jemaat->id_lingkungan . '_' . $data_jemaat->jemaat_nama . '.pdf';
         $customPaper = array(0,0,609.44,935.43);
-
+        dd($dataKartuKeluargas);
         $pdf = PDF::loadView('pages.kartujemaat.pdf-view',
             compact('data_jemaat','dataKartuKeluargas','nomor_kartu'))
                 ->setPaper($customPaper, 'landscape');
